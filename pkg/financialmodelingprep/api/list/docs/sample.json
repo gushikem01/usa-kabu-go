@@ -1,0 +1,16 @@
+[
+  {
+    "symbol": "SPY",
+    "name": "SPDR S&P 500 ETF Trust",
+    "price": 441.4,
+    "exchange": "New York Stock Exchange Arca",
+    "exchangeShortName": "NYSE"
+  },
+  {
+    "symbol": "GDX",
+    "name": "VanEck Vectors Gold Miners ETF",
+    "price": 30.58,
+    "exchange": "New York Stock Exchange Arca",
+    "exchangeShortName": "NYSE"
+  }
+]
