@@ -54,9 +54,9 @@ func TestFindAll(t *testing.T) {
 	defer client.Close()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := sSrv.Run(tt.ctx)
-			// s, e := sSrv.FindAll(tt.ctx)
-			// assert.NotNil(t, s)
+			// e := sSrv.Run(tt.ctx)
+			s, e := sSrv.FindAll(tt.ctx)
+			assert.NotNil(t, s)
 			assert.Nil(t, e)
 		})
 	}

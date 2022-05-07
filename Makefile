@@ -7,15 +7,15 @@ up:	 ## docker-compose up -d
 	docker-compose up -d
 
 .PHONY: build
-build:	 ## docker-compose build
+build: ## docker-compose build
 	docker-compose build
 
 .PHONY: down
-down:	 ## docker-compose down
+down: ## docker-compose down
 	docker-compose down
 
 .PHONY: bash
-bash:	## bash
+bash: ## bash
 	docker exec -it usa-kabu-go-postgres-1 /bin/bash
 
 .PHONY: migrate
@@ -37,5 +37,15 @@ schema-stocks: ## schema-stocks
 .PHONY: generate
 generate:	## generate
 	go generate ./ent && go run main.go
+
+# gen
+.PHONY: gen
+gen: ## gen
+	go get github.com/99designs/gqlgen@v0.17.5 && cd server && go run github.com/99designs/gqlgen
+
+# air api
+.PHONY: air-%
+air-%: ## air -c $(@:air-%=%)/cmd/api/.air.toml
+	air -c $(@:air-%=%)/cmd/api/.air.toml
 
 # go run -mod=mod entgo.io/ent/cmd/ent describe ./ent/schema

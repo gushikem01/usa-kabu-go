@@ -1,0 +1,13 @@
+type Stocks {
+    id: ID!
+    symbol: String!
+    name: String!
+    type: String!
+    price: Float!
+    exchange: String!
+    exchangeShortName: String!
+}
+
+extend type Query {
+    stocks(id: ID): Stocks!
+}
