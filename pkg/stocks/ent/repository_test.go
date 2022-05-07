@@ -9,15 +9,21 @@ import (
 	"github.com/gushikem01/usa-kabu-go/pkg/db/dbent"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
 	stocksEnt "github.com/gushikem01/usa-kabu-go/pkg/stocks/ent"
+	"github.com/gushikem01/usa-kabu-go/pkg/zaplog"
 	"github.com/stretchr/testify/assert"
 )
 
 func initTest() (stocks.Repository, *ent.Client, error) {
+	l, e := zaplog.NewZap()
+	if e != nil {
+		return nil, nil, e
+	}
+
 	client, err := dbent.New()
 	if err != nil {
 		return nil, nil, err
 	}
-	repo := stocksEnt.NewRepository(client)
+	repo := stocksEnt.NewRepository(client, l)
 	return repo, client, nil
 }
 

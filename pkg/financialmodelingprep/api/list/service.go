@@ -9,7 +9,6 @@ import (
 	"github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/apiconf"
 	"github.com/gushikem01/usa-kabu-go/pkg/httpclient"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
-	model "github.com/gushikem01/usa-kabu-go/pkg/stocks"
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 )
@@ -20,8 +19,7 @@ var (
 
 // Service サービス
 type Service struct {
-	logger     *zap.Logger
-	repo       Repository
+	log        *zap.Logger
 	client     *ent.Client
 	httpclient *httpclient.HTTP
 	sSrv       *stocks.Service
@@ -29,8 +27,8 @@ type Service struct {
 }
 
 // NewService サービス作成
-func NewService(logger *zap.Logger, repo Repository, client *ent.Client, httpclient *httpclient.HTTP, sSrv *stocks.Service, apiconf *apiconf.FinancialmodelingprepConfig) *Service {
-	return &Service{logger, repo, client, httpclient, sSrv, apiconf}
+func NewService(log *zap.Logger, client *ent.Client, httpclient *httpclient.HTTP, sSrv *stocks.Service, apiconf *apiconf.FinancialmodelingprepConfig) *Service {
+	return &Service{log, client, httpclient, sSrv, apiconf}
 }
 
 // Run 実行
@@ -52,7 +50,7 @@ func (srv *Service) Run(ctx context.Context) error {
 		return err
 	}
 
-	_, _, err := srv.run(ctx, stocks, apiData)
+	_, err := srv.run(ctx, stocks, apiData)
 	if err != nil {
 		return err
 	}
@@ -60,11 +58,35 @@ func (srv *Service) Run(ctx context.Context) error {
 }
 
 // run 実行
-func (srv *Service) run(ctx context.Context, stocks []*ent.Stocks, apiData []*SymbolsList) (add []*SymbolsList, up []*SymbolsList, err error) {
-	symbolMap := map[string]string{}
-	for _, v := range stocks {
-		symbolMap[v.Symbol] = v.Symbol
+func (srv *Service) run(ctx context.Context, stocks []*ent.Stocks, apiData []*SymbolsList) ([]*ent.Stocks, error) {
+	var u []*ent.Stocks
+	var err error
+	add, up := srv.createOrUpdate(ctx, stocks, apiData)
+
+	eg := errgroup.Group{}
+	eg.Go(func() (err error) {
+		err = srv.Create(ctx, add)
+		return
+	})
+	// TODO: 更新処理はここでは行わない
+	_ = up
+	// eg.Go(func() (err error) {
+	// 	u, err = srv.UpdateAll(ctx, up)
+	// 	return
+	// })
+
+	if err = eg.Wait(); err != nil {
+		return nil, err
 	}
+	return u, err
+}
+
+// createOrUpdate 作成と更新
+// 	引数1:	Stocksテーブルのデータ
+//	引数2: 	Apiデータ
+//	戻り値1:	追加データ
+//	戻り値2:	追加データ
+func (srv *Service) createOrUpdate(ctx context.Context, stocks []*ent.Stocks, apiData []*SymbolsList) (add []*SymbolsList, up []*SymbolsList) {
 	var i, j int
 	// 更新
 	up = make([]*SymbolsList, len(apiData))
@@ -73,24 +95,43 @@ func (srv *Service) run(ctx context.Context, stocks []*ent.Stocks, apiData []*Sy
 	add = make([]*SymbolsList, len(apiData))
 
 	for _, a := range apiData {
-		if v, ok := symbolMap[a.Symbol]; ok {
+		find := false
+		id := 0
+		for _, v := range stocks {
+			if v.Symbol == a.Symbol {
+				id = v.ID
+				find = true
+				break
+			}
+		}
+		if find {
+			a.ID = int64(id)
 			up[i] = a
 			i++
-			fmt.Println(v)
-			// Found. update this data
 			continue
 		}
+
 		// Not Found. insert this data
 		add[j] = a
 		j++
 	}
-	return add, up, nil
+	if len(up) > 0 {
+		up = up[:i-1]
+	}
+	if len(add) > 0 {
+		add = add[:j-1]
+	}
+	return add, up
 }
 
 // FindAll 一覧取得
 func (srv *Service) FindAll(ctx context.Context) ([]*ent.Stocks, error) {
 	stocks, err := srv.sSrv.FindAll(ctx)
 	if err != nil {
+		srv.log.Error(
+			"一覧取得に失敗しました。",
+			zap.Error(err),
+		)
 		return nil, err
 	}
 	return stocks, nil
@@ -98,10 +139,12 @@ func (srv *Service) FindAll(ctx context.Context) ([]*ent.Stocks, error) {
 
 // APIGet api実行
 func (srv *Service) APIGet(ctx context.Context) ([]*SymbolsList, error) {
-	// url := fmt.Sprintf("%s?apikey=%s", endpoint, srv.apiconf.APIKey)
-	// fmt.Println(url)
 	res, err := srv.httpclient.Get(fmt.Sprintf("%s?apikey=%s", endpoint, srv.apiconf.APIKey), nil)
 	if err != nil {
+		srv.log.Error(
+			"APIの取得に失敗しました。",
+			zap.Error(err),
+		)
 		return nil, err
 	}
 	jsonBytes := ([]byte)(res)
@@ -114,9 +157,35 @@ func (srv *Service) APIGet(ctx context.Context) ([]*SymbolsList, error) {
 }
 
 // Create 作成
-func (srv *Service) Create(ctx context.Context, stocks []*model.Stocks) error {
-	if err := srv.repo.Create(ctx, stocks); err != nil {
+func (srv *Service) Create(ctx context.Context, stocks []*SymbolsList) error {
+	if len(stocks) == 0 {
+		return nil
+	}
+	s := CopyToStocks(stocks)
+	if err := srv.sSrv.Create(ctx, s); err != nil {
+		srv.log.Error(
+			"データ作成に失敗しました。",
+			zap.Error(err),
+		)
 		return err
 	}
 	return nil
+}
+
+// Update 更新
+func (srv *Service) UpdateAll(ctx context.Context, stocks []*SymbolsList) ([]*ent.Stocks, error) {
+	if len(stocks) == 0 {
+		return nil, nil
+	}
+
+	s := CopyToStocks(stocks)
+	up, err := srv.sSrv.UpdateAll(ctx, s)
+	if err != nil {
+		srv.log.Error(
+			"データ更新に失敗しました。",
+			zap.Error(err),
+		)
+		return nil, err
+	}
+	return up, nil
 }

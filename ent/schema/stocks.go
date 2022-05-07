@@ -21,6 +21,10 @@ func (Stocks) Fields() []ent.Field {
 			SchemaType(map[string]string{
 				dialect.Postgres: "varchar(255)",
 			}),
+		field.String("name").
+			SchemaType(map[string]string{
+				dialect.Postgres: "varchar(255)",
+			}).Optional(),
 		field.String("name_ja").
 			SchemaType(map[string]string{
 				dialect.Postgres: "varchar(255)",

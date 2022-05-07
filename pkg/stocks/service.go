@@ -27,3 +27,20 @@ func (srv *Service) FindAll(ctx context.Context) ([]*ent.Stocks, error) {
 	}
 	return stocks, nil
 }
+
+// UpdateAll 作成
+func (srv *Service) UpdateAll(ctx context.Context, stocks []*Stocks) ([]*ent.Stocks, error) {
+	up, err := srv.repo.UpdateAll(ctx, stocks)
+	if err != nil {
+		return nil, err
+	}
+	return up, nil
+}
+
+// Create 作成
+func (srv *Service) Create(ctx context.Context, stocks []*Stocks) error {
+	if err := srv.repo.Create(ctx, stocks); err != nil {
+		return err
+	}
+	return nil
+}

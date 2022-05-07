@@ -34,6 +34,26 @@ func (su *StocksUpdate) SetSymbol(s string) *StocksUpdate {
 	return su
 }
 
+// SetName sets the "name" field.
+func (su *StocksUpdate) SetName(s string) *StocksUpdate {
+	su.mutation.SetName(s)
+	return su
+}
+
+// SetNillableName sets the "name" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableName(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetName(*s)
+	}
+	return su
+}
+
+// ClearName clears the value of the "name" field.
+func (su *StocksUpdate) ClearName() *StocksUpdate {
+	su.mutation.ClearName()
+	return su
+}
+
 // SetNameJa sets the "name_ja" field.
 func (su *StocksUpdate) SetNameJa(s string) *StocksUpdate {
 	su.mutation.SetNameJa(s)
@@ -233,6 +253,19 @@ func (su *StocksUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: stocks.FieldSymbol,
 		})
 	}
+	if value, ok := su.mutation.Name(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldName,
+		})
+	}
+	if su.mutation.NameCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldName,
+		})
+	}
 	if value, ok := su.mutation.NameJa(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
@@ -371,6 +404,26 @@ type StocksUpdateOne struct {
 // SetSymbol sets the "symbol" field.
 func (suo *StocksUpdateOne) SetSymbol(s string) *StocksUpdateOne {
 	suo.mutation.SetSymbol(s)
+	return suo
+}
+
+// SetName sets the "name" field.
+func (suo *StocksUpdateOne) SetName(s string) *StocksUpdateOne {
+	suo.mutation.SetName(s)
+	return suo
+}
+
+// SetNillableName sets the "name" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableName(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetName(*s)
+	}
+	return suo
+}
+
+// ClearName clears the value of the "name" field.
+func (suo *StocksUpdateOne) ClearName() *StocksUpdateOne {
+	suo.mutation.ClearName()
 	return suo
 }
 
@@ -595,6 +648,19 @@ func (suo *StocksUpdateOne) sqlSave(ctx context.Context) (_node *Stocks, err err
 			Type:   field.TypeString,
 			Value:  value,
 			Column: stocks.FieldSymbol,
+		})
+	}
+	if value, ok := suo.mutation.Name(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldName,
+		})
+	}
+	if suo.mutation.NameCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldName,
 		})
 	}
 	if value, ok := suo.mutation.NameJa(); ok {

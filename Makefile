@@ -36,6 +36,6 @@ schema-stocks: ## schema-stocks
 
 .PHONY: generate
 generate:	## generate
-	go generate ./ent
+	go generate ./ent && go run main.go
 
 # go run -mod=mod entgo.io/ent/cmd/ent describe ./ent/schema

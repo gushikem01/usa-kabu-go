@@ -8,7 +8,6 @@ import (
 	"github.com/gushikem01/usa-kabu-go/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/db/dbent"
 	financialmodelingprep "github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/api/list"
-	financialmodelingprep_ent "github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/api/list/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/apiconf"
 	"github.com/gushikem01/usa-kabu-go/pkg/httpclient"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
@@ -30,11 +29,10 @@ func initTest() (*financialmodelingprep.Service, *ent.Client, error) {
 		return nil, nil, err
 	}
 	httpclient := httpclient.NewHTTP(l)
-	repo := financialmodelingprep_ent.NewRepository(client)
 	apiconf := apiconf.NewFinancialmodelingprepConfig()
-	sRepo := stocksEnt.NewRepository(client)
+	sRepo := stocksEnt.NewRepository(client, l)
 	sSrv := stocks.NewService(l, sRepo, client)
-	fSrv := financialmodelingprep.NewService(l, repo, client, httpclient, sSrv, apiconf)
+	fSrv := financialmodelingprep.NewService(l, client, httpclient, sSrv, apiconf)
 	return fSrv, client, err
 }
 
@@ -56,8 +54,9 @@ func TestFindAll(t *testing.T) {
 	defer client.Close()
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s, e := sSrv.FindAll(tt.ctx)
-			assert.NotNil(t, s)
+			e := sSrv.Run(tt.ctx)
+			// s, e := sSrv.FindAll(tt.ctx)
+			// assert.NotNil(t, s)
 			assert.Nil(t, e)
 		})
 	}

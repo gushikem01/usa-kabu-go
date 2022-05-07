@@ -13,6 +13,8 @@ const (
 	FieldID = "id"
 	// FieldSymbol holds the string denoting the symbol field in the database.
 	FieldSymbol = "symbol"
+	// FieldName holds the string denoting the name field in the database.
+	FieldName = "name"
 	// FieldNameJa holds the string denoting the name_ja field in the database.
 	FieldNameJa = "name_ja"
 	// FieldType holds the string denoting the type field in the database.
@@ -39,6 +41,7 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldSymbol,
+	FieldName,
 	FieldNameJa,
 	FieldType,
 	FieldExchange,

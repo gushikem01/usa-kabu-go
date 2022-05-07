@@ -18,6 +18,8 @@ type Stocks struct {
 	ID int `json:"id,omitempty"`
 	// Symbol holds the value of the "symbol" field.
 	Symbol string `json:"symbol,omitempty"`
+	// Name holds the value of the "name" field.
+	Name string `json:"name,omitempty"`
 	// NameJa holds the value of the "name_ja" field.
 	NameJa string `json:"name_ja,omitempty"`
 	// Type holds the value of the "type" field.
@@ -64,7 +66,7 @@ func (*Stocks) scanValues(columns []string) ([]interface{}, error) {
 			values[i] = new(sql.NullFloat64)
 		case stocks.FieldID:
 			values[i] = new(sql.NullInt64)
-		case stocks.FieldSymbol, stocks.FieldNameJa, stocks.FieldType, stocks.FieldExchange, stocks.FieldExchangeShortName:
+		case stocks.FieldSymbol, stocks.FieldName, stocks.FieldNameJa, stocks.FieldType, stocks.FieldExchange, stocks.FieldExchangeShortName:
 			values[i] = new(sql.NullString)
 		case stocks.FieldCreatedAt, stocks.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
@@ -94,6 +96,12 @@ func (s *Stocks) assignValues(columns []string, values []interface{}) error {
 				return fmt.Errorf("unexpected type %T for field symbol", values[i])
 			} else if value.Valid {
 				s.Symbol = value.String
+			}
+		case stocks.FieldName:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field name", values[i])
+			} else if value.Valid {
+				s.Name = value.String
 			}
 		case stocks.FieldNameJa:
 			if value, ok := values[i].(*sql.NullString); !ok {
@@ -172,6 +180,8 @@ func (s *Stocks) String() string {
 	builder.WriteString(fmt.Sprintf("id=%v", s.ID))
 	builder.WriteString(", symbol=")
 	builder.WriteString(s.Symbol)
+	builder.WriteString(", name=")
+	builder.WriteString(s.Name)
 	builder.WriteString(", name_ja=")
 	builder.WriteString(s.NameJa)
 	builder.WriteString(", type=")

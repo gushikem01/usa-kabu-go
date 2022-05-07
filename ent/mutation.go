@@ -34,6 +34,7 @@ type StocksMutation struct {
 	typ                 string
 	id                  *int
 	symbol              *string
+	name                *string
 	name_ja             *string
 	_type               *string
 	exchange            *string
@@ -183,6 +184,55 @@ func (m *StocksMutation) OldSymbol(ctx context.Context) (v string, err error) {
 // ResetSymbol resets all changes to the "symbol" field.
 func (m *StocksMutation) ResetSymbol() {
 	m.symbol = nil
+}
+
+// SetName sets the "name" field.
+func (m *StocksMutation) SetName(s string) {
+	m.name = &s
+}
+
+// Name returns the value of the "name" field in the mutation.
+func (m *StocksMutation) Name() (r string, exists bool) {
+	v := m.name
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldName returns the old "name" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldName(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldName is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldName requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldName: %w", err)
+	}
+	return oldValue.Name, nil
+}
+
+// ClearName clears the value of the "name" field.
+func (m *StocksMutation) ClearName() {
+	m.name = nil
+	m.clearedFields[stocks.FieldName] = struct{}{}
+}
+
+// NameCleared returns if the "name" field was cleared in this mutation.
+func (m *StocksMutation) NameCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldName]
+	return ok
+}
+
+// ResetName resets all changes to the "name" field.
+func (m *StocksMutation) ResetName() {
+	m.name = nil
+	delete(m.clearedFields, stocks.FieldName)
 }
 
 // SetNameJa sets the "name_ja" field.
@@ -543,9 +593,12 @@ func (m *StocksMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *StocksMutation) Fields() []string {
-	fields := make([]string, 0, 8)
+	fields := make([]string, 0, 9)
 	if m.symbol != nil {
 		fields = append(fields, stocks.FieldSymbol)
+	}
+	if m.name != nil {
+		fields = append(fields, stocks.FieldName)
 	}
 	if m.name_ja != nil {
 		fields = append(fields, stocks.FieldNameJa)
@@ -578,6 +631,8 @@ func (m *StocksMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case stocks.FieldSymbol:
 		return m.Symbol()
+	case stocks.FieldName:
+		return m.Name()
 	case stocks.FieldNameJa:
 		return m.NameJa()
 	case stocks.FieldType:
@@ -603,6 +658,8 @@ func (m *StocksMutation) OldField(ctx context.Context, name string) (ent.Value, 
 	switch name {
 	case stocks.FieldSymbol:
 		return m.OldSymbol(ctx)
+	case stocks.FieldName:
+		return m.OldName(ctx)
 	case stocks.FieldNameJa:
 		return m.OldNameJa(ctx)
 	case stocks.FieldType:
@@ -632,6 +689,13 @@ func (m *StocksMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetSymbol(v)
+		return nil
+	case stocks.FieldName:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetName(v)
 		return nil
 	case stocks.FieldNameJa:
 		v, ok := value.(string)
@@ -727,6 +791,9 @@ func (m *StocksMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *StocksMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(stocks.FieldName) {
+		fields = append(fields, stocks.FieldName)
+	}
 	if m.FieldCleared(stocks.FieldNameJa) {
 		fields = append(fields, stocks.FieldNameJa)
 	}
@@ -744,6 +811,9 @@ func (m *StocksMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *StocksMutation) ClearField(name string) error {
 	switch name {
+	case stocks.FieldName:
+		m.ClearName()
+		return nil
 	case stocks.FieldNameJa:
 		m.ClearNameJa()
 		return nil
@@ -757,6 +827,9 @@ func (m *StocksMutation) ResetField(name string) error {
 	switch name {
 	case stocks.FieldSymbol:
 		m.ResetSymbol()
+		return nil
+	case stocks.FieldName:
+		m.ResetName()
 		return nil
 	case stocks.FieldNameJa:
 		m.ResetNameJa()

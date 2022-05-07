@@ -26,6 +26,20 @@ func (sc *StocksCreate) SetSymbol(s string) *StocksCreate {
 	return sc
 }
 
+// SetName sets the "name" field.
+func (sc *StocksCreate) SetName(s string) *StocksCreate {
+	sc.mutation.SetName(s)
+	return sc
+}
+
+// SetNillableName sets the "name" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableName(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetName(*s)
+	}
+	return sc
+}
+
 // SetNameJa sets the "name_ja" field.
 func (sc *StocksCreate) SetNameJa(s string) *StocksCreate {
 	sc.mutation.SetNameJa(s)
@@ -245,6 +259,14 @@ func (sc *StocksCreate) createSpec() (*Stocks, *sqlgraph.CreateSpec) {
 			Column: stocks.FieldSymbol,
 		})
 		_node.Symbol = value
+	}
+	if value, ok := sc.mutation.Name(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldName,
+		})
+		_node.Name = value
 	}
 	if value, ok := sc.mutation.NameJa(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{

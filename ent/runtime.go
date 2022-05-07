@@ -16,11 +16,11 @@ func init() {
 	stocksFields := schema.Stocks{}.Fields()
 	_ = stocksFields
 	// stocksDescCreatedAt is the schema descriptor for created_at field.
-	stocksDescCreatedAt := stocksFields[6].Descriptor()
+	stocksDescCreatedAt := stocksFields[7].Descriptor()
 	// stocks.DefaultCreatedAt holds the default value on creation for the created_at field.
 	stocks.DefaultCreatedAt = stocksDescCreatedAt.Default.(func() time.Time)
 	// stocksDescUpdatedAt is the schema descriptor for updated_at field.
-	stocksDescUpdatedAt := stocksFields[7].Descriptor()
+	stocksDescUpdatedAt := stocksFields[8].Descriptor()
 	// stocks.DefaultUpdatedAt holds the default value on creation for the updated_at field.
 	stocks.DefaultUpdatedAt = stocksDescUpdatedAt.Default.(func() time.Time)
 }
