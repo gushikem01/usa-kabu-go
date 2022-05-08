@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	endpoint string = "https://financialmodelingprep.com/api/v3/stock/list"
+	apiEndpoint string = "https://financialmodelingprep.com/api/v3/stock/list"
 )
 
 // Service サービス
@@ -139,7 +139,7 @@ func (srv *Service) FindAll(ctx context.Context) ([]*ent.Stocks, error) {
 
 // APIGet api実行
 func (srv *Service) APIGet(ctx context.Context) ([]*SymbolsList, error) {
-	res, err := srv.httpclient.Get(fmt.Sprintf("%s?apikey=%s", endpoint, srv.apiconf.APIKey), nil)
+	res, err := srv.httpclient.Get(fmt.Sprintf("%s?apikey=%s", apiEndpoint, srv.apiconf.APIKey), nil)
 	if err != nil {
 		srv.log.Error(
 			"APIの取得に失敗しました。",

@@ -142,6 +142,41 @@ func Price(v float64) predicate.Stocks {
 	})
 }
 
+// Industry applies equality check predicate on the "industry" field. It's identical to IndustryEQ.
+func Industry(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldIndustry), v))
+	})
+}
+
+// MarketCarp applies equality check predicate on the "market_carp" field. It's identical to MarketCarpEQ.
+func MarketCarp(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldMarketCarp), v))
+	})
+}
+
+// LastDiv applies equality check predicate on the "last_div" field. It's identical to LastDivEQ.
+func LastDiv(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldLastDiv), v))
+	})
+}
+
+// Description applies equality check predicate on the "description" field. It's identical to DescriptionEQ.
+func Description(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldDescription), v))
+	})
+}
+
+// Yield applies equality check predicate on the "yield" field. It's identical to YieldEQ.
+func Yield(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldYield), v))
+	})
+}
+
 // CreatedAt applies equality check predicate on the "created_at" field. It's identical to CreatedAtEQ.
 func CreatedAt(v time.Time) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
@@ -250,6 +285,20 @@ func SymbolHasPrefix(v string) predicate.Stocks {
 func SymbolHasSuffix(v string) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
 		s.Where(sql.HasSuffix(s.C(FieldSymbol), v))
+	})
+}
+
+// SymbolIsNil applies the IsNil predicate on the "symbol" field.
+func SymbolIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldSymbol)))
+	})
+}
+
+// SymbolNotNil applies the NotNil predicate on the "symbol" field.
+func SymbolNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldSymbol)))
 	})
 }
 
@@ -614,6 +663,20 @@ func TypeHasSuffix(v string) predicate.Stocks {
 	})
 }
 
+// TypeIsNil applies the IsNil predicate on the "type" field.
+func TypeIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldType)))
+	})
+}
+
+// TypeNotNil applies the NotNil predicate on the "type" field.
+func TypeNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldType)))
+	})
+}
+
 // TypeEqualFold applies the EqualFold predicate on the "type" field.
 func TypeEqualFold(v string) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
@@ -722,6 +785,20 @@ func ExchangeHasPrefix(v string) predicate.Stocks {
 func ExchangeHasSuffix(v string) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
 		s.Where(sql.HasSuffix(s.C(FieldExchange), v))
+	})
+}
+
+// ExchangeIsNil applies the IsNil predicate on the "exchange" field.
+func ExchangeIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldExchange)))
+	})
+}
+
+// ExchangeNotNil applies the NotNil predicate on the "exchange" field.
+func ExchangeNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldExchange)))
 	})
 }
 
@@ -836,6 +913,20 @@ func ExchangeShortNameHasSuffix(v string) predicate.Stocks {
 	})
 }
 
+// ExchangeShortNameIsNil applies the IsNil predicate on the "exchange_short_name" field.
+func ExchangeShortNameIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldExchangeShortName)))
+	})
+}
+
+// ExchangeShortNameNotNil applies the NotNil predicate on the "exchange_short_name" field.
+func ExchangeShortNameNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldExchangeShortName)))
+	})
+}
+
 // ExchangeShortNameEqualFold applies the EqualFold predicate on the "exchange_short_name" field.
 func ExchangeShortNameEqualFold(v string) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
@@ -923,6 +1014,505 @@ func PriceLT(v float64) predicate.Stocks {
 func PriceLTE(v float64) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
 		s.Where(sql.LTE(s.C(FieldPrice), v))
+	})
+}
+
+// PriceIsNil applies the IsNil predicate on the "price" field.
+func PriceIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldPrice)))
+	})
+}
+
+// PriceNotNil applies the NotNil predicate on the "price" field.
+func PriceNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldPrice)))
+	})
+}
+
+// IndustryEQ applies the EQ predicate on the "industry" field.
+func IndustryEQ(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryNEQ applies the NEQ predicate on the "industry" field.
+func IndustryNEQ(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryIn applies the In predicate on the "industry" field.
+func IndustryIn(vs ...string) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldIndustry), v...))
+	})
+}
+
+// IndustryNotIn applies the NotIn predicate on the "industry" field.
+func IndustryNotIn(vs ...string) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldIndustry), v...))
+	})
+}
+
+// IndustryGT applies the GT predicate on the "industry" field.
+func IndustryGT(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryGTE applies the GTE predicate on the "industry" field.
+func IndustryGTE(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryLT applies the LT predicate on the "industry" field.
+func IndustryLT(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryLTE applies the LTE predicate on the "industry" field.
+func IndustryLTE(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryContains applies the Contains predicate on the "industry" field.
+func IndustryContains(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.Contains(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryHasPrefix applies the HasPrefix predicate on the "industry" field.
+func IndustryHasPrefix(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.HasPrefix(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryHasSuffix applies the HasSuffix predicate on the "industry" field.
+func IndustryHasSuffix(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.HasSuffix(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryIsNil applies the IsNil predicate on the "industry" field.
+func IndustryIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldIndustry)))
+	})
+}
+
+// IndustryNotNil applies the NotNil predicate on the "industry" field.
+func IndustryNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldIndustry)))
+	})
+}
+
+// IndustryEqualFold applies the EqualFold predicate on the "industry" field.
+func IndustryEqualFold(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EqualFold(s.C(FieldIndustry), v))
+	})
+}
+
+// IndustryContainsFold applies the ContainsFold predicate on the "industry" field.
+func IndustryContainsFold(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.ContainsFold(s.C(FieldIndustry), v))
+	})
+}
+
+// MarketCarpEQ applies the EQ predicate on the "market_carp" field.
+func MarketCarpEQ(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldMarketCarp), v))
+	})
+}
+
+// MarketCarpNEQ applies the NEQ predicate on the "market_carp" field.
+func MarketCarpNEQ(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldMarketCarp), v))
+	})
+}
+
+// MarketCarpIn applies the In predicate on the "market_carp" field.
+func MarketCarpIn(vs ...float64) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldMarketCarp), v...))
+	})
+}
+
+// MarketCarpNotIn applies the NotIn predicate on the "market_carp" field.
+func MarketCarpNotIn(vs ...float64) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldMarketCarp), v...))
+	})
+}
+
+// MarketCarpGT applies the GT predicate on the "market_carp" field.
+func MarketCarpGT(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldMarketCarp), v))
+	})
+}
+
+// MarketCarpGTE applies the GTE predicate on the "market_carp" field.
+func MarketCarpGTE(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldMarketCarp), v))
+	})
+}
+
+// MarketCarpLT applies the LT predicate on the "market_carp" field.
+func MarketCarpLT(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldMarketCarp), v))
+	})
+}
+
+// MarketCarpLTE applies the LTE predicate on the "market_carp" field.
+func MarketCarpLTE(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldMarketCarp), v))
+	})
+}
+
+// MarketCarpIsNil applies the IsNil predicate on the "market_carp" field.
+func MarketCarpIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldMarketCarp)))
+	})
+}
+
+// MarketCarpNotNil applies the NotNil predicate on the "market_carp" field.
+func MarketCarpNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldMarketCarp)))
+	})
+}
+
+// LastDivEQ applies the EQ predicate on the "last_div" field.
+func LastDivEQ(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldLastDiv), v))
+	})
+}
+
+// LastDivNEQ applies the NEQ predicate on the "last_div" field.
+func LastDivNEQ(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldLastDiv), v))
+	})
+}
+
+// LastDivIn applies the In predicate on the "last_div" field.
+func LastDivIn(vs ...int) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldLastDiv), v...))
+	})
+}
+
+// LastDivNotIn applies the NotIn predicate on the "last_div" field.
+func LastDivNotIn(vs ...int) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldLastDiv), v...))
+	})
+}
+
+// LastDivGT applies the GT predicate on the "last_div" field.
+func LastDivGT(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldLastDiv), v))
+	})
+}
+
+// LastDivGTE applies the GTE predicate on the "last_div" field.
+func LastDivGTE(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldLastDiv), v))
+	})
+}
+
+// LastDivLT applies the LT predicate on the "last_div" field.
+func LastDivLT(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldLastDiv), v))
+	})
+}
+
+// LastDivLTE applies the LTE predicate on the "last_div" field.
+func LastDivLTE(v int) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldLastDiv), v))
+	})
+}
+
+// LastDivIsNil applies the IsNil predicate on the "last_div" field.
+func LastDivIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldLastDiv)))
+	})
+}
+
+// LastDivNotNil applies the NotNil predicate on the "last_div" field.
+func LastDivNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldLastDiv)))
+	})
+}
+
+// DescriptionEQ applies the EQ predicate on the "description" field.
+func DescriptionEQ(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldDescription), v))
+	})
+}
+
+// DescriptionNEQ applies the NEQ predicate on the "description" field.
+func DescriptionNEQ(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldDescription), v))
+	})
+}
+
+// DescriptionIn applies the In predicate on the "description" field.
+func DescriptionIn(vs ...float64) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldDescription), v...))
+	})
+}
+
+// DescriptionNotIn applies the NotIn predicate on the "description" field.
+func DescriptionNotIn(vs ...float64) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldDescription), v...))
+	})
+}
+
+// DescriptionGT applies the GT predicate on the "description" field.
+func DescriptionGT(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldDescription), v))
+	})
+}
+
+// DescriptionGTE applies the GTE predicate on the "description" field.
+func DescriptionGTE(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldDescription), v))
+	})
+}
+
+// DescriptionLT applies the LT predicate on the "description" field.
+func DescriptionLT(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldDescription), v))
+	})
+}
+
+// DescriptionLTE applies the LTE predicate on the "description" field.
+func DescriptionLTE(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldDescription), v))
+	})
+}
+
+// DescriptionIsNil applies the IsNil predicate on the "description" field.
+func DescriptionIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldDescription)))
+	})
+}
+
+// DescriptionNotNil applies the NotNil predicate on the "description" field.
+func DescriptionNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldDescription)))
+	})
+}
+
+// YieldEQ applies the EQ predicate on the "yield" field.
+func YieldEQ(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldYield), v))
+	})
+}
+
+// YieldNEQ applies the NEQ predicate on the "yield" field.
+func YieldNEQ(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldYield), v))
+	})
+}
+
+// YieldIn applies the In predicate on the "yield" field.
+func YieldIn(vs ...float64) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldYield), v...))
+	})
+}
+
+// YieldNotIn applies the NotIn predicate on the "yield" field.
+func YieldNotIn(vs ...float64) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldYield), v...))
+	})
+}
+
+// YieldGT applies the GT predicate on the "yield" field.
+func YieldGT(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldYield), v))
+	})
+}
+
+// YieldGTE applies the GTE predicate on the "yield" field.
+func YieldGTE(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldYield), v))
+	})
+}
+
+// YieldLT applies the LT predicate on the "yield" field.
+func YieldLT(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldYield), v))
+	})
+}
+
+// YieldLTE applies the LTE predicate on the "yield" field.
+func YieldLTE(v float64) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldYield), v))
+	})
+}
+
+// YieldIsNil applies the IsNil predicate on the "yield" field.
+func YieldIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldYield)))
+	})
+}
+
+// YieldNotNil applies the NotNil predicate on the "yield" field.
+func YieldNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldYield)))
 	})
 }
 

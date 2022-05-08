@@ -25,6 +25,16 @@ const (
 	FieldExchangeShortName = "exchange_short_name"
 	// FieldPrice holds the string denoting the price field in the database.
 	FieldPrice = "price"
+	// FieldIndustry holds the string denoting the industry field in the database.
+	FieldIndustry = "industry"
+	// FieldMarketCarp holds the string denoting the market_carp field in the database.
+	FieldMarketCarp = "market_carp"
+	// FieldLastDiv holds the string denoting the last_div field in the database.
+	FieldLastDiv = "last_div"
+	// FieldDescription holds the string denoting the description field in the database.
+	FieldDescription = "description"
+	// FieldYield holds the string denoting the yield field in the database.
+	FieldYield = "yield"
 	// FieldCreatedAt holds the string denoting the created_at field in the database.
 	FieldCreatedAt = "created_at"
 	// FieldUpdatedAt holds the string denoting the updated_at field in the database.
@@ -47,6 +57,11 @@ var Columns = []string{
 	FieldExchange,
 	FieldExchangeShortName,
 	FieldPrice,
+	FieldIndustry,
+	FieldMarketCarp,
+	FieldLastDiv,
+	FieldDescription,
+	FieldYield,
 	FieldCreatedAt,
 	FieldUpdatedAt,
 }
@@ -68,6 +83,14 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultPrice holds the default value on creation for the "price" field.
+	DefaultPrice float64
+	// DefaultMarketCarp holds the default value on creation for the "market_carp" field.
+	DefaultMarketCarp float64
+	// DefaultLastDiv holds the default value on creation for the "last_div" field.
+	DefaultLastDiv int
+	// DefaultYield holds the default value on creation for the "yield" field.
+	DefaultYield float64
 	// DefaultCreatedAt holds the default value on creation for the "created_at" field.
 	DefaultCreatedAt func() time.Time
 	// DefaultUpdatedAt holds the default value on creation for the "updated_at" field.

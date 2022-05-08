@@ -11,13 +11,18 @@ var (
 	// StocksColumns holds the columns for the "stocks" table.
 	StocksColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "symbol", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(255)"}},
+		{Name: "symbol", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(255)"}},
 		{Name: "name", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(255)"}},
 		{Name: "name_ja", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(255)"}},
-		{Name: "type", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(16)"}},
-		{Name: "exchange", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(255)"}},
-		{Name: "exchange_short_name", Type: field.TypeString, SchemaType: map[string]string{"postgres": "varchar(64)"}},
-		{Name: "price", Type: field.TypeFloat64, SchemaType: map[string]string{"postgres": "numeric"}},
+		{Name: "type", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(16)"}},
+		{Name: "exchange", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(255)"}},
+		{Name: "exchange_short_name", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(64)"}},
+		{Name: "price", Type: field.TypeFloat64, Nullable: true, Default: 0, SchemaType: map[string]string{"postgres": "bigint"}},
+		{Name: "industry", Type: field.TypeString, Nullable: true, SchemaType: map[string]string{"postgres": "varchar(64)"}},
+		{Name: "market_carp", Type: field.TypeFloat64, Nullable: true, Default: 0, SchemaType: map[string]string{"postgres": "bigint"}},
+		{Name: "last_div", Type: field.TypeInt, Nullable: true, Default: 0, SchemaType: map[string]string{"postgres": "integer"}},
+		{Name: "description", Type: field.TypeFloat64, Nullable: true, SchemaType: map[string]string{"postgres": "text"}},
+		{Name: "yield", Type: field.TypeFloat64, Nullable: true, Default: 0, SchemaType: map[string]string{"postgres": "numeric"}},
 		{Name: "created_at", Type: field.TypeTime, SchemaType: map[string]string{"postgres": "timestamp"}},
 		{Name: "updated_at", Type: field.TypeTime, SchemaType: map[string]string{"postgres": "timestamp"}},
 	}

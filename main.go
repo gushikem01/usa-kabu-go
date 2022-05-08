@@ -22,6 +22,7 @@ func main() {
 
 	// Run the auto migration tool
 	ctx := context.Background()
+	// if err := client.Schema.WriteTo(ctx, os.Stdin); err != nil {
 	if err := client.Schema.Create(ctx); err != nil {
 		log.Fatalf("failed creating schema resources: %v", err)
 	}

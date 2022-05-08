@@ -44,3 +44,12 @@ func (srv *Service) Create(ctx context.Context, stocks []*Stocks) error {
 	}
 	return nil
 }
+
+// Update 更新
+func (srv *Service) Update(ctx context.Context, stocks *Stocks) (*ent.Stocks, error) {
+	s, err := srv.repo.UpdateOne(ctx, stocks)
+	if err != nil {
+		return nil, err
+	}
+	return s, nil
+}

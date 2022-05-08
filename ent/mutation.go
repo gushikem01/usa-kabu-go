@@ -41,6 +41,15 @@ type StocksMutation struct {
 	exchange_short_name *string
 	price               *float64
 	addprice            *float64
+	industry            *string
+	market_carp         *float64
+	addmarket_carp      *float64
+	last_div            *int
+	addlast_div         *int
+	description         *float64
+	adddescription      *float64
+	yield               *float64
+	addyield            *float64
 	created_at          *time.Time
 	updated_at          *time.Time
 	clearedFields       map[string]struct{}
@@ -181,9 +190,22 @@ func (m *StocksMutation) OldSymbol(ctx context.Context) (v string, err error) {
 	return oldValue.Symbol, nil
 }
 
+// ClearSymbol clears the value of the "symbol" field.
+func (m *StocksMutation) ClearSymbol() {
+	m.symbol = nil
+	m.clearedFields[stocks.FieldSymbol] = struct{}{}
+}
+
+// SymbolCleared returns if the "symbol" field was cleared in this mutation.
+func (m *StocksMutation) SymbolCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldSymbol]
+	return ok
+}
+
 // ResetSymbol resets all changes to the "symbol" field.
 func (m *StocksMutation) ResetSymbol() {
 	m.symbol = nil
+	delete(m.clearedFields, stocks.FieldSymbol)
 }
 
 // SetName sets the "name" field.
@@ -315,9 +337,22 @@ func (m *StocksMutation) OldType(ctx context.Context) (v string, err error) {
 	return oldValue.Type, nil
 }
 
+// ClearType clears the value of the "type" field.
+func (m *StocksMutation) ClearType() {
+	m._type = nil
+	m.clearedFields[stocks.FieldType] = struct{}{}
+}
+
+// TypeCleared returns if the "type" field was cleared in this mutation.
+func (m *StocksMutation) TypeCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldType]
+	return ok
+}
+
 // ResetType resets all changes to the "type" field.
 func (m *StocksMutation) ResetType() {
 	m._type = nil
+	delete(m.clearedFields, stocks.FieldType)
 }
 
 // SetExchange sets the "exchange" field.
@@ -351,9 +386,22 @@ func (m *StocksMutation) OldExchange(ctx context.Context) (v string, err error) 
 	return oldValue.Exchange, nil
 }
 
+// ClearExchange clears the value of the "exchange" field.
+func (m *StocksMutation) ClearExchange() {
+	m.exchange = nil
+	m.clearedFields[stocks.FieldExchange] = struct{}{}
+}
+
+// ExchangeCleared returns if the "exchange" field was cleared in this mutation.
+func (m *StocksMutation) ExchangeCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldExchange]
+	return ok
+}
+
 // ResetExchange resets all changes to the "exchange" field.
 func (m *StocksMutation) ResetExchange() {
 	m.exchange = nil
+	delete(m.clearedFields, stocks.FieldExchange)
 }
 
 // SetExchangeShortName sets the "exchange_short_name" field.
@@ -387,9 +435,22 @@ func (m *StocksMutation) OldExchangeShortName(ctx context.Context) (v string, er
 	return oldValue.ExchangeShortName, nil
 }
 
+// ClearExchangeShortName clears the value of the "exchange_short_name" field.
+func (m *StocksMutation) ClearExchangeShortName() {
+	m.exchange_short_name = nil
+	m.clearedFields[stocks.FieldExchangeShortName] = struct{}{}
+}
+
+// ExchangeShortNameCleared returns if the "exchange_short_name" field was cleared in this mutation.
+func (m *StocksMutation) ExchangeShortNameCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldExchangeShortName]
+	return ok
+}
+
 // ResetExchangeShortName resets all changes to the "exchange_short_name" field.
 func (m *StocksMutation) ResetExchangeShortName() {
 	m.exchange_short_name = nil
+	delete(m.clearedFields, stocks.FieldExchangeShortName)
 }
 
 // SetPrice sets the "price" field.
@@ -442,10 +503,353 @@ func (m *StocksMutation) AddedPrice() (r float64, exists bool) {
 	return *v, true
 }
 
+// ClearPrice clears the value of the "price" field.
+func (m *StocksMutation) ClearPrice() {
+	m.price = nil
+	m.addprice = nil
+	m.clearedFields[stocks.FieldPrice] = struct{}{}
+}
+
+// PriceCleared returns if the "price" field was cleared in this mutation.
+func (m *StocksMutation) PriceCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldPrice]
+	return ok
+}
+
 // ResetPrice resets all changes to the "price" field.
 func (m *StocksMutation) ResetPrice() {
 	m.price = nil
 	m.addprice = nil
+	delete(m.clearedFields, stocks.FieldPrice)
+}
+
+// SetIndustry sets the "industry" field.
+func (m *StocksMutation) SetIndustry(s string) {
+	m.industry = &s
+}
+
+// Industry returns the value of the "industry" field in the mutation.
+func (m *StocksMutation) Industry() (r string, exists bool) {
+	v := m.industry
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldIndustry returns the old "industry" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldIndustry(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldIndustry is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldIndustry requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldIndustry: %w", err)
+	}
+	return oldValue.Industry, nil
+}
+
+// ClearIndustry clears the value of the "industry" field.
+func (m *StocksMutation) ClearIndustry() {
+	m.industry = nil
+	m.clearedFields[stocks.FieldIndustry] = struct{}{}
+}
+
+// IndustryCleared returns if the "industry" field was cleared in this mutation.
+func (m *StocksMutation) IndustryCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldIndustry]
+	return ok
+}
+
+// ResetIndustry resets all changes to the "industry" field.
+func (m *StocksMutation) ResetIndustry() {
+	m.industry = nil
+	delete(m.clearedFields, stocks.FieldIndustry)
+}
+
+// SetMarketCarp sets the "market_carp" field.
+func (m *StocksMutation) SetMarketCarp(f float64) {
+	m.market_carp = &f
+	m.addmarket_carp = nil
+}
+
+// MarketCarp returns the value of the "market_carp" field in the mutation.
+func (m *StocksMutation) MarketCarp() (r float64, exists bool) {
+	v := m.market_carp
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldMarketCarp returns the old "market_carp" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldMarketCarp(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldMarketCarp is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldMarketCarp requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldMarketCarp: %w", err)
+	}
+	return oldValue.MarketCarp, nil
+}
+
+// AddMarketCarp adds f to the "market_carp" field.
+func (m *StocksMutation) AddMarketCarp(f float64) {
+	if m.addmarket_carp != nil {
+		*m.addmarket_carp += f
+	} else {
+		m.addmarket_carp = &f
+	}
+}
+
+// AddedMarketCarp returns the value that was added to the "market_carp" field in this mutation.
+func (m *StocksMutation) AddedMarketCarp() (r float64, exists bool) {
+	v := m.addmarket_carp
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearMarketCarp clears the value of the "market_carp" field.
+func (m *StocksMutation) ClearMarketCarp() {
+	m.market_carp = nil
+	m.addmarket_carp = nil
+	m.clearedFields[stocks.FieldMarketCarp] = struct{}{}
+}
+
+// MarketCarpCleared returns if the "market_carp" field was cleared in this mutation.
+func (m *StocksMutation) MarketCarpCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldMarketCarp]
+	return ok
+}
+
+// ResetMarketCarp resets all changes to the "market_carp" field.
+func (m *StocksMutation) ResetMarketCarp() {
+	m.market_carp = nil
+	m.addmarket_carp = nil
+	delete(m.clearedFields, stocks.FieldMarketCarp)
+}
+
+// SetLastDiv sets the "last_div" field.
+func (m *StocksMutation) SetLastDiv(i int) {
+	m.last_div = &i
+	m.addlast_div = nil
+}
+
+// LastDiv returns the value of the "last_div" field in the mutation.
+func (m *StocksMutation) LastDiv() (r int, exists bool) {
+	v := m.last_div
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldLastDiv returns the old "last_div" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldLastDiv(ctx context.Context) (v int, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldLastDiv is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldLastDiv requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldLastDiv: %w", err)
+	}
+	return oldValue.LastDiv, nil
+}
+
+// AddLastDiv adds i to the "last_div" field.
+func (m *StocksMutation) AddLastDiv(i int) {
+	if m.addlast_div != nil {
+		*m.addlast_div += i
+	} else {
+		m.addlast_div = &i
+	}
+}
+
+// AddedLastDiv returns the value that was added to the "last_div" field in this mutation.
+func (m *StocksMutation) AddedLastDiv() (r int, exists bool) {
+	v := m.addlast_div
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearLastDiv clears the value of the "last_div" field.
+func (m *StocksMutation) ClearLastDiv() {
+	m.last_div = nil
+	m.addlast_div = nil
+	m.clearedFields[stocks.FieldLastDiv] = struct{}{}
+}
+
+// LastDivCleared returns if the "last_div" field was cleared in this mutation.
+func (m *StocksMutation) LastDivCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldLastDiv]
+	return ok
+}
+
+// ResetLastDiv resets all changes to the "last_div" field.
+func (m *StocksMutation) ResetLastDiv() {
+	m.last_div = nil
+	m.addlast_div = nil
+	delete(m.clearedFields, stocks.FieldLastDiv)
+}
+
+// SetDescription sets the "description" field.
+func (m *StocksMutation) SetDescription(f float64) {
+	m.description = &f
+	m.adddescription = nil
+}
+
+// Description returns the value of the "description" field in the mutation.
+func (m *StocksMutation) Description() (r float64, exists bool) {
+	v := m.description
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldDescription returns the old "description" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldDescription(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldDescription is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldDescription requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldDescription: %w", err)
+	}
+	return oldValue.Description, nil
+}
+
+// AddDescription adds f to the "description" field.
+func (m *StocksMutation) AddDescription(f float64) {
+	if m.adddescription != nil {
+		*m.adddescription += f
+	} else {
+		m.adddescription = &f
+	}
+}
+
+// AddedDescription returns the value that was added to the "description" field in this mutation.
+func (m *StocksMutation) AddedDescription() (r float64, exists bool) {
+	v := m.adddescription
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearDescription clears the value of the "description" field.
+func (m *StocksMutation) ClearDescription() {
+	m.description = nil
+	m.adddescription = nil
+	m.clearedFields[stocks.FieldDescription] = struct{}{}
+}
+
+// DescriptionCleared returns if the "description" field was cleared in this mutation.
+func (m *StocksMutation) DescriptionCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldDescription]
+	return ok
+}
+
+// ResetDescription resets all changes to the "description" field.
+func (m *StocksMutation) ResetDescription() {
+	m.description = nil
+	m.adddescription = nil
+	delete(m.clearedFields, stocks.FieldDescription)
+}
+
+// SetYield sets the "yield" field.
+func (m *StocksMutation) SetYield(f float64) {
+	m.yield = &f
+	m.addyield = nil
+}
+
+// Yield returns the value of the "yield" field in the mutation.
+func (m *StocksMutation) Yield() (r float64, exists bool) {
+	v := m.yield
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldYield returns the old "yield" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldYield(ctx context.Context) (v float64, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldYield is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldYield requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldYield: %w", err)
+	}
+	return oldValue.Yield, nil
+}
+
+// AddYield adds f to the "yield" field.
+func (m *StocksMutation) AddYield(f float64) {
+	if m.addyield != nil {
+		*m.addyield += f
+	} else {
+		m.addyield = &f
+	}
+}
+
+// AddedYield returns the value that was added to the "yield" field in this mutation.
+func (m *StocksMutation) AddedYield() (r float64, exists bool) {
+	v := m.addyield
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// ClearYield clears the value of the "yield" field.
+func (m *StocksMutation) ClearYield() {
+	m.yield = nil
+	m.addyield = nil
+	m.clearedFields[stocks.FieldYield] = struct{}{}
+}
+
+// YieldCleared returns if the "yield" field was cleared in this mutation.
+func (m *StocksMutation) YieldCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldYield]
+	return ok
+}
+
+// ResetYield resets all changes to the "yield" field.
+func (m *StocksMutation) ResetYield() {
+	m.yield = nil
+	m.addyield = nil
+	delete(m.clearedFields, stocks.FieldYield)
 }
 
 // SetCreatedAt sets the "created_at" field.
@@ -593,7 +997,7 @@ func (m *StocksMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *StocksMutation) Fields() []string {
-	fields := make([]string, 0, 9)
+	fields := make([]string, 0, 14)
 	if m.symbol != nil {
 		fields = append(fields, stocks.FieldSymbol)
 	}
@@ -614,6 +1018,21 @@ func (m *StocksMutation) Fields() []string {
 	}
 	if m.price != nil {
 		fields = append(fields, stocks.FieldPrice)
+	}
+	if m.industry != nil {
+		fields = append(fields, stocks.FieldIndustry)
+	}
+	if m.market_carp != nil {
+		fields = append(fields, stocks.FieldMarketCarp)
+	}
+	if m.last_div != nil {
+		fields = append(fields, stocks.FieldLastDiv)
+	}
+	if m.description != nil {
+		fields = append(fields, stocks.FieldDescription)
+	}
+	if m.yield != nil {
+		fields = append(fields, stocks.FieldYield)
 	}
 	if m.created_at != nil {
 		fields = append(fields, stocks.FieldCreatedAt)
@@ -643,6 +1062,16 @@ func (m *StocksMutation) Field(name string) (ent.Value, bool) {
 		return m.ExchangeShortName()
 	case stocks.FieldPrice:
 		return m.Price()
+	case stocks.FieldIndustry:
+		return m.Industry()
+	case stocks.FieldMarketCarp:
+		return m.MarketCarp()
+	case stocks.FieldLastDiv:
+		return m.LastDiv()
+	case stocks.FieldDescription:
+		return m.Description()
+	case stocks.FieldYield:
+		return m.Yield()
 	case stocks.FieldCreatedAt:
 		return m.CreatedAt()
 	case stocks.FieldUpdatedAt:
@@ -670,6 +1099,16 @@ func (m *StocksMutation) OldField(ctx context.Context, name string) (ent.Value, 
 		return m.OldExchangeShortName(ctx)
 	case stocks.FieldPrice:
 		return m.OldPrice(ctx)
+	case stocks.FieldIndustry:
+		return m.OldIndustry(ctx)
+	case stocks.FieldMarketCarp:
+		return m.OldMarketCarp(ctx)
+	case stocks.FieldLastDiv:
+		return m.OldLastDiv(ctx)
+	case stocks.FieldDescription:
+		return m.OldDescription(ctx)
+	case stocks.FieldYield:
+		return m.OldYield(ctx)
 	case stocks.FieldCreatedAt:
 		return m.OldCreatedAt(ctx)
 	case stocks.FieldUpdatedAt:
@@ -732,6 +1171,41 @@ func (m *StocksMutation) SetField(name string, value ent.Value) error {
 		}
 		m.SetPrice(v)
 		return nil
+	case stocks.FieldIndustry:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetIndustry(v)
+		return nil
+	case stocks.FieldMarketCarp:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetMarketCarp(v)
+		return nil
+	case stocks.FieldLastDiv:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetLastDiv(v)
+		return nil
+	case stocks.FieldDescription:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetDescription(v)
+		return nil
+	case stocks.FieldYield:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetYield(v)
+		return nil
 	case stocks.FieldCreatedAt:
 		v, ok := value.(time.Time)
 		if !ok {
@@ -757,6 +1231,18 @@ func (m *StocksMutation) AddedFields() []string {
 	if m.addprice != nil {
 		fields = append(fields, stocks.FieldPrice)
 	}
+	if m.addmarket_carp != nil {
+		fields = append(fields, stocks.FieldMarketCarp)
+	}
+	if m.addlast_div != nil {
+		fields = append(fields, stocks.FieldLastDiv)
+	}
+	if m.adddescription != nil {
+		fields = append(fields, stocks.FieldDescription)
+	}
+	if m.addyield != nil {
+		fields = append(fields, stocks.FieldYield)
+	}
 	return fields
 }
 
@@ -767,6 +1253,14 @@ func (m *StocksMutation) AddedField(name string) (ent.Value, bool) {
 	switch name {
 	case stocks.FieldPrice:
 		return m.AddedPrice()
+	case stocks.FieldMarketCarp:
+		return m.AddedMarketCarp()
+	case stocks.FieldLastDiv:
+		return m.AddedLastDiv()
+	case stocks.FieldDescription:
+		return m.AddedDescription()
+	case stocks.FieldYield:
+		return m.AddedYield()
 	}
 	return nil, false
 }
@@ -783,6 +1277,34 @@ func (m *StocksMutation) AddField(name string, value ent.Value) error {
 		}
 		m.AddPrice(v)
 		return nil
+	case stocks.FieldMarketCarp:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddMarketCarp(v)
+		return nil
+	case stocks.FieldLastDiv:
+		v, ok := value.(int)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddLastDiv(v)
+		return nil
+	case stocks.FieldDescription:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddDescription(v)
+		return nil
+	case stocks.FieldYield:
+		v, ok := value.(float64)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.AddYield(v)
+		return nil
 	}
 	return fmt.Errorf("unknown Stocks numeric field %s", name)
 }
@@ -791,11 +1313,41 @@ func (m *StocksMutation) AddField(name string, value ent.Value) error {
 // mutation.
 func (m *StocksMutation) ClearedFields() []string {
 	var fields []string
+	if m.FieldCleared(stocks.FieldSymbol) {
+		fields = append(fields, stocks.FieldSymbol)
+	}
 	if m.FieldCleared(stocks.FieldName) {
 		fields = append(fields, stocks.FieldName)
 	}
 	if m.FieldCleared(stocks.FieldNameJa) {
 		fields = append(fields, stocks.FieldNameJa)
+	}
+	if m.FieldCleared(stocks.FieldType) {
+		fields = append(fields, stocks.FieldType)
+	}
+	if m.FieldCleared(stocks.FieldExchange) {
+		fields = append(fields, stocks.FieldExchange)
+	}
+	if m.FieldCleared(stocks.FieldExchangeShortName) {
+		fields = append(fields, stocks.FieldExchangeShortName)
+	}
+	if m.FieldCleared(stocks.FieldPrice) {
+		fields = append(fields, stocks.FieldPrice)
+	}
+	if m.FieldCleared(stocks.FieldIndustry) {
+		fields = append(fields, stocks.FieldIndustry)
+	}
+	if m.FieldCleared(stocks.FieldMarketCarp) {
+		fields = append(fields, stocks.FieldMarketCarp)
+	}
+	if m.FieldCleared(stocks.FieldLastDiv) {
+		fields = append(fields, stocks.FieldLastDiv)
+	}
+	if m.FieldCleared(stocks.FieldDescription) {
+		fields = append(fields, stocks.FieldDescription)
+	}
+	if m.FieldCleared(stocks.FieldYield) {
+		fields = append(fields, stocks.FieldYield)
 	}
 	return fields
 }
@@ -811,11 +1363,41 @@ func (m *StocksMutation) FieldCleared(name string) bool {
 // error if the field is not defined in the schema.
 func (m *StocksMutation) ClearField(name string) error {
 	switch name {
+	case stocks.FieldSymbol:
+		m.ClearSymbol()
+		return nil
 	case stocks.FieldName:
 		m.ClearName()
 		return nil
 	case stocks.FieldNameJa:
 		m.ClearNameJa()
+		return nil
+	case stocks.FieldType:
+		m.ClearType()
+		return nil
+	case stocks.FieldExchange:
+		m.ClearExchange()
+		return nil
+	case stocks.FieldExchangeShortName:
+		m.ClearExchangeShortName()
+		return nil
+	case stocks.FieldPrice:
+		m.ClearPrice()
+		return nil
+	case stocks.FieldIndustry:
+		m.ClearIndustry()
+		return nil
+	case stocks.FieldMarketCarp:
+		m.ClearMarketCarp()
+		return nil
+	case stocks.FieldLastDiv:
+		m.ClearLastDiv()
+		return nil
+	case stocks.FieldDescription:
+		m.ClearDescription()
+		return nil
+	case stocks.FieldYield:
+		m.ClearYield()
 		return nil
 	}
 	return fmt.Errorf("unknown Stocks nullable field %s", name)
@@ -845,6 +1427,21 @@ func (m *StocksMutation) ResetField(name string) error {
 		return nil
 	case stocks.FieldPrice:
 		m.ResetPrice()
+		return nil
+	case stocks.FieldIndustry:
+		m.ResetIndustry()
+		return nil
+	case stocks.FieldMarketCarp:
+		m.ResetMarketCarp()
+		return nil
+	case stocks.FieldLastDiv:
+		m.ResetLastDiv()
+		return nil
+	case stocks.FieldDescription:
+		m.ResetDescription()
+		return nil
+	case stocks.FieldYield:
+		m.ResetYield()
 		return nil
 	case stocks.FieldCreatedAt:
 		m.ResetCreatedAt()

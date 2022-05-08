@@ -9,4 +9,6 @@ type Stocks struct {
 	Price             float64 `json:"price"`
 	Exchange          string  `json:"exchange"`
 	ExchangeShortName string  `json:"exchangeShortName"`
+	Industry          string  `json:"industry"`
+	MarketCarp        float64 `json:"market_carp"`
 }

@@ -15,12 +15,28 @@ import (
 func init() {
 	stocksFields := schema.Stocks{}.Fields()
 	_ = stocksFields
+	// stocksDescPrice is the schema descriptor for price field.
+	stocksDescPrice := stocksFields[6].Descriptor()
+	// stocks.DefaultPrice holds the default value on creation for the price field.
+	stocks.DefaultPrice = stocksDescPrice.Default.(float64)
+	// stocksDescMarketCarp is the schema descriptor for market_carp field.
+	stocksDescMarketCarp := stocksFields[8].Descriptor()
+	// stocks.DefaultMarketCarp holds the default value on creation for the market_carp field.
+	stocks.DefaultMarketCarp = stocksDescMarketCarp.Default.(float64)
+	// stocksDescLastDiv is the schema descriptor for last_div field.
+	stocksDescLastDiv := stocksFields[9].Descriptor()
+	// stocks.DefaultLastDiv holds the default value on creation for the last_div field.
+	stocks.DefaultLastDiv = stocksDescLastDiv.Default.(int)
+	// stocksDescYield is the schema descriptor for yield field.
+	stocksDescYield := stocksFields[11].Descriptor()
+	// stocks.DefaultYield holds the default value on creation for the yield field.
+	stocks.DefaultYield = stocksDescYield.Default.(float64)
 	// stocksDescCreatedAt is the schema descriptor for created_at field.
-	stocksDescCreatedAt := stocksFields[7].Descriptor()
+	stocksDescCreatedAt := stocksFields[12].Descriptor()
 	// stocks.DefaultCreatedAt holds the default value on creation for the created_at field.
 	stocks.DefaultCreatedAt = stocksDescCreatedAt.Default.(func() time.Time)
 	// stocksDescUpdatedAt is the schema descriptor for updated_at field.
-	stocksDescUpdatedAt := stocksFields[8].Descriptor()
+	stocksDescUpdatedAt := stocksFields[13].Descriptor()
 	// stocks.DefaultUpdatedAt holds the default value on creation for the updated_at field.
 	stocks.DefaultUpdatedAt = stocksDescUpdatedAt.Default.(func() time.Time)
 }

@@ -88,13 +88,16 @@ func (repo *Repo) UpdateAll(ctx context.Context, stocks []*stocks.Stocks) ([]*en
 
 // UpdateOne 1件更新
 func (repo *Repo) UpdateOne(ctx context.Context, s *stocks.Stocks) (*ent.Stocks, error) {
+
 	n, err := repo.client.Stocks.UpdateOneID(int(s.ID)).
-		SetExchange(s.Exchange).
-		SetExchangeShortName(s.ExchangeShortName).
-		SetPrice(s.Price).
-		SetName(s.Name).
-		SetSymbol(s.Symbol).
-		SetType(s.Type).
+		SetNillableExchange(&s.Exchange).
+		SetNillableExchangeShortName(&s.ExchangeShortName).
+		SetNillablePrice(&s.Price).
+		SetNillableName(&s.Name).
+		SetNillableSymbol(&s.Symbol).
+		SetNillableType(&s.Type).
+		SetNillableIndustry(&s.Industry).
+		SetNillableMarketCarp(&s.MarketCarp).
 		Save(ctx)
 	if err != nil {
 		repo.log.Error(

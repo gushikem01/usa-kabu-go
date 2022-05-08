@@ -1,5 +1,7 @@
 # usa-kabu.go
 
+This is a Repository that acquires data from financialmodelingprep.com and reflects it in the database
+
 ##  api documents
 https://financialmodelingprep.com/developer/docs/
 

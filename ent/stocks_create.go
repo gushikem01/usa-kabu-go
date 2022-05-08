@@ -26,6 +26,14 @@ func (sc *StocksCreate) SetSymbol(s string) *StocksCreate {
 	return sc
 }
 
+// SetNillableSymbol sets the "symbol" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableSymbol(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetSymbol(*s)
+	}
+	return sc
+}
+
 // SetName sets the "name" field.
 func (sc *StocksCreate) SetName(s string) *StocksCreate {
 	sc.mutation.SetName(s)
@@ -60,9 +68,25 @@ func (sc *StocksCreate) SetType(s string) *StocksCreate {
 	return sc
 }
 
+// SetNillableType sets the "type" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableType(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetType(*s)
+	}
+	return sc
+}
+
 // SetExchange sets the "exchange" field.
 func (sc *StocksCreate) SetExchange(s string) *StocksCreate {
 	sc.mutation.SetExchange(s)
+	return sc
+}
+
+// SetNillableExchange sets the "exchange" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableExchange(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetExchange(*s)
+	}
 	return sc
 }
 
@@ -72,9 +96,95 @@ func (sc *StocksCreate) SetExchangeShortName(s string) *StocksCreate {
 	return sc
 }
 
+// SetNillableExchangeShortName sets the "exchange_short_name" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableExchangeShortName(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetExchangeShortName(*s)
+	}
+	return sc
+}
+
 // SetPrice sets the "price" field.
 func (sc *StocksCreate) SetPrice(f float64) *StocksCreate {
 	sc.mutation.SetPrice(f)
+	return sc
+}
+
+// SetNillablePrice sets the "price" field if the given value is not nil.
+func (sc *StocksCreate) SetNillablePrice(f *float64) *StocksCreate {
+	if f != nil {
+		sc.SetPrice(*f)
+	}
+	return sc
+}
+
+// SetIndustry sets the "industry" field.
+func (sc *StocksCreate) SetIndustry(s string) *StocksCreate {
+	sc.mutation.SetIndustry(s)
+	return sc
+}
+
+// SetNillableIndustry sets the "industry" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableIndustry(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetIndustry(*s)
+	}
+	return sc
+}
+
+// SetMarketCarp sets the "market_carp" field.
+func (sc *StocksCreate) SetMarketCarp(f float64) *StocksCreate {
+	sc.mutation.SetMarketCarp(f)
+	return sc
+}
+
+// SetNillableMarketCarp sets the "market_carp" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableMarketCarp(f *float64) *StocksCreate {
+	if f != nil {
+		sc.SetMarketCarp(*f)
+	}
+	return sc
+}
+
+// SetLastDiv sets the "last_div" field.
+func (sc *StocksCreate) SetLastDiv(i int) *StocksCreate {
+	sc.mutation.SetLastDiv(i)
+	return sc
+}
+
+// SetNillableLastDiv sets the "last_div" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableLastDiv(i *int) *StocksCreate {
+	if i != nil {
+		sc.SetLastDiv(*i)
+	}
+	return sc
+}
+
+// SetDescription sets the "description" field.
+func (sc *StocksCreate) SetDescription(f float64) *StocksCreate {
+	sc.mutation.SetDescription(f)
+	return sc
+}
+
+// SetNillableDescription sets the "description" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableDescription(f *float64) *StocksCreate {
+	if f != nil {
+		sc.SetDescription(*f)
+	}
+	return sc
+}
+
+// SetYield sets the "yield" field.
+func (sc *StocksCreate) SetYield(f float64) *StocksCreate {
+	sc.mutation.SetYield(f)
+	return sc
+}
+
+// SetNillableYield sets the "yield" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableYield(f *float64) *StocksCreate {
+	if f != nil {
+		sc.SetYield(*f)
+	}
 	return sc
 }
 
@@ -192,6 +302,22 @@ func (sc *StocksCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (sc *StocksCreate) defaults() {
+	if _, ok := sc.mutation.Price(); !ok {
+		v := stocks.DefaultPrice
+		sc.mutation.SetPrice(v)
+	}
+	if _, ok := sc.mutation.MarketCarp(); !ok {
+		v := stocks.DefaultMarketCarp
+		sc.mutation.SetMarketCarp(v)
+	}
+	if _, ok := sc.mutation.LastDiv(); !ok {
+		v := stocks.DefaultLastDiv
+		sc.mutation.SetLastDiv(v)
+	}
+	if _, ok := sc.mutation.Yield(); !ok {
+		v := stocks.DefaultYield
+		sc.mutation.SetYield(v)
+	}
 	if _, ok := sc.mutation.CreatedAt(); !ok {
 		v := stocks.DefaultCreatedAt()
 		sc.mutation.SetCreatedAt(v)
@@ -204,21 +330,6 @@ func (sc *StocksCreate) defaults() {
 
 // check runs all checks and user-defined validators on the builder.
 func (sc *StocksCreate) check() error {
-	if _, ok := sc.mutation.Symbol(); !ok {
-		return &ValidationError{Name: "symbol", err: errors.New(`ent: missing required field "Stocks.symbol"`)}
-	}
-	if _, ok := sc.mutation.GetType(); !ok {
-		return &ValidationError{Name: "type", err: errors.New(`ent: missing required field "Stocks.type"`)}
-	}
-	if _, ok := sc.mutation.Exchange(); !ok {
-		return &ValidationError{Name: "exchange", err: errors.New(`ent: missing required field "Stocks.exchange"`)}
-	}
-	if _, ok := sc.mutation.ExchangeShortName(); !ok {
-		return &ValidationError{Name: "exchange_short_name", err: errors.New(`ent: missing required field "Stocks.exchange_short_name"`)}
-	}
-	if _, ok := sc.mutation.Price(); !ok {
-		return &ValidationError{Name: "price", err: errors.New(`ent: missing required field "Stocks.price"`)}
-	}
 	if _, ok := sc.mutation.CreatedAt(); !ok {
 		return &ValidationError{Name: "created_at", err: errors.New(`ent: missing required field "Stocks.created_at"`)}
 	}
@@ -307,6 +418,46 @@ func (sc *StocksCreate) createSpec() (*Stocks, *sqlgraph.CreateSpec) {
 			Column: stocks.FieldPrice,
 		})
 		_node.Price = value
+	}
+	if value, ok := sc.mutation.Industry(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldIndustry,
+		})
+		_node.Industry = value
+	}
+	if value, ok := sc.mutation.MarketCarp(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeFloat64,
+			Value:  value,
+			Column: stocks.FieldMarketCarp,
+		})
+		_node.MarketCarp = value
+	}
+	if value, ok := sc.mutation.LastDiv(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeInt,
+			Value:  value,
+			Column: stocks.FieldLastDiv,
+		})
+		_node.LastDiv = value
+	}
+	if value, ok := sc.mutation.Description(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeFloat64,
+			Value:  value,
+			Column: stocks.FieldDescription,
+		})
+		_node.Description = value
+	}
+	if value, ok := sc.mutation.Yield(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeFloat64,
+			Value:  value,
+			Column: stocks.FieldYield,
+		})
+		_node.Yield = value
 	}
 	if value, ok := sc.mutation.CreatedAt(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
