@@ -13,7 +13,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/gushikem01/usa-kabu-go/server/graph/model"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 )
@@ -37,6 +37,7 @@ type Config struct {
 
 type ResolverRoot interface {
 	Query() QueryResolver
+	Stocks() StocksResolver
 }
 
 type DirectiveRoot struct {
@@ -59,7 +60,14 @@ type ComplexityRoot struct {
 }
 
 type QueryResolver interface {
-	Stocks(ctx context.Context, id *string) (*model.Stocks, error)
+	Stocks(ctx context.Context, id *string) ([]*ent.Stocks, error)
+}
+type StocksResolver interface {
+	Name(ctx context.Context, obj *ent.Stocks) (string, error)
+	Type(ctx context.Context, obj *ent.Stocks) (string, error)
+	Price(ctx context.Context, obj *ent.Stocks) (float64, error)
+	Exchange(ctx context.Context, obj *ent.Stocks) (string, error)
+	ExchangeShortName(ctx context.Context, obj *ent.Stocks) (string, error)
 }
 
 type executableSchema struct {
@@ -201,7 +209,7 @@ var sources = []*ast.Source{
 }
 
 extend type Query {
-    stocks(id: ID): Stocks!
+    stocks(id: ID): [Stocks!]!
 }
 `, BuiltIn: false},
 }
@@ -305,9 +313,9 @@ func (ec *executionContext) _Query_stocks(ctx context.Context, field graphql.Col
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.Stocks)
+	res := resTmp.([]*ent.Stocks)
 	fc.Result = res
-	return ec.marshalNStocks2ᚖgithubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋgraphᚋmodelᚐStocks(ctx, field.Selections, res)
+	return ec.marshalNStocks2ᚕᚖgithubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋentᚐStocksᚄ(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Query_stocks(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -479,7 +487,7 @@ func (ec *executionContext) fieldContext_Query___schema(ctx context.Context, fie
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_id(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_id(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_id(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -505,9 +513,9 @@ func (ec *executionContext) _Stocks_id(ctx context.Context, field graphql.Collec
 		}
 		return graphql.Null
 	}
-	res := resTmp.(string)
+	res := resTmp.(int)
 	fc.Result = res
-	return ec.marshalNID2string(ctx, field.Selections, res)
+	return ec.marshalNID2int(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Stocks_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -523,7 +531,7 @@ func (ec *executionContext) fieldContext_Stocks_id(ctx context.Context, field gr
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_symbol(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_symbol(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_symbol(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -567,7 +575,7 @@ func (ec *executionContext) fieldContext_Stocks_symbol(ctx context.Context, fiel
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_name(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_name(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_name(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -581,7 +589,7 @@ func (ec *executionContext) _Stocks_name(ctx context.Context, field graphql.Coll
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Name, nil
+		return ec.resolvers.Stocks().Name(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -602,8 +610,8 @@ func (ec *executionContext) fieldContext_Stocks_name(ctx context.Context, field 
 	fc = &graphql.FieldContext{
 		Object:     "Stocks",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
 		},
@@ -611,7 +619,7 @@ func (ec *executionContext) fieldContext_Stocks_name(ctx context.Context, field 
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_type(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_type(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_type(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -625,7 +633,7 @@ func (ec *executionContext) _Stocks_type(ctx context.Context, field graphql.Coll
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Type, nil
+		return ec.resolvers.Stocks().Type(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -646,8 +654,8 @@ func (ec *executionContext) fieldContext_Stocks_type(ctx context.Context, field 
 	fc = &graphql.FieldContext{
 		Object:     "Stocks",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
 		},
@@ -655,7 +663,7 @@ func (ec *executionContext) fieldContext_Stocks_type(ctx context.Context, field 
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_price(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_price(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_price(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -669,7 +677,7 @@ func (ec *executionContext) _Stocks_price(ctx context.Context, field graphql.Col
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Price, nil
+		return ec.resolvers.Stocks().Price(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -690,8 +698,8 @@ func (ec *executionContext) fieldContext_Stocks_price(ctx context.Context, field
 	fc = &graphql.FieldContext{
 		Object:     "Stocks",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type Float does not have child fields")
 		},
@@ -699,7 +707,7 @@ func (ec *executionContext) fieldContext_Stocks_price(ctx context.Context, field
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_exchange(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_exchange(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_exchange(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -713,7 +721,7 @@ func (ec *executionContext) _Stocks_exchange(ctx context.Context, field graphql.
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Exchange, nil
+		return ec.resolvers.Stocks().Exchange(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -734,8 +742,8 @@ func (ec *executionContext) fieldContext_Stocks_exchange(ctx context.Context, fi
 	fc = &graphql.FieldContext{
 		Object:     "Stocks",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
 		},
@@ -743,7 +751,7 @@ func (ec *executionContext) fieldContext_Stocks_exchange(ctx context.Context, fi
 	return fc, nil
 }
 
-func (ec *executionContext) _Stocks_exchangeShortName(ctx context.Context, field graphql.CollectedField, obj *model.Stocks) (ret graphql.Marshaler) {
+func (ec *executionContext) _Stocks_exchangeShortName(ctx context.Context, field graphql.CollectedField, obj *ent.Stocks) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Stocks_exchangeShortName(ctx, field)
 	if err != nil {
 		return graphql.Null
@@ -757,7 +765,7 @@ func (ec *executionContext) _Stocks_exchangeShortName(ctx context.Context, field
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.ExchangeShortName, nil
+		return ec.resolvers.Stocks().ExchangeShortName(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -778,8 +786,8 @@ func (ec *executionContext) fieldContext_Stocks_exchangeShortName(ctx context.Co
 	fc = &graphql.FieldContext{
 		Object:     "Stocks",
 		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
+		IsMethod:   true,
+		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
 		},
@@ -2635,7 +2643,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 
 var stocksImplementors = []string{"Stocks"}
 
-func (ec *executionContext) _Stocks(ctx context.Context, sel ast.SelectionSet, obj *model.Stocks) graphql.Marshaler {
+func (ec *executionContext) _Stocks(ctx context.Context, sel ast.SelectionSet, obj *ent.Stocks) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, stocksImplementors)
 	out := graphql.NewFieldSet(fields)
 	var invalids uint32
@@ -2648,50 +2656,115 @@ func (ec *executionContext) _Stocks(ctx context.Context, sel ast.SelectionSet, o
 			out.Values[i] = ec._Stocks_id(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "symbol":
 
 			out.Values[i] = ec._Stocks_symbol(ctx, field, obj)
 
 			if out.Values[i] == graphql.Null {
-				invalids++
+				atomic.AddUint32(&invalids, 1)
 			}
 		case "name":
+			field := field
 
-			out.Values[i] = ec._Stocks_name(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Stocks_name(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "type":
+			field := field
 
-			out.Values[i] = ec._Stocks_type(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Stocks_type(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "price":
+			field := field
 
-			out.Values[i] = ec._Stocks_price(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Stocks_price(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "exchange":
+			field := field
 
-			out.Values[i] = ec._Stocks_exchange(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Stocks_exchange(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		case "exchangeShortName":
+			field := field
 
-			out.Values[i] = ec._Stocks_exchangeShortName(ctx, field, obj)
-
-			if out.Values[i] == graphql.Null {
-				invalids++
+			innerFunc := func(ctx context.Context) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Stocks_exchangeShortName(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&invalids, 1)
+				}
+				return res
 			}
+
+			out.Concurrently(i, func() graphql.Marshaler {
+				return innerFunc(ctx)
+
+			})
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -3051,13 +3124,13 @@ func (ec *executionContext) marshalNFloat2float64(ctx context.Context, sel ast.S
 	return graphql.WrapContextMarshaler(ctx, res)
 }
 
-func (ec *executionContext) unmarshalNID2string(ctx context.Context, v interface{}) (string, error) {
-	res, err := graphql.UnmarshalID(v)
+func (ec *executionContext) unmarshalNID2int(ctx context.Context, v interface{}) (int, error) {
+	res, err := graphql.UnmarshalInt(v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.SelectionSet, v string) graphql.Marshaler {
-	res := graphql.MarshalID(v)
+func (ec *executionContext) marshalNID2int(ctx context.Context, sel ast.SelectionSet, v int) graphql.Marshaler {
+	res := graphql.MarshalInt(v)
 	if res == graphql.Null {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
@@ -3066,11 +3139,51 @@ func (ec *executionContext) marshalNID2string(ctx context.Context, sel ast.Selec
 	return res
 }
 
-func (ec *executionContext) marshalNStocks2githubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋgraphᚋmodelᚐStocks(ctx context.Context, sel ast.SelectionSet, v model.Stocks) graphql.Marshaler {
-	return ec._Stocks(ctx, sel, &v)
+func (ec *executionContext) marshalNStocks2ᚕᚖgithubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋentᚐStocksᚄ(ctx context.Context, sel ast.SelectionSet, v []*ent.Stocks) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNStocks2ᚖgithubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋentᚐStocks(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
 }
 
-func (ec *executionContext) marshalNStocks2ᚖgithubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋgraphᚋmodelᚐStocks(ctx context.Context, sel ast.SelectionSet, v *model.Stocks) graphql.Marshaler {
+func (ec *executionContext) marshalNStocks2ᚖgithubᚗcomᚋgushikem01ᚋusaᚑkabuᚑgoᚋserverᚋentᚐStocks(ctx context.Context, sel ast.SelectionSet, v *ent.Stocks) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "the requested element is null which the schema does not allow")

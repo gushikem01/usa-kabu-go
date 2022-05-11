@@ -9,11 +9,12 @@ import (
 	"fmt"
 	"math"
 
+	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gushikem01/usa-kabu-go/ent/predicate"
-	"github.com/gushikem01/usa-kabu-go/ent/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent/predicate"
+	"github.com/gushikem01/usa-kabu-go/server/ent/stocks"
 )
 
 // StocksQuery is the builder for querying Stocks entities.
@@ -27,6 +28,7 @@ type StocksQuery struct {
 	predicates []predicate.Stocks
 	// eager-loading edges.
 	withStocks *StocksQuery
+	modifiers  []func(s *sql.Selector)
 	// intermediate query (i.e. traversal path).
 	sql  *sql.Selector
 	path func(context.Context) (*sql.Selector, error)
@@ -367,6 +369,9 @@ func (sq *StocksQuery) sqlAll(ctx context.Context) ([]*Stocks, error) {
 		node.Edges.loadedTypes = loadedTypes
 		return node.assignValues(columns, values)
 	}
+	if len(sq.modifiers) > 0 {
+		_spec.Modifiers = sq.modifiers
+	}
 	if err := sqlgraph.QueryNodes(ctx, sq.driver, _spec); err != nil {
 		return nil, err
 	}
@@ -444,6 +449,9 @@ func (sq *StocksQuery) sqlAll(ctx context.Context) ([]*Stocks, error) {
 
 func (sq *StocksQuery) sqlCount(ctx context.Context) (int, error) {
 	_spec := sq.querySpec()
+	if len(sq.modifiers) > 0 {
+		_spec.Modifiers = sq.modifiers
+	}
 	_spec.Node.Columns = sq.fields
 	if len(sq.fields) > 0 {
 		_spec.Unique = sq.unique != nil && *sq.unique
@@ -522,6 +530,9 @@ func (sq *StocksQuery) sqlQuery(ctx context.Context) *sql.Selector {
 	if sq.unique != nil && *sq.unique {
 		selector.Distinct()
 	}
+	for _, m := range sq.modifiers {
+		m(selector)
+	}
 	for _, p := range sq.predicates {
 		p(selector)
 	}
@@ -537,6 +548,32 @@ func (sq *StocksQuery) sqlQuery(ctx context.Context) *sql.Selector {
 		selector.Limit(*limit)
 	}
 	return selector
+}
+
+// ForUpdate locks the selected rows against concurrent updates, and prevent them from being
+// updated, deleted or "selected ... for update" by other sessions, until the transaction is
+// either committed or rolled-back.
+func (sq *StocksQuery) ForUpdate(opts ...sql.LockOption) *StocksQuery {
+	if sq.driver.Dialect() == dialect.Postgres {
+		sq.Unique(false)
+	}
+	sq.modifiers = append(sq.modifiers, func(s *sql.Selector) {
+		s.ForUpdate(opts...)
+	})
+	return sq
+}
+
+// ForShare behaves similarly to ForUpdate, except that it acquires a shared mode lock
+// on any rows that are read. Other sessions can read the rows, but cannot modify them
+// until your transaction commits.
+func (sq *StocksQuery) ForShare(opts ...sql.LockOption) *StocksQuery {
+	if sq.driver.Dialect() == dialect.Postgres {
+		sq.Unique(false)
+	}
+	sq.modifiers = append(sq.modifiers, func(s *sql.Selector) {
+		s.ForShare(opts...)
+	})
+	return sq
 }
 
 // StocksGroupBy is the group-by builder for Stocks entities.

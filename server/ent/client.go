@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gushikem01/usa-kabu-go/ent/migrate"
+	"github.com/gushikem01/usa-kabu-go/server/ent/migrate"
 
-	"github.com/gushikem01/usa-kabu-go/ent/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent/stocks"
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"
@@ -23,6 +23,8 @@ type Client struct {
 	Schema *migrate.Schema
 	// Stocks is the client for interacting with the Stocks builders.
 	Stocks *StocksClient
+	// additional fields for node api
+	tables tables
 }
 
 // NewClient creates a new client configured with the given options.

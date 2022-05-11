@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/apiconf"
 	"github.com/gushikem01/usa-kabu-go/pkg/httpclient"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	"go.uber.org/zap"
 	"golang.org/x/sync/errgroup"
 )

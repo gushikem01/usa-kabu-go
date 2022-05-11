@@ -3,7 +3,7 @@ package stocks
 import (
 	"context"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	"go.uber.org/zap"
 )
 

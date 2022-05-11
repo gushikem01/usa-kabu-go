@@ -9,7 +9,6 @@ import (
 	"entgo.io/ent/schema/field"
 )
 
-// Stocks holds the schema definition for the Stocks entity.
 type Stocks struct {
 	ent.Schema
 }

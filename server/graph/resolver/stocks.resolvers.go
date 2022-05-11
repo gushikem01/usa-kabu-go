@@ -5,21 +5,46 @@ package resolver
 
 import (
 	"context"
+	"fmt"
 
+	ent1 "github.com/gushikem01/usa-kabu-go/server/ent"
 	"github.com/gushikem01/usa-kabu-go/server/graph/generated"
-	"github.com/gushikem01/usa-kabu-go/server/graph/model"
 )
 
-func (r *queryResolver) Stocks(ctx context.Context, id *string) (*model.Stocks, error) {
+func (r *queryResolver) Stocks(ctx context.Context, id *string) ([]*ent1.Stocks, error) {
 	// panic(fmt.Errorf("not implemented"))
-	m := &model.Stocks{
-		ID:   "1",
-		Name: "tests",
+	s, err := r.sSrv.FindAll(ctx)
+	if err != nil {
+		return nil, err
 	}
-	return m, nil
+	return s, nil
+}
+
+func (r *stocksResolver) Name(ctx context.Context, obj *ent1.Stocks) (string, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *stocksResolver) Type(ctx context.Context, obj *ent1.Stocks) (string, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *stocksResolver) Price(ctx context.Context, obj *ent1.Stocks) (float64, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *stocksResolver) Exchange(ctx context.Context, obj *ent1.Stocks) (string, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *stocksResolver) ExchangeShortName(ctx context.Context, obj *ent1.Stocks) (string, error) {
+	panic(fmt.Errorf("not implemented"))
 }
 
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
+// Stocks returns generated.StocksResolver implementation.
+func (r *Resolver) Stocks() generated.StocksResolver { return &stocksResolver{r} }
+
 type queryResolver struct{ *Resolver }
+type stocksResolver struct{ *Resolver }

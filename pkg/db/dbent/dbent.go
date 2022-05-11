@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	_ "github.com/lib/pq"
 )
 

@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 )
 
 // The StocksFunc type is an adapter to allow the use of ordinary

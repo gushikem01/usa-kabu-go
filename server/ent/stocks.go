@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"entgo.io/ent/dialect/sql"
-	"github.com/gushikem01/usa-kabu-go/ent/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent/stocks"
 )
 
 // Stocks is the model entity for the Stocks schema.

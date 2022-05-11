@@ -9,5 +9,5 @@ type Stocks {
 }
 
 extend type Query {
-    stocks(id: ID): Stocks!
+    stocks(id: ID): [Stocks!]!
 }

@@ -5,7 +5,6 @@ import (
 	"log"
 	"testing"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/db/dbent"
 	financialmodelingprep "github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/api/list"
 	"github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/apiconf"
@@ -13,6 +12,7 @@ import (
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
 	stocksEnt "github.com/gushikem01/usa-kabu-go/pkg/stocks/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/zaplog"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	_ "github.com/lib/pq"
 	"github.com/stretchr/testify/assert"
 )

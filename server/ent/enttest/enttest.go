@@ -5,9 +5,9 @@ package enttest
 import (
 	"context"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	// required by schema hooks.
-	_ "github.com/gushikem01/usa-kabu-go/ent/runtime"
+	_ "github.com/gushikem01/usa-kabu-go/server/ent/runtime"
 
 	"entgo.io/ent/dialect/sql/schema"
 )

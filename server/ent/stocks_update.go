@@ -11,8 +11,8 @@ import (
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"
 	"entgo.io/ent/schema/field"
-	"github.com/gushikem01/usa-kabu-go/ent/predicate"
-	"github.com/gushikem01/usa-kabu-go/ent/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent/predicate"
+	"github.com/gushikem01/usa-kabu-go/server/ent/stocks"
 )
 
 // StocksUpdate is the builder for updating Stocks entities.

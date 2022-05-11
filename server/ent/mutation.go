@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gushikem01/usa-kabu-go/ent/predicate"
-	"github.com/gushikem01/usa-kabu-go/ent/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent/predicate"
+	"github.com/gushikem01/usa-kabu-go/server/ent/stocks"
 
 	"entgo.io/ent"
 )

@@ -34,18 +34,22 @@ endif
 schema-stocks: ## schema-stocks
 	go run entgo.io/ent/cmd/ent init Stocks
 
-.PHONY: generate
-generate:	## generate
-	go generate ./ent && go run main.go
-
 # gen
 .PHONY: gen
 gen: ## gen
-	go get github.com/99designs/gqlgen@v0.17.5 && cd server && go run github.com/99designs/gqlgen
+	cd ./server && go run github.com/99designs/gqlgen
+
+## generate
+.PHONY: generate
+generate:	## generate
+	go generate ./server/generate.go
+
+## gql
+.PHONY: gql
+gql: ## gql
+	go generate ./server/ent/...
 
 # air api
 .PHONY: air-%
 air-%: ## air -c $(@:air-%=%)/cmd/api/.air.toml
 	air -c $(@:air-%=%)/cmd/api/.air.toml
-
-# go run -mod=mod entgo.io/ent/cmd/ent describe ./ent/schema

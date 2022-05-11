@@ -3,8 +3,8 @@ package ent
 import (
 	"context"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	"go.uber.org/zap"
 )
 
@@ -90,14 +90,14 @@ func (repo *Repo) UpdateAll(ctx context.Context, stocks []*stocks.Stocks) ([]*en
 func (repo *Repo) UpdateOne(ctx context.Context, s *stocks.Stocks) (*ent.Stocks, error) {
 
 	n, err := repo.client.Stocks.UpdateOneID(int(s.ID)).
-		SetNillableExchange(&s.Exchange).
-		SetNillableExchangeShortName(&s.ExchangeShortName).
-		SetNillablePrice(&s.Price).
-		SetNillableName(&s.Name).
-		SetNillableSymbol(&s.Symbol).
-		SetNillableType(&s.Type).
-		SetNillableIndustry(&s.Industry).
-		SetNillableMarketCarp(&s.MarketCarp).
+		SetNillableExchange(setStringValue(&s.Exchange)).
+		SetNillableExchangeShortName(setStringValue(&s.ExchangeShortName)).
+		SetNillablePrice(setFloat64Value(&s.Price)).
+		SetNillableName(setStringValue(&s.Name)).
+		SetNillableSymbol(setStringValue(&s.Symbol)).
+		SetNillableType(setStringValue(&s.Type)).
+		SetNillableIndustry(setStringValue(&s.Industry)).
+		SetNillableMarketCarp(setFloat64Value(&s.MarketCarp)).
 		Save(ctx)
 	if err != nil {
 		repo.log.Error(
@@ -109,11 +109,21 @@ func (repo *Repo) UpdateOne(ctx context.Context, s *stocks.Stocks) (*ent.Stocks,
 		)
 		return nil, err
 	}
-	// repo.log.Info(
-	// 	"データ更新しました。",
-	// 	zap.Int64("ID", s.ID),
-	// 	zap.String("name", s.Name),
-	// 	zap.String("symbol", s.Symbol),
-	// )
 	return n, nil
+}
+
+// setStringValue setStringValue
+func setStringValue(v *string) *string {
+	if *v == "" {
+		return nil
+	}
+	return v
+}
+
+// setFloat64Value setFloat64Value
+func setFloat64Value(v *float64) *float64 {
+	if *v == 0 {
+		return nil
+	}
+	return v
 }

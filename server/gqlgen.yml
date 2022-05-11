@@ -18,6 +18,12 @@ resolver:
   dir: graph/resolver
   package: resolver
 
+# autobindは、gqlgenに、指定されたGoパッケージ内のGraphQLスキーマに含まれる任意の
+# 型名を検索するように指示します。
+# 一致するものがあれば、それを使用し、そうでなければ新しい型を生成します。
+autobind:
+  - github.com/gushikem01/usa-kabu-go/server/ent
+
 models:
   ID:
     model:

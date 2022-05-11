@@ -5,8 +5,8 @@ package ent
 import (
 	"time"
 
-	"github.com/gushikem01/usa-kabu-go/ent/schema"
-	"github.com/gushikem01/usa-kabu-go/ent/stocks"
+	"github.com/gushikem01/usa-kabu-go/server/ent/schema"
+	"github.com/gushikem01/usa-kabu-go/server/ent/stocks"
 )
 
 // The init function reads all schema descriptors with runtime code

@@ -2,6 +2,8 @@
 
 This is a Repository that acquires data from financialmodelingprep.com and reflects it in the database
 
+# How to use this repository
+
 ##  api documents
 https://financialmodelingprep.com/developer/docs/
 

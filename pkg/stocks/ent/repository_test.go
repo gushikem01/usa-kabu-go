@@ -5,15 +5,16 @@ import (
 	"log"
 	"testing"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/db/dbent"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
 	stocksEnt "github.com/gushikem01/usa-kabu-go/pkg/stocks/ent"
 	"github.com/gushikem01/usa-kabu-go/pkg/zaplog"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	"github.com/stretchr/testify/assert"
 )
 
 func initTest() (stocks.Repository, *ent.Client, error) {
+
 	l, e := zaplog.NewZap()
 	if e != nil {
 		return nil, nil, e
