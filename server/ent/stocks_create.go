@@ -176,6 +176,20 @@ func (sc *StocksCreate) SetNillableDescription(f *float64) *StocksCreate {
 	return sc
 }
 
+// SetWebsite sets the "website" field.
+func (sc *StocksCreate) SetWebsite(s string) *StocksCreate {
+	sc.mutation.SetWebsite(s)
+	return sc
+}
+
+// SetNillableWebsite sets the "website" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableWebsite(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetWebsite(*s)
+	}
+	return sc
+}
+
 // SetYield sets the "yield" field.
 func (sc *StocksCreate) SetYield(f float64) *StocksCreate {
 	sc.mutation.SetYield(f)
@@ -304,9 +318,33 @@ func (sc *StocksCreate) ExecX(ctx context.Context) {
 
 // defaults sets the default values of the builder before save.
 func (sc *StocksCreate) defaults() {
+	if _, ok := sc.mutation.Name(); !ok {
+		v := stocks.DefaultName
+		sc.mutation.SetName(v)
+	}
+	if _, ok := sc.mutation.NameJa(); !ok {
+		v := stocks.DefaultNameJa
+		sc.mutation.SetNameJa(v)
+	}
+	if _, ok := sc.mutation.GetType(); !ok {
+		v := stocks.DefaultType
+		sc.mutation.SetType(v)
+	}
+	if _, ok := sc.mutation.Exchange(); !ok {
+		v := stocks.DefaultExchange
+		sc.mutation.SetExchange(v)
+	}
+	if _, ok := sc.mutation.ExchangeShortName(); !ok {
+		v := stocks.DefaultExchangeShortName
+		sc.mutation.SetExchangeShortName(v)
+	}
 	if _, ok := sc.mutation.Price(); !ok {
 		v := stocks.DefaultPrice
 		sc.mutation.SetPrice(v)
+	}
+	if _, ok := sc.mutation.Industry(); !ok {
+		v := stocks.DefaultIndustry
+		sc.mutation.SetIndustry(v)
 	}
 	if _, ok := sc.mutation.MarketCarp(); !ok {
 		v := stocks.DefaultMarketCarp
@@ -315,6 +353,14 @@ func (sc *StocksCreate) defaults() {
 	if _, ok := sc.mutation.LastDiv(); !ok {
 		v := stocks.DefaultLastDiv
 		sc.mutation.SetLastDiv(v)
+	}
+	if _, ok := sc.mutation.Description(); !ok {
+		v := stocks.DefaultDescription
+		sc.mutation.SetDescription(v)
+	}
+	if _, ok := sc.mutation.Website(); !ok {
+		v := stocks.DefaultWebsite
+		sc.mutation.SetWebsite(v)
 	}
 	if _, ok := sc.mutation.Yield(); !ok {
 		v := stocks.DefaultYield
@@ -453,6 +499,14 @@ func (sc *StocksCreate) createSpec() (*Stocks, *sqlgraph.CreateSpec) {
 			Column: stocks.FieldDescription,
 		})
 		_node.Description = value
+	}
+	if value, ok := sc.mutation.Website(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldWebsite,
+		})
+		_node.Website = value
 	}
 	if value, ok := sc.mutation.Yield(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
@@ -770,6 +824,24 @@ func (u *StocksUpsert) AddDescription(v float64) *StocksUpsert {
 // ClearDescription clears the value of the "description" field.
 func (u *StocksUpsert) ClearDescription() *StocksUpsert {
 	u.SetNull(stocks.FieldDescription)
+	return u
+}
+
+// SetWebsite sets the "website" field.
+func (u *StocksUpsert) SetWebsite(v string) *StocksUpsert {
+	u.Set(stocks.FieldWebsite, v)
+	return u
+}
+
+// UpdateWebsite sets the "website" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateWebsite() *StocksUpsert {
+	u.SetExcluded(stocks.FieldWebsite)
+	return u
+}
+
+// ClearWebsite clears the value of the "website" field.
+func (u *StocksUpsert) ClearWebsite() *StocksUpsert {
+	u.SetNull(stocks.FieldWebsite)
 	return u
 }
 
@@ -1119,6 +1191,27 @@ func (u *StocksUpsertOne) UpdateDescription() *StocksUpsertOne {
 func (u *StocksUpsertOne) ClearDescription() *StocksUpsertOne {
 	return u.Update(func(s *StocksUpsert) {
 		s.ClearDescription()
+	})
+}
+
+// SetWebsite sets the "website" field.
+func (u *StocksUpsertOne) SetWebsite(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetWebsite(v)
+	})
+}
+
+// UpdateWebsite sets the "website" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateWebsite() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateWebsite()
+	})
+}
+
+// ClearWebsite clears the value of the "website" field.
+func (u *StocksUpsertOne) ClearWebsite() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearWebsite()
 	})
 }
 
@@ -1638,6 +1731,27 @@ func (u *StocksUpsertBulk) UpdateDescription() *StocksUpsertBulk {
 func (u *StocksUpsertBulk) ClearDescription() *StocksUpsertBulk {
 	return u.Update(func(s *StocksUpsert) {
 		s.ClearDescription()
+	})
+}
+
+// SetWebsite sets the "website" field.
+func (u *StocksUpsertBulk) SetWebsite(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetWebsite(v)
+	})
+}
+
+// UpdateWebsite sets the "website" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateWebsite() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateWebsite()
+	})
+}
+
+// ClearWebsite clears the value of the "website" field.
+func (u *StocksUpsertBulk) ClearWebsite() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearWebsite()
 	})
 }
 

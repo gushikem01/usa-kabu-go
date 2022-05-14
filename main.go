@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/gushikem01/usa-kabu-go/ent"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	_ "github.com/lib/pq"
 )
 

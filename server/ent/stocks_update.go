@@ -276,6 +276,26 @@ func (su *StocksUpdate) ClearDescription() *StocksUpdate {
 	return su
 }
 
+// SetWebsite sets the "website" field.
+func (su *StocksUpdate) SetWebsite(s string) *StocksUpdate {
+	su.mutation.SetWebsite(s)
+	return su
+}
+
+// SetNillableWebsite sets the "website" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableWebsite(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetWebsite(*s)
+	}
+	return su
+}
+
+// ClearWebsite clears the value of the "website" field.
+func (su *StocksUpdate) ClearWebsite() *StocksUpdate {
+	su.mutation.ClearWebsite()
+	return su
+}
+
 // SetYield sets the "yield" field.
 func (su *StocksUpdate) SetYield(f float64) *StocksUpdate {
 	su.mutation.ResetYield()
@@ -613,6 +633,19 @@ func (su *StocksUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
 			Type:   field.TypeFloat64,
 			Column: stocks.FieldDescription,
+		})
+	}
+	if value, ok := su.mutation.Website(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldWebsite,
+		})
+	}
+	if su.mutation.WebsiteCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldWebsite,
 		})
 	}
 	if value, ok := su.mutation.Yield(); ok {
@@ -967,6 +1000,26 @@ func (suo *StocksUpdateOne) AddDescription(f float64) *StocksUpdateOne {
 // ClearDescription clears the value of the "description" field.
 func (suo *StocksUpdateOne) ClearDescription() *StocksUpdateOne {
 	suo.mutation.ClearDescription()
+	return suo
+}
+
+// SetWebsite sets the "website" field.
+func (suo *StocksUpdateOne) SetWebsite(s string) *StocksUpdateOne {
+	suo.mutation.SetWebsite(s)
+	return suo
+}
+
+// SetNillableWebsite sets the "website" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableWebsite(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetWebsite(*s)
+	}
+	return suo
+}
+
+// ClearWebsite clears the value of the "website" field.
+func (suo *StocksUpdateOne) ClearWebsite() *StocksUpdateOne {
+	suo.mutation.ClearWebsite()
 	return suo
 }
 
@@ -1331,6 +1384,19 @@ func (suo *StocksUpdateOne) sqlSave(ctx context.Context) (_node *Stocks, err err
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
 			Type:   field.TypeFloat64,
 			Column: stocks.FieldDescription,
+		})
+	}
+	if value, ok := suo.mutation.Website(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldWebsite,
+		})
+	}
+	if suo.mutation.WebsiteCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldWebsite,
 		})
 	}
 	if value, ok := suo.mutation.Yield(); ok {

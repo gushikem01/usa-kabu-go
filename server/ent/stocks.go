@@ -38,6 +38,8 @@ type Stocks struct {
 	LastDiv int `json:"last_div,omitempty"`
 	// Description holds the value of the "description" field.
 	Description float64 `json:"description,omitempty"`
+	// Website holds the value of the "website" field.
+	Website string `json:"website,omitempty"`
 	// Yield holds the value of the "yield" field.
 	Yield float64 `json:"yield,omitempty"`
 	// CreatedAt holds the value of the "created_at" field.
@@ -76,7 +78,7 @@ func (*Stocks) scanValues(columns []string) ([]interface{}, error) {
 			values[i] = new(sql.NullFloat64)
 		case stocks.FieldID, stocks.FieldLastDiv:
 			values[i] = new(sql.NullInt64)
-		case stocks.FieldSymbol, stocks.FieldName, stocks.FieldNameJa, stocks.FieldType, stocks.FieldExchange, stocks.FieldExchangeShortName, stocks.FieldIndustry:
+		case stocks.FieldSymbol, stocks.FieldName, stocks.FieldNameJa, stocks.FieldType, stocks.FieldExchange, stocks.FieldExchangeShortName, stocks.FieldIndustry, stocks.FieldWebsite:
 			values[i] = new(sql.NullString)
 		case stocks.FieldCreatedAt, stocks.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
@@ -167,6 +169,12 @@ func (s *Stocks) assignValues(columns []string, values []interface{}) error {
 			} else if value.Valid {
 				s.Description = value.Float64
 			}
+		case stocks.FieldWebsite:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field website", values[i])
+			} else if value.Valid {
+				s.Website = value.String
+			}
 		case stocks.FieldYield:
 			if value, ok := values[i].(*sql.NullFloat64); !ok {
 				return fmt.Errorf("unexpected type %T for field yield", values[i])
@@ -240,6 +248,8 @@ func (s *Stocks) String() string {
 	builder.WriteString(fmt.Sprintf("%v", s.LastDiv))
 	builder.WriteString(", description=")
 	builder.WriteString(fmt.Sprintf("%v", s.Description))
+	builder.WriteString(", website=")
+	builder.WriteString(s.Website)
 	builder.WriteString(", yield=")
 	builder.WriteString(fmt.Sprintf("%v", s.Yield))
 	builder.WriteString(", created_at=")

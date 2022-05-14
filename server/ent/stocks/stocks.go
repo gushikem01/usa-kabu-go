@@ -33,6 +33,8 @@ const (
 	FieldLastDiv = "last_div"
 	// FieldDescription holds the string denoting the description field in the database.
 	FieldDescription = "description"
+	// FieldWebsite holds the string denoting the website field in the database.
+	FieldWebsite = "website"
 	// FieldYield holds the string denoting the yield field in the database.
 	FieldYield = "yield"
 	// FieldCreatedAt holds the string denoting the created_at field in the database.
@@ -61,6 +63,7 @@ var Columns = []string{
 	FieldMarketCarp,
 	FieldLastDiv,
 	FieldDescription,
+	FieldWebsite,
 	FieldYield,
 	FieldCreatedAt,
 	FieldUpdatedAt,
@@ -83,12 +86,28 @@ func ValidColumn(column string) bool {
 }
 
 var (
+	// DefaultName holds the default value on creation for the "name" field.
+	DefaultName string
+	// DefaultNameJa holds the default value on creation for the "name_ja" field.
+	DefaultNameJa string
+	// DefaultType holds the default value on creation for the "type" field.
+	DefaultType string
+	// DefaultExchange holds the default value on creation for the "exchange" field.
+	DefaultExchange string
+	// DefaultExchangeShortName holds the default value on creation for the "exchange_short_name" field.
+	DefaultExchangeShortName string
 	// DefaultPrice holds the default value on creation for the "price" field.
 	DefaultPrice float64
+	// DefaultIndustry holds the default value on creation for the "industry" field.
+	DefaultIndustry string
 	// DefaultMarketCarp holds the default value on creation for the "market_carp" field.
 	DefaultMarketCarp float64
 	// DefaultLastDiv holds the default value on creation for the "last_div" field.
 	DefaultLastDiv int
+	// DefaultDescription holds the default value on creation for the "description" field.
+	DefaultDescription float64
+	// DefaultWebsite holds the default value on creation for the "website" field.
+	DefaultWebsite string
 	// DefaultYield holds the default value on creation for the "yield" field.
 	DefaultYield float64
 	// DefaultCreatedAt holds the default value on creation for the "created_at" field.

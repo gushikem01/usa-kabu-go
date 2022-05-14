@@ -5,6 +5,10 @@
 
 # .env
 .env
+# .envrc
+.envrc
+# env.sh
+env.sh
 
 # .old file
 *.old

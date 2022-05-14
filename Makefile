@@ -37,7 +37,7 @@ schema-stocks: ## schema-stocks
 # gen
 .PHONY: gen
 gen: ## gen
-	cd ./server && go run github.com/99designs/gqlgen
+	go get github.com/99designs/gqlgen@v0.17.5 && cd ./server && go run github.com/99designs/gqlgen
 
 ## generate
 .PHONY: generate

@@ -170,6 +170,13 @@ func Description(v float64) predicate.Stocks {
 	})
 }
 
+// Website applies equality check predicate on the "website" field. It's identical to WebsiteEQ.
+func Website(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldWebsite), v))
+	})
+}
+
 // Yield applies equality check predicate on the "yield" field. It's identical to YieldEQ.
 func Yield(v float64) predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
@@ -1423,6 +1430,131 @@ func DescriptionIsNil() predicate.Stocks {
 func DescriptionNotNil() predicate.Stocks {
 	return predicate.Stocks(func(s *sql.Selector) {
 		s.Where(sql.NotNull(s.C(FieldDescription)))
+	})
+}
+
+// WebsiteEQ applies the EQ predicate on the "website" field.
+func WebsiteEQ(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EQ(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteNEQ applies the NEQ predicate on the "website" field.
+func WebsiteNEQ(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NEQ(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteIn applies the In predicate on the "website" field.
+func WebsiteIn(vs ...string) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.In(s.C(FieldWebsite), v...))
+	})
+}
+
+// WebsiteNotIn applies the NotIn predicate on the "website" field.
+func WebsiteNotIn(vs ...string) predicate.Stocks {
+	v := make([]interface{}, len(vs))
+	for i := range v {
+		v[i] = vs[i]
+	}
+	return predicate.Stocks(func(s *sql.Selector) {
+		// if not arguments were provided, append the FALSE constants,
+		// since we can't apply "IN ()". This will make this predicate falsy.
+		if len(v) == 0 {
+			s.Where(sql.False())
+			return
+		}
+		s.Where(sql.NotIn(s.C(FieldWebsite), v...))
+	})
+}
+
+// WebsiteGT applies the GT predicate on the "website" field.
+func WebsiteGT(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GT(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteGTE applies the GTE predicate on the "website" field.
+func WebsiteGTE(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.GTE(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteLT applies the LT predicate on the "website" field.
+func WebsiteLT(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LT(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteLTE applies the LTE predicate on the "website" field.
+func WebsiteLTE(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.LTE(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteContains applies the Contains predicate on the "website" field.
+func WebsiteContains(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.Contains(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteHasPrefix applies the HasPrefix predicate on the "website" field.
+func WebsiteHasPrefix(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.HasPrefix(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteHasSuffix applies the HasSuffix predicate on the "website" field.
+func WebsiteHasSuffix(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.HasSuffix(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteIsNil applies the IsNil predicate on the "website" field.
+func WebsiteIsNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.IsNull(s.C(FieldWebsite)))
+	})
+}
+
+// WebsiteNotNil applies the NotNil predicate on the "website" field.
+func WebsiteNotNil() predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.NotNull(s.C(FieldWebsite)))
+	})
+}
+
+// WebsiteEqualFold applies the EqualFold predicate on the "website" field.
+func WebsiteEqualFold(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.EqualFold(s.C(FieldWebsite), v))
+	})
+}
+
+// WebsiteContainsFold applies the ContainsFold predicate on the "website" field.
+func WebsiteContainsFold(v string) predicate.Stocks {
+	return predicate.Stocks(func(s *sql.Selector) {
+		s.Where(sql.ContainsFold(s.C(FieldWebsite), v))
 	})
 }
 

@@ -7,12 +7,11 @@ import (
 	"context"
 	"fmt"
 
-	ent1 "github.com/gushikem01/usa-kabu-go/server/ent"
+	"github.com/gushikem01/usa-kabu-go/server/ent"
 	"github.com/gushikem01/usa-kabu-go/server/graph/generated"
 )
 
-func (r *queryResolver) Stocks(ctx context.Context, id *string) ([]*ent1.Stocks, error) {
-	// panic(fmt.Errorf("not implemented"))
+func (r *queryResolver) Stocks(ctx context.Context, id *string) ([]*ent.Stocks, error) {
 	s, err := r.sSrv.FindAll(ctx)
 	if err != nil {
 		return nil, err
@@ -20,23 +19,11 @@ func (r *queryResolver) Stocks(ctx context.Context, id *string) ([]*ent1.Stocks,
 	return s, nil
 }
 
-func (r *stocksResolver) Name(ctx context.Context, obj *ent1.Stocks) (string, error) {
+func (r *stocksResolver) LastDiv(ctx context.Context, obj *ent.Stocks) (float64, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *stocksResolver) Type(ctx context.Context, obj *ent1.Stocks) (string, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *stocksResolver) Price(ctx context.Context, obj *ent1.Stocks) (float64, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *stocksResolver) Exchange(ctx context.Context, obj *ent1.Stocks) (string, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *stocksResolver) ExchangeShortName(ctx context.Context, obj *ent1.Stocks) (string, error) {
+func (r *stocksResolver) Description(ctx context.Context, obj *ent.Stocks) (string, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 

@@ -2,10 +2,17 @@ type Stocks {
     id: ID!
     symbol: String!
     name: String!
+    nameJa: String!
     type: String!
-    price: Float!
     exchange: String!
     exchangeShortName: String!
+    price: Float!
+    industry: String!
+    marketCarp: Float!
+    lastDiv: Float!
+    description: String!
+    website: String!
+    yield: Float!
 }
 
 extend type Query {

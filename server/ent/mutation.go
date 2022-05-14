@@ -48,6 +48,7 @@ type StocksMutation struct {
 	addlast_div         *int
 	description         *float64
 	adddescription      *float64
+	website             *string
 	yield               *float64
 	addyield            *float64
 	created_at          *time.Time
@@ -782,6 +783,55 @@ func (m *StocksMutation) ResetDescription() {
 	delete(m.clearedFields, stocks.FieldDescription)
 }
 
+// SetWebsite sets the "website" field.
+func (m *StocksMutation) SetWebsite(s string) {
+	m.website = &s
+}
+
+// Website returns the value of the "website" field in the mutation.
+func (m *StocksMutation) Website() (r string, exists bool) {
+	v := m.website
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldWebsite returns the old "website" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldWebsite(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldWebsite is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldWebsite requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldWebsite: %w", err)
+	}
+	return oldValue.Website, nil
+}
+
+// ClearWebsite clears the value of the "website" field.
+func (m *StocksMutation) ClearWebsite() {
+	m.website = nil
+	m.clearedFields[stocks.FieldWebsite] = struct{}{}
+}
+
+// WebsiteCleared returns if the "website" field was cleared in this mutation.
+func (m *StocksMutation) WebsiteCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldWebsite]
+	return ok
+}
+
+// ResetWebsite resets all changes to the "website" field.
+func (m *StocksMutation) ResetWebsite() {
+	m.website = nil
+	delete(m.clearedFields, stocks.FieldWebsite)
+}
+
 // SetYield sets the "yield" field.
 func (m *StocksMutation) SetYield(f float64) {
 	m.yield = &f
@@ -997,7 +1047,7 @@ func (m *StocksMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *StocksMutation) Fields() []string {
-	fields := make([]string, 0, 14)
+	fields := make([]string, 0, 15)
 	if m.symbol != nil {
 		fields = append(fields, stocks.FieldSymbol)
 	}
@@ -1030,6 +1080,9 @@ func (m *StocksMutation) Fields() []string {
 	}
 	if m.description != nil {
 		fields = append(fields, stocks.FieldDescription)
+	}
+	if m.website != nil {
+		fields = append(fields, stocks.FieldWebsite)
 	}
 	if m.yield != nil {
 		fields = append(fields, stocks.FieldYield)
@@ -1070,6 +1123,8 @@ func (m *StocksMutation) Field(name string) (ent.Value, bool) {
 		return m.LastDiv()
 	case stocks.FieldDescription:
 		return m.Description()
+	case stocks.FieldWebsite:
+		return m.Website()
 	case stocks.FieldYield:
 		return m.Yield()
 	case stocks.FieldCreatedAt:
@@ -1107,6 +1162,8 @@ func (m *StocksMutation) OldField(ctx context.Context, name string) (ent.Value, 
 		return m.OldLastDiv(ctx)
 	case stocks.FieldDescription:
 		return m.OldDescription(ctx)
+	case stocks.FieldWebsite:
+		return m.OldWebsite(ctx)
 	case stocks.FieldYield:
 		return m.OldYield(ctx)
 	case stocks.FieldCreatedAt:
@@ -1198,6 +1255,13 @@ func (m *StocksMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetDescription(v)
+		return nil
+	case stocks.FieldWebsite:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetWebsite(v)
 		return nil
 	case stocks.FieldYield:
 		v, ok := value.(float64)
@@ -1346,6 +1410,9 @@ func (m *StocksMutation) ClearedFields() []string {
 	if m.FieldCleared(stocks.FieldDescription) {
 		fields = append(fields, stocks.FieldDescription)
 	}
+	if m.FieldCleared(stocks.FieldWebsite) {
+		fields = append(fields, stocks.FieldWebsite)
+	}
 	if m.FieldCleared(stocks.FieldYield) {
 		fields = append(fields, stocks.FieldYield)
 	}
@@ -1396,6 +1463,9 @@ func (m *StocksMutation) ClearField(name string) error {
 	case stocks.FieldDescription:
 		m.ClearDescription()
 		return nil
+	case stocks.FieldWebsite:
+		m.ClearWebsite()
+		return nil
 	case stocks.FieldYield:
 		m.ClearYield()
 		return nil
@@ -1439,6 +1509,9 @@ func (m *StocksMutation) ResetField(name string) error {
 		return nil
 	case stocks.FieldDescription:
 		m.ResetDescription()
+		return nil
+	case stocks.FieldWebsite:
+		m.ResetWebsite()
 		return nil
 	case stocks.FieldYield:
 		m.ResetYield()

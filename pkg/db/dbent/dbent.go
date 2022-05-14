@@ -24,6 +24,7 @@ func New() (*ent.Client, error) {
 	return client, err
 }
 
+// getConnectionSetting 接続情報
 func getConnectionSetting() *pgConn {
 	c := &pgConn{
 		host:     os.Getenv("POSTGRES_HOST"),
@@ -32,5 +33,6 @@ func getConnectionSetting() *pgConn {
 		password: os.Getenv("POSTGRES_PASSWORD"),
 		port:     os.Getenv("POSTGRES_PORT"),
 	}
+	fmt.Println(c)
 	return c
 }
