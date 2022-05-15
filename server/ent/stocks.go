@@ -35,11 +35,33 @@ type Stocks struct {
 	// MarketCarp holds the value of the "market_carp" field.
 	MarketCarp float64 `json:"market_carp,omitempty"`
 	// LastDiv holds the value of the "last_div" field.
-	LastDiv int `json:"last_div,omitempty"`
+	LastDiv float64 `json:"last_div,omitempty"`
 	// Description holds the value of the "description" field.
 	Description float64 `json:"description,omitempty"`
 	// Website holds the value of the "website" field.
 	Website string `json:"website,omitempty"`
+	// Ceo holds the value of the "ceo" field.
+	Ceo string `json:"ceo,omitempty"`
+	// Sector holds the value of the "sector" field.
+	Sector string `json:"sector,omitempty"`
+	// Country holds the value of the "country" field.
+	Country string `json:"country,omitempty"`
+	// FullTimeEmployees holds the value of the "full_time_employees" field.
+	FullTimeEmployees string `json:"full_time_employees,omitempty"`
+	// Phone holds the value of the "phone" field.
+	Phone string `json:"phone,omitempty"`
+	// Address holds the value of the "address" field.
+	Address string `json:"address,omitempty"`
+	// City holds the value of the "city" field.
+	City string `json:"city,omitempty"`
+	// State holds the value of the "state" field.
+	State string `json:"state,omitempty"`
+	// Zip holds the value of the "zip" field.
+	Zip string `json:"zip,omitempty"`
+	// Image holds the value of the "image" field.
+	Image string `json:"image,omitempty"`
+	// IpoDate holds the value of the "ipo_date" field.
+	IpoDate string `json:"ipo_date,omitempty"`
 	// Yield holds the value of the "yield" field.
 	Yield float64 `json:"yield,omitempty"`
 	// CreatedAt holds the value of the "created_at" field.
@@ -74,11 +96,11 @@ func (*Stocks) scanValues(columns []string) ([]interface{}, error) {
 	values := make([]interface{}, len(columns))
 	for i := range columns {
 		switch columns[i] {
-		case stocks.FieldPrice, stocks.FieldMarketCarp, stocks.FieldDescription, stocks.FieldYield:
+		case stocks.FieldPrice, stocks.FieldMarketCarp, stocks.FieldLastDiv, stocks.FieldDescription, stocks.FieldYield:
 			values[i] = new(sql.NullFloat64)
-		case stocks.FieldID, stocks.FieldLastDiv:
+		case stocks.FieldID:
 			values[i] = new(sql.NullInt64)
-		case stocks.FieldSymbol, stocks.FieldName, stocks.FieldNameJa, stocks.FieldType, stocks.FieldExchange, stocks.FieldExchangeShortName, stocks.FieldIndustry, stocks.FieldWebsite:
+		case stocks.FieldSymbol, stocks.FieldName, stocks.FieldNameJa, stocks.FieldType, stocks.FieldExchange, stocks.FieldExchangeShortName, stocks.FieldIndustry, stocks.FieldWebsite, stocks.FieldCeo, stocks.FieldSector, stocks.FieldCountry, stocks.FieldFullTimeEmployees, stocks.FieldPhone, stocks.FieldAddress, stocks.FieldCity, stocks.FieldState, stocks.FieldZip, stocks.FieldImage, stocks.FieldIpoDate:
 			values[i] = new(sql.NullString)
 		case stocks.FieldCreatedAt, stocks.FieldUpdatedAt:
 			values[i] = new(sql.NullTime)
@@ -158,10 +180,10 @@ func (s *Stocks) assignValues(columns []string, values []interface{}) error {
 				s.MarketCarp = value.Float64
 			}
 		case stocks.FieldLastDiv:
-			if value, ok := values[i].(*sql.NullInt64); !ok {
+			if value, ok := values[i].(*sql.NullFloat64); !ok {
 				return fmt.Errorf("unexpected type %T for field last_div", values[i])
 			} else if value.Valid {
-				s.LastDiv = int(value.Int64)
+				s.LastDiv = value.Float64
 			}
 		case stocks.FieldDescription:
 			if value, ok := values[i].(*sql.NullFloat64); !ok {
@@ -174,6 +196,72 @@ func (s *Stocks) assignValues(columns []string, values []interface{}) error {
 				return fmt.Errorf("unexpected type %T for field website", values[i])
 			} else if value.Valid {
 				s.Website = value.String
+			}
+		case stocks.FieldCeo:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field ceo", values[i])
+			} else if value.Valid {
+				s.Ceo = value.String
+			}
+		case stocks.FieldSector:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field sector", values[i])
+			} else if value.Valid {
+				s.Sector = value.String
+			}
+		case stocks.FieldCountry:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field country", values[i])
+			} else if value.Valid {
+				s.Country = value.String
+			}
+		case stocks.FieldFullTimeEmployees:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field full_time_employees", values[i])
+			} else if value.Valid {
+				s.FullTimeEmployees = value.String
+			}
+		case stocks.FieldPhone:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field phone", values[i])
+			} else if value.Valid {
+				s.Phone = value.String
+			}
+		case stocks.FieldAddress:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field address", values[i])
+			} else if value.Valid {
+				s.Address = value.String
+			}
+		case stocks.FieldCity:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field city", values[i])
+			} else if value.Valid {
+				s.City = value.String
+			}
+		case stocks.FieldState:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field state", values[i])
+			} else if value.Valid {
+				s.State = value.String
+			}
+		case stocks.FieldZip:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field zip", values[i])
+			} else if value.Valid {
+				s.Zip = value.String
+			}
+		case stocks.FieldImage:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field image", values[i])
+			} else if value.Valid {
+				s.Image = value.String
+			}
+		case stocks.FieldIpoDate:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field ipo_date", values[i])
+			} else if value.Valid {
+				s.IpoDate = value.String
 			}
 		case stocks.FieldYield:
 			if value, ok := values[i].(*sql.NullFloat64); !ok {
@@ -250,6 +338,28 @@ func (s *Stocks) String() string {
 	builder.WriteString(fmt.Sprintf("%v", s.Description))
 	builder.WriteString(", website=")
 	builder.WriteString(s.Website)
+	builder.WriteString(", ceo=")
+	builder.WriteString(s.Ceo)
+	builder.WriteString(", sector=")
+	builder.WriteString(s.Sector)
+	builder.WriteString(", country=")
+	builder.WriteString(s.Country)
+	builder.WriteString(", full_time_employees=")
+	builder.WriteString(s.FullTimeEmployees)
+	builder.WriteString(", phone=")
+	builder.WriteString(s.Phone)
+	builder.WriteString(", address=")
+	builder.WriteString(s.Address)
+	builder.WriteString(", city=")
+	builder.WriteString(s.City)
+	builder.WriteString(", state=")
+	builder.WriteString(s.State)
+	builder.WriteString(", zip=")
+	builder.WriteString(s.Zip)
+	builder.WriteString(", image=")
+	builder.WriteString(s.Image)
+	builder.WriteString(", ipo_date=")
+	builder.WriteString(s.IpoDate)
 	builder.WriteString(", yield=")
 	builder.WriteString(fmt.Sprintf("%v", s.Yield))
 	builder.WriteString(", created_at=")

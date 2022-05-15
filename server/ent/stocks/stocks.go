@@ -35,6 +35,28 @@ const (
 	FieldDescription = "description"
 	// FieldWebsite holds the string denoting the website field in the database.
 	FieldWebsite = "website"
+	// FieldCeo holds the string denoting the ceo field in the database.
+	FieldCeo = "ceo"
+	// FieldSector holds the string denoting the sector field in the database.
+	FieldSector = "sector"
+	// FieldCountry holds the string denoting the country field in the database.
+	FieldCountry = "country"
+	// FieldFullTimeEmployees holds the string denoting the full_time_employees field in the database.
+	FieldFullTimeEmployees = "full_time_employees"
+	// FieldPhone holds the string denoting the phone field in the database.
+	FieldPhone = "phone"
+	// FieldAddress holds the string denoting the address field in the database.
+	FieldAddress = "address"
+	// FieldCity holds the string denoting the city field in the database.
+	FieldCity = "city"
+	// FieldState holds the string denoting the state field in the database.
+	FieldState = "state"
+	// FieldZip holds the string denoting the zip field in the database.
+	FieldZip = "zip"
+	// FieldImage holds the string denoting the image field in the database.
+	FieldImage = "image"
+	// FieldIpoDate holds the string denoting the ipo_date field in the database.
+	FieldIpoDate = "ipo_date"
 	// FieldYield holds the string denoting the yield field in the database.
 	FieldYield = "yield"
 	// FieldCreatedAt holds the string denoting the created_at field in the database.
@@ -64,6 +86,17 @@ var Columns = []string{
 	FieldLastDiv,
 	FieldDescription,
 	FieldWebsite,
+	FieldCeo,
+	FieldSector,
+	FieldCountry,
+	FieldFullTimeEmployees,
+	FieldPhone,
+	FieldAddress,
+	FieldCity,
+	FieldState,
+	FieldZip,
+	FieldImage,
+	FieldIpoDate,
 	FieldYield,
 	FieldCreatedAt,
 	FieldUpdatedAt,
@@ -103,11 +136,33 @@ var (
 	// DefaultMarketCarp holds the default value on creation for the "market_carp" field.
 	DefaultMarketCarp float64
 	// DefaultLastDiv holds the default value on creation for the "last_div" field.
-	DefaultLastDiv int
+	DefaultLastDiv float64
 	// DefaultDescription holds the default value on creation for the "description" field.
 	DefaultDescription float64
 	// DefaultWebsite holds the default value on creation for the "website" field.
 	DefaultWebsite string
+	// DefaultCeo holds the default value on creation for the "ceo" field.
+	DefaultCeo string
+	// DefaultSector holds the default value on creation for the "sector" field.
+	DefaultSector string
+	// DefaultCountry holds the default value on creation for the "country" field.
+	DefaultCountry string
+	// DefaultFullTimeEmployees holds the default value on creation for the "full_time_employees" field.
+	DefaultFullTimeEmployees string
+	// DefaultPhone holds the default value on creation for the "phone" field.
+	DefaultPhone string
+	// DefaultAddress holds the default value on creation for the "address" field.
+	DefaultAddress string
+	// DefaultCity holds the default value on creation for the "city" field.
+	DefaultCity string
+	// DefaultState holds the default value on creation for the "state" field.
+	DefaultState string
+	// DefaultZip holds the default value on creation for the "zip" field.
+	DefaultZip string
+	// DefaultImage holds the default value on creation for the "image" field.
+	DefaultImage string
+	// DefaultIpoDate holds the default value on creation for the "ipo_date" field.
+	DefaultIpoDate string
 	// DefaultYield holds the default value on creation for the "yield" field.
 	DefaultYield float64
 	// DefaultCreatedAt holds the default value on creation for the "created_at" field.

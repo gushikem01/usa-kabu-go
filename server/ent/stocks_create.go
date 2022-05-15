@@ -149,15 +149,15 @@ func (sc *StocksCreate) SetNillableMarketCarp(f *float64) *StocksCreate {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (sc *StocksCreate) SetLastDiv(i int) *StocksCreate {
-	sc.mutation.SetLastDiv(i)
+func (sc *StocksCreate) SetLastDiv(f float64) *StocksCreate {
+	sc.mutation.SetLastDiv(f)
 	return sc
 }
 
 // SetNillableLastDiv sets the "last_div" field if the given value is not nil.
-func (sc *StocksCreate) SetNillableLastDiv(i *int) *StocksCreate {
-	if i != nil {
-		sc.SetLastDiv(*i)
+func (sc *StocksCreate) SetNillableLastDiv(f *float64) *StocksCreate {
+	if f != nil {
+		sc.SetLastDiv(*f)
 	}
 	return sc
 }
@@ -186,6 +186,160 @@ func (sc *StocksCreate) SetWebsite(s string) *StocksCreate {
 func (sc *StocksCreate) SetNillableWebsite(s *string) *StocksCreate {
 	if s != nil {
 		sc.SetWebsite(*s)
+	}
+	return sc
+}
+
+// SetCeo sets the "ceo" field.
+func (sc *StocksCreate) SetCeo(s string) *StocksCreate {
+	sc.mutation.SetCeo(s)
+	return sc
+}
+
+// SetNillableCeo sets the "ceo" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableCeo(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetCeo(*s)
+	}
+	return sc
+}
+
+// SetSector sets the "sector" field.
+func (sc *StocksCreate) SetSector(s string) *StocksCreate {
+	sc.mutation.SetSector(s)
+	return sc
+}
+
+// SetNillableSector sets the "sector" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableSector(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetSector(*s)
+	}
+	return sc
+}
+
+// SetCountry sets the "country" field.
+func (sc *StocksCreate) SetCountry(s string) *StocksCreate {
+	sc.mutation.SetCountry(s)
+	return sc
+}
+
+// SetNillableCountry sets the "country" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableCountry(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetCountry(*s)
+	}
+	return sc
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (sc *StocksCreate) SetFullTimeEmployees(s string) *StocksCreate {
+	sc.mutation.SetFullTimeEmployees(s)
+	return sc
+}
+
+// SetNillableFullTimeEmployees sets the "full_time_employees" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableFullTimeEmployees(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetFullTimeEmployees(*s)
+	}
+	return sc
+}
+
+// SetPhone sets the "phone" field.
+func (sc *StocksCreate) SetPhone(s string) *StocksCreate {
+	sc.mutation.SetPhone(s)
+	return sc
+}
+
+// SetNillablePhone sets the "phone" field if the given value is not nil.
+func (sc *StocksCreate) SetNillablePhone(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetPhone(*s)
+	}
+	return sc
+}
+
+// SetAddress sets the "address" field.
+func (sc *StocksCreate) SetAddress(s string) *StocksCreate {
+	sc.mutation.SetAddress(s)
+	return sc
+}
+
+// SetNillableAddress sets the "address" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableAddress(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetAddress(*s)
+	}
+	return sc
+}
+
+// SetCity sets the "city" field.
+func (sc *StocksCreate) SetCity(s string) *StocksCreate {
+	sc.mutation.SetCity(s)
+	return sc
+}
+
+// SetNillableCity sets the "city" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableCity(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetCity(*s)
+	}
+	return sc
+}
+
+// SetState sets the "state" field.
+func (sc *StocksCreate) SetState(s string) *StocksCreate {
+	sc.mutation.SetState(s)
+	return sc
+}
+
+// SetNillableState sets the "state" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableState(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetState(*s)
+	}
+	return sc
+}
+
+// SetZip sets the "zip" field.
+func (sc *StocksCreate) SetZip(s string) *StocksCreate {
+	sc.mutation.SetZip(s)
+	return sc
+}
+
+// SetNillableZip sets the "zip" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableZip(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetZip(*s)
+	}
+	return sc
+}
+
+// SetImage sets the "image" field.
+func (sc *StocksCreate) SetImage(s string) *StocksCreate {
+	sc.mutation.SetImage(s)
+	return sc
+}
+
+// SetNillableImage sets the "image" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableImage(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetImage(*s)
+	}
+	return sc
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (sc *StocksCreate) SetIpoDate(s string) *StocksCreate {
+	sc.mutation.SetIpoDate(s)
+	return sc
+}
+
+// SetNillableIpoDate sets the "ipo_date" field if the given value is not nil.
+func (sc *StocksCreate) SetNillableIpoDate(s *string) *StocksCreate {
+	if s != nil {
+		sc.SetIpoDate(*s)
 	}
 	return sc
 }
@@ -362,6 +516,50 @@ func (sc *StocksCreate) defaults() {
 		v := stocks.DefaultWebsite
 		sc.mutation.SetWebsite(v)
 	}
+	if _, ok := sc.mutation.Ceo(); !ok {
+		v := stocks.DefaultCeo
+		sc.mutation.SetCeo(v)
+	}
+	if _, ok := sc.mutation.Sector(); !ok {
+		v := stocks.DefaultSector
+		sc.mutation.SetSector(v)
+	}
+	if _, ok := sc.mutation.Country(); !ok {
+		v := stocks.DefaultCountry
+		sc.mutation.SetCountry(v)
+	}
+	if _, ok := sc.mutation.FullTimeEmployees(); !ok {
+		v := stocks.DefaultFullTimeEmployees
+		sc.mutation.SetFullTimeEmployees(v)
+	}
+	if _, ok := sc.mutation.Phone(); !ok {
+		v := stocks.DefaultPhone
+		sc.mutation.SetPhone(v)
+	}
+	if _, ok := sc.mutation.Address(); !ok {
+		v := stocks.DefaultAddress
+		sc.mutation.SetAddress(v)
+	}
+	if _, ok := sc.mutation.City(); !ok {
+		v := stocks.DefaultCity
+		sc.mutation.SetCity(v)
+	}
+	if _, ok := sc.mutation.State(); !ok {
+		v := stocks.DefaultState
+		sc.mutation.SetState(v)
+	}
+	if _, ok := sc.mutation.Zip(); !ok {
+		v := stocks.DefaultZip
+		sc.mutation.SetZip(v)
+	}
+	if _, ok := sc.mutation.Image(); !ok {
+		v := stocks.DefaultImage
+		sc.mutation.SetImage(v)
+	}
+	if _, ok := sc.mutation.IpoDate(); !ok {
+		v := stocks.DefaultIpoDate
+		sc.mutation.SetIpoDate(v)
+	}
 	if _, ok := sc.mutation.Yield(); !ok {
 		v := stocks.DefaultYield
 		sc.mutation.SetYield(v)
@@ -486,7 +684,7 @@ func (sc *StocksCreate) createSpec() (*Stocks, *sqlgraph.CreateSpec) {
 	}
 	if value, ok := sc.mutation.LastDiv(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Value:  value,
 			Column: stocks.FieldLastDiv,
 		})
@@ -507,6 +705,94 @@ func (sc *StocksCreate) createSpec() (*Stocks, *sqlgraph.CreateSpec) {
 			Column: stocks.FieldWebsite,
 		})
 		_node.Website = value
+	}
+	if value, ok := sc.mutation.Ceo(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCeo,
+		})
+		_node.Ceo = value
+	}
+	if value, ok := sc.mutation.Sector(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldSector,
+		})
+		_node.Sector = value
+	}
+	if value, ok := sc.mutation.Country(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCountry,
+		})
+		_node.Country = value
+	}
+	if value, ok := sc.mutation.FullTimeEmployees(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldFullTimeEmployees,
+		})
+		_node.FullTimeEmployees = value
+	}
+	if value, ok := sc.mutation.Phone(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldPhone,
+		})
+		_node.Phone = value
+	}
+	if value, ok := sc.mutation.Address(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldAddress,
+		})
+		_node.Address = value
+	}
+	if value, ok := sc.mutation.City(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCity,
+		})
+		_node.City = value
+	}
+	if value, ok := sc.mutation.State(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldState,
+		})
+		_node.State = value
+	}
+	if value, ok := sc.mutation.Zip(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldZip,
+		})
+		_node.Zip = value
+	}
+	if value, ok := sc.mutation.Image(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldImage,
+		})
+		_node.Image = value
+	}
+	if value, ok := sc.mutation.IpoDate(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldIpoDate,
+		})
+		_node.IpoDate = value
 	}
 	if value, ok := sc.mutation.Yield(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
@@ -780,7 +1066,7 @@ func (u *StocksUpsert) ClearMarketCarp() *StocksUpsert {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (u *StocksUpsert) SetLastDiv(v int) *StocksUpsert {
+func (u *StocksUpsert) SetLastDiv(v float64) *StocksUpsert {
 	u.Set(stocks.FieldLastDiv, v)
 	return u
 }
@@ -792,7 +1078,7 @@ func (u *StocksUpsert) UpdateLastDiv() *StocksUpsert {
 }
 
 // AddLastDiv adds v to the "last_div" field.
-func (u *StocksUpsert) AddLastDiv(v int) *StocksUpsert {
+func (u *StocksUpsert) AddLastDiv(v float64) *StocksUpsert {
 	u.Add(stocks.FieldLastDiv, v)
 	return u
 }
@@ -842,6 +1128,204 @@ func (u *StocksUpsert) UpdateWebsite() *StocksUpsert {
 // ClearWebsite clears the value of the "website" field.
 func (u *StocksUpsert) ClearWebsite() *StocksUpsert {
 	u.SetNull(stocks.FieldWebsite)
+	return u
+}
+
+// SetCeo sets the "ceo" field.
+func (u *StocksUpsert) SetCeo(v string) *StocksUpsert {
+	u.Set(stocks.FieldCeo, v)
+	return u
+}
+
+// UpdateCeo sets the "ceo" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateCeo() *StocksUpsert {
+	u.SetExcluded(stocks.FieldCeo)
+	return u
+}
+
+// ClearCeo clears the value of the "ceo" field.
+func (u *StocksUpsert) ClearCeo() *StocksUpsert {
+	u.SetNull(stocks.FieldCeo)
+	return u
+}
+
+// SetSector sets the "sector" field.
+func (u *StocksUpsert) SetSector(v string) *StocksUpsert {
+	u.Set(stocks.FieldSector, v)
+	return u
+}
+
+// UpdateSector sets the "sector" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateSector() *StocksUpsert {
+	u.SetExcluded(stocks.FieldSector)
+	return u
+}
+
+// ClearSector clears the value of the "sector" field.
+func (u *StocksUpsert) ClearSector() *StocksUpsert {
+	u.SetNull(stocks.FieldSector)
+	return u
+}
+
+// SetCountry sets the "country" field.
+func (u *StocksUpsert) SetCountry(v string) *StocksUpsert {
+	u.Set(stocks.FieldCountry, v)
+	return u
+}
+
+// UpdateCountry sets the "country" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateCountry() *StocksUpsert {
+	u.SetExcluded(stocks.FieldCountry)
+	return u
+}
+
+// ClearCountry clears the value of the "country" field.
+func (u *StocksUpsert) ClearCountry() *StocksUpsert {
+	u.SetNull(stocks.FieldCountry)
+	return u
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (u *StocksUpsert) SetFullTimeEmployees(v string) *StocksUpsert {
+	u.Set(stocks.FieldFullTimeEmployees, v)
+	return u
+}
+
+// UpdateFullTimeEmployees sets the "full_time_employees" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateFullTimeEmployees() *StocksUpsert {
+	u.SetExcluded(stocks.FieldFullTimeEmployees)
+	return u
+}
+
+// ClearFullTimeEmployees clears the value of the "full_time_employees" field.
+func (u *StocksUpsert) ClearFullTimeEmployees() *StocksUpsert {
+	u.SetNull(stocks.FieldFullTimeEmployees)
+	return u
+}
+
+// SetPhone sets the "phone" field.
+func (u *StocksUpsert) SetPhone(v string) *StocksUpsert {
+	u.Set(stocks.FieldPhone, v)
+	return u
+}
+
+// UpdatePhone sets the "phone" field to the value that was provided on create.
+func (u *StocksUpsert) UpdatePhone() *StocksUpsert {
+	u.SetExcluded(stocks.FieldPhone)
+	return u
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (u *StocksUpsert) ClearPhone() *StocksUpsert {
+	u.SetNull(stocks.FieldPhone)
+	return u
+}
+
+// SetAddress sets the "address" field.
+func (u *StocksUpsert) SetAddress(v string) *StocksUpsert {
+	u.Set(stocks.FieldAddress, v)
+	return u
+}
+
+// UpdateAddress sets the "address" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateAddress() *StocksUpsert {
+	u.SetExcluded(stocks.FieldAddress)
+	return u
+}
+
+// ClearAddress clears the value of the "address" field.
+func (u *StocksUpsert) ClearAddress() *StocksUpsert {
+	u.SetNull(stocks.FieldAddress)
+	return u
+}
+
+// SetCity sets the "city" field.
+func (u *StocksUpsert) SetCity(v string) *StocksUpsert {
+	u.Set(stocks.FieldCity, v)
+	return u
+}
+
+// UpdateCity sets the "city" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateCity() *StocksUpsert {
+	u.SetExcluded(stocks.FieldCity)
+	return u
+}
+
+// ClearCity clears the value of the "city" field.
+func (u *StocksUpsert) ClearCity() *StocksUpsert {
+	u.SetNull(stocks.FieldCity)
+	return u
+}
+
+// SetState sets the "state" field.
+func (u *StocksUpsert) SetState(v string) *StocksUpsert {
+	u.Set(stocks.FieldState, v)
+	return u
+}
+
+// UpdateState sets the "state" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateState() *StocksUpsert {
+	u.SetExcluded(stocks.FieldState)
+	return u
+}
+
+// ClearState clears the value of the "state" field.
+func (u *StocksUpsert) ClearState() *StocksUpsert {
+	u.SetNull(stocks.FieldState)
+	return u
+}
+
+// SetZip sets the "zip" field.
+func (u *StocksUpsert) SetZip(v string) *StocksUpsert {
+	u.Set(stocks.FieldZip, v)
+	return u
+}
+
+// UpdateZip sets the "zip" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateZip() *StocksUpsert {
+	u.SetExcluded(stocks.FieldZip)
+	return u
+}
+
+// ClearZip clears the value of the "zip" field.
+func (u *StocksUpsert) ClearZip() *StocksUpsert {
+	u.SetNull(stocks.FieldZip)
+	return u
+}
+
+// SetImage sets the "image" field.
+func (u *StocksUpsert) SetImage(v string) *StocksUpsert {
+	u.Set(stocks.FieldImage, v)
+	return u
+}
+
+// UpdateImage sets the "image" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateImage() *StocksUpsert {
+	u.SetExcluded(stocks.FieldImage)
+	return u
+}
+
+// ClearImage clears the value of the "image" field.
+func (u *StocksUpsert) ClearImage() *StocksUpsert {
+	u.SetNull(stocks.FieldImage)
+	return u
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (u *StocksUpsert) SetIpoDate(v string) *StocksUpsert {
+	u.Set(stocks.FieldIpoDate, v)
+	return u
+}
+
+// UpdateIpoDate sets the "ipo_date" field to the value that was provided on create.
+func (u *StocksUpsert) UpdateIpoDate() *StocksUpsert {
+	u.SetExcluded(stocks.FieldIpoDate)
+	return u
+}
+
+// ClearIpoDate clears the value of the "ipo_date" field.
+func (u *StocksUpsert) ClearIpoDate() *StocksUpsert {
+	u.SetNull(stocks.FieldIpoDate)
 	return u
 }
 
@@ -1139,14 +1623,14 @@ func (u *StocksUpsertOne) ClearMarketCarp() *StocksUpsertOne {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (u *StocksUpsertOne) SetLastDiv(v int) *StocksUpsertOne {
+func (u *StocksUpsertOne) SetLastDiv(v float64) *StocksUpsertOne {
 	return u.Update(func(s *StocksUpsert) {
 		s.SetLastDiv(v)
 	})
 }
 
 // AddLastDiv adds v to the "last_div" field.
-func (u *StocksUpsertOne) AddLastDiv(v int) *StocksUpsertOne {
+func (u *StocksUpsertOne) AddLastDiv(v float64) *StocksUpsertOne {
 	return u.Update(func(s *StocksUpsert) {
 		s.AddLastDiv(v)
 	})
@@ -1212,6 +1696,237 @@ func (u *StocksUpsertOne) UpdateWebsite() *StocksUpsertOne {
 func (u *StocksUpsertOne) ClearWebsite() *StocksUpsertOne {
 	return u.Update(func(s *StocksUpsert) {
 		s.ClearWebsite()
+	})
+}
+
+// SetCeo sets the "ceo" field.
+func (u *StocksUpsertOne) SetCeo(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetCeo(v)
+	})
+}
+
+// UpdateCeo sets the "ceo" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateCeo() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateCeo()
+	})
+}
+
+// ClearCeo clears the value of the "ceo" field.
+func (u *StocksUpsertOne) ClearCeo() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearCeo()
+	})
+}
+
+// SetSector sets the "sector" field.
+func (u *StocksUpsertOne) SetSector(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetSector(v)
+	})
+}
+
+// UpdateSector sets the "sector" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateSector() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateSector()
+	})
+}
+
+// ClearSector clears the value of the "sector" field.
+func (u *StocksUpsertOne) ClearSector() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearSector()
+	})
+}
+
+// SetCountry sets the "country" field.
+func (u *StocksUpsertOne) SetCountry(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetCountry(v)
+	})
+}
+
+// UpdateCountry sets the "country" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateCountry() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateCountry()
+	})
+}
+
+// ClearCountry clears the value of the "country" field.
+func (u *StocksUpsertOne) ClearCountry() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearCountry()
+	})
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (u *StocksUpsertOne) SetFullTimeEmployees(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetFullTimeEmployees(v)
+	})
+}
+
+// UpdateFullTimeEmployees sets the "full_time_employees" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateFullTimeEmployees() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateFullTimeEmployees()
+	})
+}
+
+// ClearFullTimeEmployees clears the value of the "full_time_employees" field.
+func (u *StocksUpsertOne) ClearFullTimeEmployees() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearFullTimeEmployees()
+	})
+}
+
+// SetPhone sets the "phone" field.
+func (u *StocksUpsertOne) SetPhone(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetPhone(v)
+	})
+}
+
+// UpdatePhone sets the "phone" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdatePhone() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdatePhone()
+	})
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (u *StocksUpsertOne) ClearPhone() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearPhone()
+	})
+}
+
+// SetAddress sets the "address" field.
+func (u *StocksUpsertOne) SetAddress(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetAddress(v)
+	})
+}
+
+// UpdateAddress sets the "address" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateAddress() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateAddress()
+	})
+}
+
+// ClearAddress clears the value of the "address" field.
+func (u *StocksUpsertOne) ClearAddress() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearAddress()
+	})
+}
+
+// SetCity sets the "city" field.
+func (u *StocksUpsertOne) SetCity(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetCity(v)
+	})
+}
+
+// UpdateCity sets the "city" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateCity() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateCity()
+	})
+}
+
+// ClearCity clears the value of the "city" field.
+func (u *StocksUpsertOne) ClearCity() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearCity()
+	})
+}
+
+// SetState sets the "state" field.
+func (u *StocksUpsertOne) SetState(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetState(v)
+	})
+}
+
+// UpdateState sets the "state" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateState() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateState()
+	})
+}
+
+// ClearState clears the value of the "state" field.
+func (u *StocksUpsertOne) ClearState() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearState()
+	})
+}
+
+// SetZip sets the "zip" field.
+func (u *StocksUpsertOne) SetZip(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetZip(v)
+	})
+}
+
+// UpdateZip sets the "zip" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateZip() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateZip()
+	})
+}
+
+// ClearZip clears the value of the "zip" field.
+func (u *StocksUpsertOne) ClearZip() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearZip()
+	})
+}
+
+// SetImage sets the "image" field.
+func (u *StocksUpsertOne) SetImage(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetImage(v)
+	})
+}
+
+// UpdateImage sets the "image" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateImage() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateImage()
+	})
+}
+
+// ClearImage clears the value of the "image" field.
+func (u *StocksUpsertOne) ClearImage() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearImage()
+	})
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (u *StocksUpsertOne) SetIpoDate(v string) *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetIpoDate(v)
+	})
+}
+
+// UpdateIpoDate sets the "ipo_date" field to the value that was provided on create.
+func (u *StocksUpsertOne) UpdateIpoDate() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateIpoDate()
+	})
+}
+
+// ClearIpoDate clears the value of the "ipo_date" field.
+func (u *StocksUpsertOne) ClearIpoDate() *StocksUpsertOne {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearIpoDate()
 	})
 }
 
@@ -1679,14 +2394,14 @@ func (u *StocksUpsertBulk) ClearMarketCarp() *StocksUpsertBulk {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (u *StocksUpsertBulk) SetLastDiv(v int) *StocksUpsertBulk {
+func (u *StocksUpsertBulk) SetLastDiv(v float64) *StocksUpsertBulk {
 	return u.Update(func(s *StocksUpsert) {
 		s.SetLastDiv(v)
 	})
 }
 
 // AddLastDiv adds v to the "last_div" field.
-func (u *StocksUpsertBulk) AddLastDiv(v int) *StocksUpsertBulk {
+func (u *StocksUpsertBulk) AddLastDiv(v float64) *StocksUpsertBulk {
 	return u.Update(func(s *StocksUpsert) {
 		s.AddLastDiv(v)
 	})
@@ -1752,6 +2467,237 @@ func (u *StocksUpsertBulk) UpdateWebsite() *StocksUpsertBulk {
 func (u *StocksUpsertBulk) ClearWebsite() *StocksUpsertBulk {
 	return u.Update(func(s *StocksUpsert) {
 		s.ClearWebsite()
+	})
+}
+
+// SetCeo sets the "ceo" field.
+func (u *StocksUpsertBulk) SetCeo(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetCeo(v)
+	})
+}
+
+// UpdateCeo sets the "ceo" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateCeo() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateCeo()
+	})
+}
+
+// ClearCeo clears the value of the "ceo" field.
+func (u *StocksUpsertBulk) ClearCeo() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearCeo()
+	})
+}
+
+// SetSector sets the "sector" field.
+func (u *StocksUpsertBulk) SetSector(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetSector(v)
+	})
+}
+
+// UpdateSector sets the "sector" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateSector() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateSector()
+	})
+}
+
+// ClearSector clears the value of the "sector" field.
+func (u *StocksUpsertBulk) ClearSector() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearSector()
+	})
+}
+
+// SetCountry sets the "country" field.
+func (u *StocksUpsertBulk) SetCountry(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetCountry(v)
+	})
+}
+
+// UpdateCountry sets the "country" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateCountry() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateCountry()
+	})
+}
+
+// ClearCountry clears the value of the "country" field.
+func (u *StocksUpsertBulk) ClearCountry() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearCountry()
+	})
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (u *StocksUpsertBulk) SetFullTimeEmployees(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetFullTimeEmployees(v)
+	})
+}
+
+// UpdateFullTimeEmployees sets the "full_time_employees" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateFullTimeEmployees() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateFullTimeEmployees()
+	})
+}
+
+// ClearFullTimeEmployees clears the value of the "full_time_employees" field.
+func (u *StocksUpsertBulk) ClearFullTimeEmployees() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearFullTimeEmployees()
+	})
+}
+
+// SetPhone sets the "phone" field.
+func (u *StocksUpsertBulk) SetPhone(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetPhone(v)
+	})
+}
+
+// UpdatePhone sets the "phone" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdatePhone() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdatePhone()
+	})
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (u *StocksUpsertBulk) ClearPhone() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearPhone()
+	})
+}
+
+// SetAddress sets the "address" field.
+func (u *StocksUpsertBulk) SetAddress(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetAddress(v)
+	})
+}
+
+// UpdateAddress sets the "address" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateAddress() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateAddress()
+	})
+}
+
+// ClearAddress clears the value of the "address" field.
+func (u *StocksUpsertBulk) ClearAddress() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearAddress()
+	})
+}
+
+// SetCity sets the "city" field.
+func (u *StocksUpsertBulk) SetCity(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetCity(v)
+	})
+}
+
+// UpdateCity sets the "city" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateCity() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateCity()
+	})
+}
+
+// ClearCity clears the value of the "city" field.
+func (u *StocksUpsertBulk) ClearCity() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearCity()
+	})
+}
+
+// SetState sets the "state" field.
+func (u *StocksUpsertBulk) SetState(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetState(v)
+	})
+}
+
+// UpdateState sets the "state" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateState() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateState()
+	})
+}
+
+// ClearState clears the value of the "state" field.
+func (u *StocksUpsertBulk) ClearState() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearState()
+	})
+}
+
+// SetZip sets the "zip" field.
+func (u *StocksUpsertBulk) SetZip(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetZip(v)
+	})
+}
+
+// UpdateZip sets the "zip" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateZip() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateZip()
+	})
+}
+
+// ClearZip clears the value of the "zip" field.
+func (u *StocksUpsertBulk) ClearZip() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearZip()
+	})
+}
+
+// SetImage sets the "image" field.
+func (u *StocksUpsertBulk) SetImage(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetImage(v)
+	})
+}
+
+// UpdateImage sets the "image" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateImage() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateImage()
+	})
+}
+
+// ClearImage clears the value of the "image" field.
+func (u *StocksUpsertBulk) ClearImage() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearImage()
+	})
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (u *StocksUpsertBulk) SetIpoDate(v string) *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.SetIpoDate(v)
+	})
+}
+
+// UpdateIpoDate sets the "ipo_date" field to the value that was provided on create.
+func (u *StocksUpsertBulk) UpdateIpoDate() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.UpdateIpoDate()
+	})
+}
+
+// ClearIpoDate clears the value of the "ipo_date" field.
+func (u *StocksUpsertBulk) ClearIpoDate() *StocksUpsertBulk {
+	return u.Update(func(s *StocksUpsert) {
+		s.ClearIpoDate()
 	})
 }
 

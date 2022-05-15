@@ -13,7 +13,7 @@ var bigIntSchema = map[string]string{
 var intSchema = map[string]string{
 	dialect.Postgres: "int",
 }
-var float64Schema = map[string]string{
+var floatSchema = map[string]string{
 	dialect.Postgres: "float",
 }
 

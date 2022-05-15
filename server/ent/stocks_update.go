@@ -223,23 +223,23 @@ func (su *StocksUpdate) ClearMarketCarp() *StocksUpdate {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (su *StocksUpdate) SetLastDiv(i int) *StocksUpdate {
+func (su *StocksUpdate) SetLastDiv(f float64) *StocksUpdate {
 	su.mutation.ResetLastDiv()
-	su.mutation.SetLastDiv(i)
+	su.mutation.SetLastDiv(f)
 	return su
 }
 
 // SetNillableLastDiv sets the "last_div" field if the given value is not nil.
-func (su *StocksUpdate) SetNillableLastDiv(i *int) *StocksUpdate {
-	if i != nil {
-		su.SetLastDiv(*i)
+func (su *StocksUpdate) SetNillableLastDiv(f *float64) *StocksUpdate {
+	if f != nil {
+		su.SetLastDiv(*f)
 	}
 	return su
 }
 
-// AddLastDiv adds i to the "last_div" field.
-func (su *StocksUpdate) AddLastDiv(i int) *StocksUpdate {
-	su.mutation.AddLastDiv(i)
+// AddLastDiv adds f to the "last_div" field.
+func (su *StocksUpdate) AddLastDiv(f float64) *StocksUpdate {
+	su.mutation.AddLastDiv(f)
 	return su
 }
 
@@ -293,6 +293,226 @@ func (su *StocksUpdate) SetNillableWebsite(s *string) *StocksUpdate {
 // ClearWebsite clears the value of the "website" field.
 func (su *StocksUpdate) ClearWebsite() *StocksUpdate {
 	su.mutation.ClearWebsite()
+	return su
+}
+
+// SetCeo sets the "ceo" field.
+func (su *StocksUpdate) SetCeo(s string) *StocksUpdate {
+	su.mutation.SetCeo(s)
+	return su
+}
+
+// SetNillableCeo sets the "ceo" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableCeo(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetCeo(*s)
+	}
+	return su
+}
+
+// ClearCeo clears the value of the "ceo" field.
+func (su *StocksUpdate) ClearCeo() *StocksUpdate {
+	su.mutation.ClearCeo()
+	return su
+}
+
+// SetSector sets the "sector" field.
+func (su *StocksUpdate) SetSector(s string) *StocksUpdate {
+	su.mutation.SetSector(s)
+	return su
+}
+
+// SetNillableSector sets the "sector" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableSector(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetSector(*s)
+	}
+	return su
+}
+
+// ClearSector clears the value of the "sector" field.
+func (su *StocksUpdate) ClearSector() *StocksUpdate {
+	su.mutation.ClearSector()
+	return su
+}
+
+// SetCountry sets the "country" field.
+func (su *StocksUpdate) SetCountry(s string) *StocksUpdate {
+	su.mutation.SetCountry(s)
+	return su
+}
+
+// SetNillableCountry sets the "country" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableCountry(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetCountry(*s)
+	}
+	return su
+}
+
+// ClearCountry clears the value of the "country" field.
+func (su *StocksUpdate) ClearCountry() *StocksUpdate {
+	su.mutation.ClearCountry()
+	return su
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (su *StocksUpdate) SetFullTimeEmployees(s string) *StocksUpdate {
+	su.mutation.SetFullTimeEmployees(s)
+	return su
+}
+
+// SetNillableFullTimeEmployees sets the "full_time_employees" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableFullTimeEmployees(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetFullTimeEmployees(*s)
+	}
+	return su
+}
+
+// ClearFullTimeEmployees clears the value of the "full_time_employees" field.
+func (su *StocksUpdate) ClearFullTimeEmployees() *StocksUpdate {
+	su.mutation.ClearFullTimeEmployees()
+	return su
+}
+
+// SetPhone sets the "phone" field.
+func (su *StocksUpdate) SetPhone(s string) *StocksUpdate {
+	su.mutation.SetPhone(s)
+	return su
+}
+
+// SetNillablePhone sets the "phone" field if the given value is not nil.
+func (su *StocksUpdate) SetNillablePhone(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetPhone(*s)
+	}
+	return su
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (su *StocksUpdate) ClearPhone() *StocksUpdate {
+	su.mutation.ClearPhone()
+	return su
+}
+
+// SetAddress sets the "address" field.
+func (su *StocksUpdate) SetAddress(s string) *StocksUpdate {
+	su.mutation.SetAddress(s)
+	return su
+}
+
+// SetNillableAddress sets the "address" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableAddress(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetAddress(*s)
+	}
+	return su
+}
+
+// ClearAddress clears the value of the "address" field.
+func (su *StocksUpdate) ClearAddress() *StocksUpdate {
+	su.mutation.ClearAddress()
+	return su
+}
+
+// SetCity sets the "city" field.
+func (su *StocksUpdate) SetCity(s string) *StocksUpdate {
+	su.mutation.SetCity(s)
+	return su
+}
+
+// SetNillableCity sets the "city" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableCity(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetCity(*s)
+	}
+	return su
+}
+
+// ClearCity clears the value of the "city" field.
+func (su *StocksUpdate) ClearCity() *StocksUpdate {
+	su.mutation.ClearCity()
+	return su
+}
+
+// SetState sets the "state" field.
+func (su *StocksUpdate) SetState(s string) *StocksUpdate {
+	su.mutation.SetState(s)
+	return su
+}
+
+// SetNillableState sets the "state" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableState(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetState(*s)
+	}
+	return su
+}
+
+// ClearState clears the value of the "state" field.
+func (su *StocksUpdate) ClearState() *StocksUpdate {
+	su.mutation.ClearState()
+	return su
+}
+
+// SetZip sets the "zip" field.
+func (su *StocksUpdate) SetZip(s string) *StocksUpdate {
+	su.mutation.SetZip(s)
+	return su
+}
+
+// SetNillableZip sets the "zip" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableZip(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetZip(*s)
+	}
+	return su
+}
+
+// ClearZip clears the value of the "zip" field.
+func (su *StocksUpdate) ClearZip() *StocksUpdate {
+	su.mutation.ClearZip()
+	return su
+}
+
+// SetImage sets the "image" field.
+func (su *StocksUpdate) SetImage(s string) *StocksUpdate {
+	su.mutation.SetImage(s)
+	return su
+}
+
+// SetNillableImage sets the "image" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableImage(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetImage(*s)
+	}
+	return su
+}
+
+// ClearImage clears the value of the "image" field.
+func (su *StocksUpdate) ClearImage() *StocksUpdate {
+	su.mutation.ClearImage()
+	return su
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (su *StocksUpdate) SetIpoDate(s string) *StocksUpdate {
+	su.mutation.SetIpoDate(s)
+	return su
+}
+
+// SetNillableIpoDate sets the "ipo_date" field if the given value is not nil.
+func (su *StocksUpdate) SetNillableIpoDate(s *string) *StocksUpdate {
+	if s != nil {
+		su.SetIpoDate(*s)
+	}
+	return su
+}
+
+// ClearIpoDate clears the value of the "ipo_date" field.
+func (su *StocksUpdate) ClearIpoDate() *StocksUpdate {
+	su.mutation.ClearIpoDate()
 	return su
 }
 
@@ -597,21 +817,21 @@ func (su *StocksUpdate) sqlSave(ctx context.Context) (n int, err error) {
 	}
 	if value, ok := su.mutation.LastDiv(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Value:  value,
 			Column: stocks.FieldLastDiv,
 		})
 	}
 	if value, ok := su.mutation.AddedLastDiv(); ok {
 		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Value:  value,
 			Column: stocks.FieldLastDiv,
 		})
 	}
 	if su.mutation.LastDivCleared() {
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Column: stocks.FieldLastDiv,
 		})
 	}
@@ -646,6 +866,149 @@ func (su *StocksUpdate) sqlSave(ctx context.Context) (n int, err error) {
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
 			Column: stocks.FieldWebsite,
+		})
+	}
+	if value, ok := su.mutation.Ceo(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCeo,
+		})
+	}
+	if su.mutation.CeoCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldCeo,
+		})
+	}
+	if value, ok := su.mutation.Sector(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldSector,
+		})
+	}
+	if su.mutation.SectorCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldSector,
+		})
+	}
+	if value, ok := su.mutation.Country(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCountry,
+		})
+	}
+	if su.mutation.CountryCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldCountry,
+		})
+	}
+	if value, ok := su.mutation.FullTimeEmployees(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldFullTimeEmployees,
+		})
+	}
+	if su.mutation.FullTimeEmployeesCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldFullTimeEmployees,
+		})
+	}
+	if value, ok := su.mutation.Phone(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldPhone,
+		})
+	}
+	if su.mutation.PhoneCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldPhone,
+		})
+	}
+	if value, ok := su.mutation.Address(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldAddress,
+		})
+	}
+	if su.mutation.AddressCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldAddress,
+		})
+	}
+	if value, ok := su.mutation.City(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCity,
+		})
+	}
+	if su.mutation.CityCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldCity,
+		})
+	}
+	if value, ok := su.mutation.State(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldState,
+		})
+	}
+	if su.mutation.StateCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldState,
+		})
+	}
+	if value, ok := su.mutation.Zip(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldZip,
+		})
+	}
+	if su.mutation.ZipCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldZip,
+		})
+	}
+	if value, ok := su.mutation.Image(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldImage,
+		})
+	}
+	if su.mutation.ImageCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldImage,
+		})
+	}
+	if value, ok := su.mutation.IpoDate(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldIpoDate,
+		})
+	}
+	if su.mutation.IpoDateCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldIpoDate,
 		})
 	}
 	if value, ok := su.mutation.Yield(); ok {
@@ -950,23 +1313,23 @@ func (suo *StocksUpdateOne) ClearMarketCarp() *StocksUpdateOne {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (suo *StocksUpdateOne) SetLastDiv(i int) *StocksUpdateOne {
+func (suo *StocksUpdateOne) SetLastDiv(f float64) *StocksUpdateOne {
 	suo.mutation.ResetLastDiv()
-	suo.mutation.SetLastDiv(i)
+	suo.mutation.SetLastDiv(f)
 	return suo
 }
 
 // SetNillableLastDiv sets the "last_div" field if the given value is not nil.
-func (suo *StocksUpdateOne) SetNillableLastDiv(i *int) *StocksUpdateOne {
-	if i != nil {
-		suo.SetLastDiv(*i)
+func (suo *StocksUpdateOne) SetNillableLastDiv(f *float64) *StocksUpdateOne {
+	if f != nil {
+		suo.SetLastDiv(*f)
 	}
 	return suo
 }
 
-// AddLastDiv adds i to the "last_div" field.
-func (suo *StocksUpdateOne) AddLastDiv(i int) *StocksUpdateOne {
-	suo.mutation.AddLastDiv(i)
+// AddLastDiv adds f to the "last_div" field.
+func (suo *StocksUpdateOne) AddLastDiv(f float64) *StocksUpdateOne {
+	suo.mutation.AddLastDiv(f)
 	return suo
 }
 
@@ -1020,6 +1383,226 @@ func (suo *StocksUpdateOne) SetNillableWebsite(s *string) *StocksUpdateOne {
 // ClearWebsite clears the value of the "website" field.
 func (suo *StocksUpdateOne) ClearWebsite() *StocksUpdateOne {
 	suo.mutation.ClearWebsite()
+	return suo
+}
+
+// SetCeo sets the "ceo" field.
+func (suo *StocksUpdateOne) SetCeo(s string) *StocksUpdateOne {
+	suo.mutation.SetCeo(s)
+	return suo
+}
+
+// SetNillableCeo sets the "ceo" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableCeo(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetCeo(*s)
+	}
+	return suo
+}
+
+// ClearCeo clears the value of the "ceo" field.
+func (suo *StocksUpdateOne) ClearCeo() *StocksUpdateOne {
+	suo.mutation.ClearCeo()
+	return suo
+}
+
+// SetSector sets the "sector" field.
+func (suo *StocksUpdateOne) SetSector(s string) *StocksUpdateOne {
+	suo.mutation.SetSector(s)
+	return suo
+}
+
+// SetNillableSector sets the "sector" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableSector(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetSector(*s)
+	}
+	return suo
+}
+
+// ClearSector clears the value of the "sector" field.
+func (suo *StocksUpdateOne) ClearSector() *StocksUpdateOne {
+	suo.mutation.ClearSector()
+	return suo
+}
+
+// SetCountry sets the "country" field.
+func (suo *StocksUpdateOne) SetCountry(s string) *StocksUpdateOne {
+	suo.mutation.SetCountry(s)
+	return suo
+}
+
+// SetNillableCountry sets the "country" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableCountry(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetCountry(*s)
+	}
+	return suo
+}
+
+// ClearCountry clears the value of the "country" field.
+func (suo *StocksUpdateOne) ClearCountry() *StocksUpdateOne {
+	suo.mutation.ClearCountry()
+	return suo
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (suo *StocksUpdateOne) SetFullTimeEmployees(s string) *StocksUpdateOne {
+	suo.mutation.SetFullTimeEmployees(s)
+	return suo
+}
+
+// SetNillableFullTimeEmployees sets the "full_time_employees" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableFullTimeEmployees(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetFullTimeEmployees(*s)
+	}
+	return suo
+}
+
+// ClearFullTimeEmployees clears the value of the "full_time_employees" field.
+func (suo *StocksUpdateOne) ClearFullTimeEmployees() *StocksUpdateOne {
+	suo.mutation.ClearFullTimeEmployees()
+	return suo
+}
+
+// SetPhone sets the "phone" field.
+func (suo *StocksUpdateOne) SetPhone(s string) *StocksUpdateOne {
+	suo.mutation.SetPhone(s)
+	return suo
+}
+
+// SetNillablePhone sets the "phone" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillablePhone(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetPhone(*s)
+	}
+	return suo
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (suo *StocksUpdateOne) ClearPhone() *StocksUpdateOne {
+	suo.mutation.ClearPhone()
+	return suo
+}
+
+// SetAddress sets the "address" field.
+func (suo *StocksUpdateOne) SetAddress(s string) *StocksUpdateOne {
+	suo.mutation.SetAddress(s)
+	return suo
+}
+
+// SetNillableAddress sets the "address" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableAddress(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetAddress(*s)
+	}
+	return suo
+}
+
+// ClearAddress clears the value of the "address" field.
+func (suo *StocksUpdateOne) ClearAddress() *StocksUpdateOne {
+	suo.mutation.ClearAddress()
+	return suo
+}
+
+// SetCity sets the "city" field.
+func (suo *StocksUpdateOne) SetCity(s string) *StocksUpdateOne {
+	suo.mutation.SetCity(s)
+	return suo
+}
+
+// SetNillableCity sets the "city" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableCity(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetCity(*s)
+	}
+	return suo
+}
+
+// ClearCity clears the value of the "city" field.
+func (suo *StocksUpdateOne) ClearCity() *StocksUpdateOne {
+	suo.mutation.ClearCity()
+	return suo
+}
+
+// SetState sets the "state" field.
+func (suo *StocksUpdateOne) SetState(s string) *StocksUpdateOne {
+	suo.mutation.SetState(s)
+	return suo
+}
+
+// SetNillableState sets the "state" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableState(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetState(*s)
+	}
+	return suo
+}
+
+// ClearState clears the value of the "state" field.
+func (suo *StocksUpdateOne) ClearState() *StocksUpdateOne {
+	suo.mutation.ClearState()
+	return suo
+}
+
+// SetZip sets the "zip" field.
+func (suo *StocksUpdateOne) SetZip(s string) *StocksUpdateOne {
+	suo.mutation.SetZip(s)
+	return suo
+}
+
+// SetNillableZip sets the "zip" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableZip(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetZip(*s)
+	}
+	return suo
+}
+
+// ClearZip clears the value of the "zip" field.
+func (suo *StocksUpdateOne) ClearZip() *StocksUpdateOne {
+	suo.mutation.ClearZip()
+	return suo
+}
+
+// SetImage sets the "image" field.
+func (suo *StocksUpdateOne) SetImage(s string) *StocksUpdateOne {
+	suo.mutation.SetImage(s)
+	return suo
+}
+
+// SetNillableImage sets the "image" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableImage(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetImage(*s)
+	}
+	return suo
+}
+
+// ClearImage clears the value of the "image" field.
+func (suo *StocksUpdateOne) ClearImage() *StocksUpdateOne {
+	suo.mutation.ClearImage()
+	return suo
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (suo *StocksUpdateOne) SetIpoDate(s string) *StocksUpdateOne {
+	suo.mutation.SetIpoDate(s)
+	return suo
+}
+
+// SetNillableIpoDate sets the "ipo_date" field if the given value is not nil.
+func (suo *StocksUpdateOne) SetNillableIpoDate(s *string) *StocksUpdateOne {
+	if s != nil {
+		suo.SetIpoDate(*s)
+	}
+	return suo
+}
+
+// ClearIpoDate clears the value of the "ipo_date" field.
+func (suo *StocksUpdateOne) ClearIpoDate() *StocksUpdateOne {
+	suo.mutation.ClearIpoDate()
 	return suo
 }
 
@@ -1348,21 +1931,21 @@ func (suo *StocksUpdateOne) sqlSave(ctx context.Context) (_node *Stocks, err err
 	}
 	if value, ok := suo.mutation.LastDiv(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Value:  value,
 			Column: stocks.FieldLastDiv,
 		})
 	}
 	if value, ok := suo.mutation.AddedLastDiv(); ok {
 		_spec.Fields.Add = append(_spec.Fields.Add, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Value:  value,
 			Column: stocks.FieldLastDiv,
 		})
 	}
 	if suo.mutation.LastDivCleared() {
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
-			Type:   field.TypeInt,
+			Type:   field.TypeFloat64,
 			Column: stocks.FieldLastDiv,
 		})
 	}
@@ -1397,6 +1980,149 @@ func (suo *StocksUpdateOne) sqlSave(ctx context.Context) (_node *Stocks, err err
 		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
 			Column: stocks.FieldWebsite,
+		})
+	}
+	if value, ok := suo.mutation.Ceo(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCeo,
+		})
+	}
+	if suo.mutation.CeoCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldCeo,
+		})
+	}
+	if value, ok := suo.mutation.Sector(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldSector,
+		})
+	}
+	if suo.mutation.SectorCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldSector,
+		})
+	}
+	if value, ok := suo.mutation.Country(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCountry,
+		})
+	}
+	if suo.mutation.CountryCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldCountry,
+		})
+	}
+	if value, ok := suo.mutation.FullTimeEmployees(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldFullTimeEmployees,
+		})
+	}
+	if suo.mutation.FullTimeEmployeesCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldFullTimeEmployees,
+		})
+	}
+	if value, ok := suo.mutation.Phone(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldPhone,
+		})
+	}
+	if suo.mutation.PhoneCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldPhone,
+		})
+	}
+	if value, ok := suo.mutation.Address(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldAddress,
+		})
+	}
+	if suo.mutation.AddressCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldAddress,
+		})
+	}
+	if value, ok := suo.mutation.City(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldCity,
+		})
+	}
+	if suo.mutation.CityCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldCity,
+		})
+	}
+	if value, ok := suo.mutation.State(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldState,
+		})
+	}
+	if suo.mutation.StateCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldState,
+		})
+	}
+	if value, ok := suo.mutation.Zip(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldZip,
+		})
+	}
+	if suo.mutation.ZipCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldZip,
+		})
+	}
+	if value, ok := suo.mutation.Image(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldImage,
+		})
+	}
+	if suo.mutation.ImageCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldImage,
+		})
+	}
+	if value, ok := suo.mutation.IpoDate(); ok {
+		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: stocks.FieldIpoDate,
+		})
+	}
+	if suo.mutation.IpoDateCleared() {
+		_spec.Fields.Clear = append(_spec.Fields.Clear, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Column: stocks.FieldIpoDate,
 		})
 	}
 	if value, ok := suo.mutation.Yield(); ok {

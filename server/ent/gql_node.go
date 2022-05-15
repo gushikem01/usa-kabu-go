@@ -50,7 +50,7 @@ func (s *Stocks) Node(ctx context.Context) (node *Node, err error) {
 	node = &Node{
 		ID:     s.ID,
 		Type:   "Stocks",
-		Fields: make([]*Field, 15),
+		Fields: make([]*Field, 26),
 		Edges:  make([]*Edge, 1),
 	}
 	var buf []byte
@@ -130,7 +130,7 @@ func (s *Stocks) Node(ctx context.Context) (node *Node, err error) {
 		return nil, err
 	}
 	node.Fields[9] = &Field{
-		Type:  "int",
+		Type:  "float64",
 		Name:  "last_div",
 		Value: string(buf),
 	}
@@ -150,10 +150,98 @@ func (s *Stocks) Node(ctx context.Context) (node *Node, err error) {
 		Name:  "website",
 		Value: string(buf),
 	}
-	if buf, err = json.Marshal(s.Yield); err != nil {
+	if buf, err = json.Marshal(s.Ceo); err != nil {
 		return nil, err
 	}
 	node.Fields[12] = &Field{
+		Type:  "string",
+		Name:  "ceo",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Sector); err != nil {
+		return nil, err
+	}
+	node.Fields[13] = &Field{
+		Type:  "string",
+		Name:  "sector",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Country); err != nil {
+		return nil, err
+	}
+	node.Fields[14] = &Field{
+		Type:  "string",
+		Name:  "country",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.FullTimeEmployees); err != nil {
+		return nil, err
+	}
+	node.Fields[15] = &Field{
+		Type:  "string",
+		Name:  "full_time_employees",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Phone); err != nil {
+		return nil, err
+	}
+	node.Fields[16] = &Field{
+		Type:  "string",
+		Name:  "phone",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Address); err != nil {
+		return nil, err
+	}
+	node.Fields[17] = &Field{
+		Type:  "string",
+		Name:  "address",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.City); err != nil {
+		return nil, err
+	}
+	node.Fields[18] = &Field{
+		Type:  "string",
+		Name:  "city",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.State); err != nil {
+		return nil, err
+	}
+	node.Fields[19] = &Field{
+		Type:  "string",
+		Name:  "state",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Zip); err != nil {
+		return nil, err
+	}
+	node.Fields[20] = &Field{
+		Type:  "string",
+		Name:  "zip",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Image); err != nil {
+		return nil, err
+	}
+	node.Fields[21] = &Field{
+		Type:  "string",
+		Name:  "image",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.IpoDate); err != nil {
+		return nil, err
+	}
+	node.Fields[22] = &Field{
+		Type:  "string",
+		Name:  "ipo_date",
+		Value: string(buf),
+	}
+	if buf, err = json.Marshal(s.Yield); err != nil {
+		return nil, err
+	}
+	node.Fields[23] = &Field{
 		Type:  "float64",
 		Name:  "yield",
 		Value: string(buf),
@@ -161,7 +249,7 @@ func (s *Stocks) Node(ctx context.Context) (node *Node, err error) {
 	if buf, err = json.Marshal(s.CreatedAt); err != nil {
 		return nil, err
 	}
-	node.Fields[13] = &Field{
+	node.Fields[24] = &Field{
 		Type:  "time.Time",
 		Name:  "created_at",
 		Value: string(buf),
@@ -169,7 +257,7 @@ func (s *Stocks) Node(ctx context.Context) (node *Node, err error) {
 	if buf, err = json.Marshal(s.UpdatedAt); err != nil {
 		return nil, err
 	}
-	node.Fields[14] = &Field{
+	node.Fields[25] = &Field{
 		Type:  "time.Time",
 		Name:  "updated_at",
 		Value: string(buf),

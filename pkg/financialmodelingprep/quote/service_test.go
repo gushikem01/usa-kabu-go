@@ -1,4 +1,4 @@
-package profile_test
+package quote_test
 
 import (
 	"context"
@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/gushikem01/usa-kabu-go/pkg/db/dbent"
-	financialmodelingprep "github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/api/profile"
 	"github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/apiconf"
+	financialmodelingprep "github.com/gushikem01/usa-kabu-go/pkg/financialmodelingprep/quote"
 	"github.com/gushikem01/usa-kabu-go/pkg/httpclient"
 	"github.com/gushikem01/usa-kabu-go/pkg/stocks"
 	stocksEnt "github.com/gushikem01/usa-kabu-go/pkg/stocks/ent"

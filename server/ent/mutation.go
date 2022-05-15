@@ -44,11 +44,22 @@ type StocksMutation struct {
 	industry            *string
 	market_carp         *float64
 	addmarket_carp      *float64
-	last_div            *int
-	addlast_div         *int
+	last_div            *float64
+	addlast_div         *float64
 	description         *float64
 	adddescription      *float64
 	website             *string
+	ceo                 *string
+	sector              *string
+	country             *string
+	full_time_employees *string
+	phone               *string
+	address             *string
+	city                *string
+	state               *string
+	zip                 *string
+	image               *string
+	ipo_date            *string
 	yield               *float64
 	addyield            *float64
 	created_at          *time.Time
@@ -644,13 +655,13 @@ func (m *StocksMutation) ResetMarketCarp() {
 }
 
 // SetLastDiv sets the "last_div" field.
-func (m *StocksMutation) SetLastDiv(i int) {
-	m.last_div = &i
+func (m *StocksMutation) SetLastDiv(f float64) {
+	m.last_div = &f
 	m.addlast_div = nil
 }
 
 // LastDiv returns the value of the "last_div" field in the mutation.
-func (m *StocksMutation) LastDiv() (r int, exists bool) {
+func (m *StocksMutation) LastDiv() (r float64, exists bool) {
 	v := m.last_div
 	if v == nil {
 		return
@@ -661,7 +672,7 @@ func (m *StocksMutation) LastDiv() (r int, exists bool) {
 // OldLastDiv returns the old "last_div" field's value of the Stocks entity.
 // If the Stocks object wasn't provided to the builder, the object is fetched from the database.
 // An error is returned if the mutation operation is not UpdateOne, or the database query fails.
-func (m *StocksMutation) OldLastDiv(ctx context.Context) (v int, err error) {
+func (m *StocksMutation) OldLastDiv(ctx context.Context) (v float64, err error) {
 	if !m.op.Is(OpUpdateOne) {
 		return v, errors.New("OldLastDiv is only allowed on UpdateOne operations")
 	}
@@ -675,17 +686,17 @@ func (m *StocksMutation) OldLastDiv(ctx context.Context) (v int, err error) {
 	return oldValue.LastDiv, nil
 }
 
-// AddLastDiv adds i to the "last_div" field.
-func (m *StocksMutation) AddLastDiv(i int) {
+// AddLastDiv adds f to the "last_div" field.
+func (m *StocksMutation) AddLastDiv(f float64) {
 	if m.addlast_div != nil {
-		*m.addlast_div += i
+		*m.addlast_div += f
 	} else {
-		m.addlast_div = &i
+		m.addlast_div = &f
 	}
 }
 
 // AddedLastDiv returns the value that was added to the "last_div" field in this mutation.
-func (m *StocksMutation) AddedLastDiv() (r int, exists bool) {
+func (m *StocksMutation) AddedLastDiv() (r float64, exists bool) {
 	v := m.addlast_div
 	if v == nil {
 		return
@@ -830,6 +841,545 @@ func (m *StocksMutation) WebsiteCleared() bool {
 func (m *StocksMutation) ResetWebsite() {
 	m.website = nil
 	delete(m.clearedFields, stocks.FieldWebsite)
+}
+
+// SetCeo sets the "ceo" field.
+func (m *StocksMutation) SetCeo(s string) {
+	m.ceo = &s
+}
+
+// Ceo returns the value of the "ceo" field in the mutation.
+func (m *StocksMutation) Ceo() (r string, exists bool) {
+	v := m.ceo
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCeo returns the old "ceo" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldCeo(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCeo is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCeo requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCeo: %w", err)
+	}
+	return oldValue.Ceo, nil
+}
+
+// ClearCeo clears the value of the "ceo" field.
+func (m *StocksMutation) ClearCeo() {
+	m.ceo = nil
+	m.clearedFields[stocks.FieldCeo] = struct{}{}
+}
+
+// CeoCleared returns if the "ceo" field was cleared in this mutation.
+func (m *StocksMutation) CeoCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldCeo]
+	return ok
+}
+
+// ResetCeo resets all changes to the "ceo" field.
+func (m *StocksMutation) ResetCeo() {
+	m.ceo = nil
+	delete(m.clearedFields, stocks.FieldCeo)
+}
+
+// SetSector sets the "sector" field.
+func (m *StocksMutation) SetSector(s string) {
+	m.sector = &s
+}
+
+// Sector returns the value of the "sector" field in the mutation.
+func (m *StocksMutation) Sector() (r string, exists bool) {
+	v := m.sector
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldSector returns the old "sector" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldSector(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldSector is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldSector requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldSector: %w", err)
+	}
+	return oldValue.Sector, nil
+}
+
+// ClearSector clears the value of the "sector" field.
+func (m *StocksMutation) ClearSector() {
+	m.sector = nil
+	m.clearedFields[stocks.FieldSector] = struct{}{}
+}
+
+// SectorCleared returns if the "sector" field was cleared in this mutation.
+func (m *StocksMutation) SectorCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldSector]
+	return ok
+}
+
+// ResetSector resets all changes to the "sector" field.
+func (m *StocksMutation) ResetSector() {
+	m.sector = nil
+	delete(m.clearedFields, stocks.FieldSector)
+}
+
+// SetCountry sets the "country" field.
+func (m *StocksMutation) SetCountry(s string) {
+	m.country = &s
+}
+
+// Country returns the value of the "country" field in the mutation.
+func (m *StocksMutation) Country() (r string, exists bool) {
+	v := m.country
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCountry returns the old "country" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldCountry(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCountry is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCountry requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCountry: %w", err)
+	}
+	return oldValue.Country, nil
+}
+
+// ClearCountry clears the value of the "country" field.
+func (m *StocksMutation) ClearCountry() {
+	m.country = nil
+	m.clearedFields[stocks.FieldCountry] = struct{}{}
+}
+
+// CountryCleared returns if the "country" field was cleared in this mutation.
+func (m *StocksMutation) CountryCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldCountry]
+	return ok
+}
+
+// ResetCountry resets all changes to the "country" field.
+func (m *StocksMutation) ResetCountry() {
+	m.country = nil
+	delete(m.clearedFields, stocks.FieldCountry)
+}
+
+// SetFullTimeEmployees sets the "full_time_employees" field.
+func (m *StocksMutation) SetFullTimeEmployees(s string) {
+	m.full_time_employees = &s
+}
+
+// FullTimeEmployees returns the value of the "full_time_employees" field in the mutation.
+func (m *StocksMutation) FullTimeEmployees() (r string, exists bool) {
+	v := m.full_time_employees
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldFullTimeEmployees returns the old "full_time_employees" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldFullTimeEmployees(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldFullTimeEmployees is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldFullTimeEmployees requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldFullTimeEmployees: %w", err)
+	}
+	return oldValue.FullTimeEmployees, nil
+}
+
+// ClearFullTimeEmployees clears the value of the "full_time_employees" field.
+func (m *StocksMutation) ClearFullTimeEmployees() {
+	m.full_time_employees = nil
+	m.clearedFields[stocks.FieldFullTimeEmployees] = struct{}{}
+}
+
+// FullTimeEmployeesCleared returns if the "full_time_employees" field was cleared in this mutation.
+func (m *StocksMutation) FullTimeEmployeesCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldFullTimeEmployees]
+	return ok
+}
+
+// ResetFullTimeEmployees resets all changes to the "full_time_employees" field.
+func (m *StocksMutation) ResetFullTimeEmployees() {
+	m.full_time_employees = nil
+	delete(m.clearedFields, stocks.FieldFullTimeEmployees)
+}
+
+// SetPhone sets the "phone" field.
+func (m *StocksMutation) SetPhone(s string) {
+	m.phone = &s
+}
+
+// Phone returns the value of the "phone" field in the mutation.
+func (m *StocksMutation) Phone() (r string, exists bool) {
+	v := m.phone
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldPhone returns the old "phone" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldPhone(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldPhone is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldPhone requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldPhone: %w", err)
+	}
+	return oldValue.Phone, nil
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (m *StocksMutation) ClearPhone() {
+	m.phone = nil
+	m.clearedFields[stocks.FieldPhone] = struct{}{}
+}
+
+// PhoneCleared returns if the "phone" field was cleared in this mutation.
+func (m *StocksMutation) PhoneCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldPhone]
+	return ok
+}
+
+// ResetPhone resets all changes to the "phone" field.
+func (m *StocksMutation) ResetPhone() {
+	m.phone = nil
+	delete(m.clearedFields, stocks.FieldPhone)
+}
+
+// SetAddress sets the "address" field.
+func (m *StocksMutation) SetAddress(s string) {
+	m.address = &s
+}
+
+// Address returns the value of the "address" field in the mutation.
+func (m *StocksMutation) Address() (r string, exists bool) {
+	v := m.address
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldAddress returns the old "address" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldAddress(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldAddress is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldAddress requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldAddress: %w", err)
+	}
+	return oldValue.Address, nil
+}
+
+// ClearAddress clears the value of the "address" field.
+func (m *StocksMutation) ClearAddress() {
+	m.address = nil
+	m.clearedFields[stocks.FieldAddress] = struct{}{}
+}
+
+// AddressCleared returns if the "address" field was cleared in this mutation.
+func (m *StocksMutation) AddressCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldAddress]
+	return ok
+}
+
+// ResetAddress resets all changes to the "address" field.
+func (m *StocksMutation) ResetAddress() {
+	m.address = nil
+	delete(m.clearedFields, stocks.FieldAddress)
+}
+
+// SetCity sets the "city" field.
+func (m *StocksMutation) SetCity(s string) {
+	m.city = &s
+}
+
+// City returns the value of the "city" field in the mutation.
+func (m *StocksMutation) City() (r string, exists bool) {
+	v := m.city
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldCity returns the old "city" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldCity(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldCity is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldCity requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldCity: %w", err)
+	}
+	return oldValue.City, nil
+}
+
+// ClearCity clears the value of the "city" field.
+func (m *StocksMutation) ClearCity() {
+	m.city = nil
+	m.clearedFields[stocks.FieldCity] = struct{}{}
+}
+
+// CityCleared returns if the "city" field was cleared in this mutation.
+func (m *StocksMutation) CityCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldCity]
+	return ok
+}
+
+// ResetCity resets all changes to the "city" field.
+func (m *StocksMutation) ResetCity() {
+	m.city = nil
+	delete(m.clearedFields, stocks.FieldCity)
+}
+
+// SetState sets the "state" field.
+func (m *StocksMutation) SetState(s string) {
+	m.state = &s
+}
+
+// State returns the value of the "state" field in the mutation.
+func (m *StocksMutation) State() (r string, exists bool) {
+	v := m.state
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldState returns the old "state" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldState(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldState is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldState requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldState: %w", err)
+	}
+	return oldValue.State, nil
+}
+
+// ClearState clears the value of the "state" field.
+func (m *StocksMutation) ClearState() {
+	m.state = nil
+	m.clearedFields[stocks.FieldState] = struct{}{}
+}
+
+// StateCleared returns if the "state" field was cleared in this mutation.
+func (m *StocksMutation) StateCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldState]
+	return ok
+}
+
+// ResetState resets all changes to the "state" field.
+func (m *StocksMutation) ResetState() {
+	m.state = nil
+	delete(m.clearedFields, stocks.FieldState)
+}
+
+// SetZip sets the "zip" field.
+func (m *StocksMutation) SetZip(s string) {
+	m.zip = &s
+}
+
+// Zip returns the value of the "zip" field in the mutation.
+func (m *StocksMutation) Zip() (r string, exists bool) {
+	v := m.zip
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldZip returns the old "zip" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldZip(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldZip is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldZip requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldZip: %w", err)
+	}
+	return oldValue.Zip, nil
+}
+
+// ClearZip clears the value of the "zip" field.
+func (m *StocksMutation) ClearZip() {
+	m.zip = nil
+	m.clearedFields[stocks.FieldZip] = struct{}{}
+}
+
+// ZipCleared returns if the "zip" field was cleared in this mutation.
+func (m *StocksMutation) ZipCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldZip]
+	return ok
+}
+
+// ResetZip resets all changes to the "zip" field.
+func (m *StocksMutation) ResetZip() {
+	m.zip = nil
+	delete(m.clearedFields, stocks.FieldZip)
+}
+
+// SetImage sets the "image" field.
+func (m *StocksMutation) SetImage(s string) {
+	m.image = &s
+}
+
+// Image returns the value of the "image" field in the mutation.
+func (m *StocksMutation) Image() (r string, exists bool) {
+	v := m.image
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldImage returns the old "image" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldImage(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldImage is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldImage requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldImage: %w", err)
+	}
+	return oldValue.Image, nil
+}
+
+// ClearImage clears the value of the "image" field.
+func (m *StocksMutation) ClearImage() {
+	m.image = nil
+	m.clearedFields[stocks.FieldImage] = struct{}{}
+}
+
+// ImageCleared returns if the "image" field was cleared in this mutation.
+func (m *StocksMutation) ImageCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldImage]
+	return ok
+}
+
+// ResetImage resets all changes to the "image" field.
+func (m *StocksMutation) ResetImage() {
+	m.image = nil
+	delete(m.clearedFields, stocks.FieldImage)
+}
+
+// SetIpoDate sets the "ipo_date" field.
+func (m *StocksMutation) SetIpoDate(s string) {
+	m.ipo_date = &s
+}
+
+// IpoDate returns the value of the "ipo_date" field in the mutation.
+func (m *StocksMutation) IpoDate() (r string, exists bool) {
+	v := m.ipo_date
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldIpoDate returns the old "ipo_date" field's value of the Stocks entity.
+// If the Stocks object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *StocksMutation) OldIpoDate(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, errors.New("OldIpoDate is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, errors.New("OldIpoDate requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldIpoDate: %w", err)
+	}
+	return oldValue.IpoDate, nil
+}
+
+// ClearIpoDate clears the value of the "ipo_date" field.
+func (m *StocksMutation) ClearIpoDate() {
+	m.ipo_date = nil
+	m.clearedFields[stocks.FieldIpoDate] = struct{}{}
+}
+
+// IpoDateCleared returns if the "ipo_date" field was cleared in this mutation.
+func (m *StocksMutation) IpoDateCleared() bool {
+	_, ok := m.clearedFields[stocks.FieldIpoDate]
+	return ok
+}
+
+// ResetIpoDate resets all changes to the "ipo_date" field.
+func (m *StocksMutation) ResetIpoDate() {
+	m.ipo_date = nil
+	delete(m.clearedFields, stocks.FieldIpoDate)
 }
 
 // SetYield sets the "yield" field.
@@ -1047,7 +1597,7 @@ func (m *StocksMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *StocksMutation) Fields() []string {
-	fields := make([]string, 0, 15)
+	fields := make([]string, 0, 26)
 	if m.symbol != nil {
 		fields = append(fields, stocks.FieldSymbol)
 	}
@@ -1083,6 +1633,39 @@ func (m *StocksMutation) Fields() []string {
 	}
 	if m.website != nil {
 		fields = append(fields, stocks.FieldWebsite)
+	}
+	if m.ceo != nil {
+		fields = append(fields, stocks.FieldCeo)
+	}
+	if m.sector != nil {
+		fields = append(fields, stocks.FieldSector)
+	}
+	if m.country != nil {
+		fields = append(fields, stocks.FieldCountry)
+	}
+	if m.full_time_employees != nil {
+		fields = append(fields, stocks.FieldFullTimeEmployees)
+	}
+	if m.phone != nil {
+		fields = append(fields, stocks.FieldPhone)
+	}
+	if m.address != nil {
+		fields = append(fields, stocks.FieldAddress)
+	}
+	if m.city != nil {
+		fields = append(fields, stocks.FieldCity)
+	}
+	if m.state != nil {
+		fields = append(fields, stocks.FieldState)
+	}
+	if m.zip != nil {
+		fields = append(fields, stocks.FieldZip)
+	}
+	if m.image != nil {
+		fields = append(fields, stocks.FieldImage)
+	}
+	if m.ipo_date != nil {
+		fields = append(fields, stocks.FieldIpoDate)
 	}
 	if m.yield != nil {
 		fields = append(fields, stocks.FieldYield)
@@ -1125,6 +1708,28 @@ func (m *StocksMutation) Field(name string) (ent.Value, bool) {
 		return m.Description()
 	case stocks.FieldWebsite:
 		return m.Website()
+	case stocks.FieldCeo:
+		return m.Ceo()
+	case stocks.FieldSector:
+		return m.Sector()
+	case stocks.FieldCountry:
+		return m.Country()
+	case stocks.FieldFullTimeEmployees:
+		return m.FullTimeEmployees()
+	case stocks.FieldPhone:
+		return m.Phone()
+	case stocks.FieldAddress:
+		return m.Address()
+	case stocks.FieldCity:
+		return m.City()
+	case stocks.FieldState:
+		return m.State()
+	case stocks.FieldZip:
+		return m.Zip()
+	case stocks.FieldImage:
+		return m.Image()
+	case stocks.FieldIpoDate:
+		return m.IpoDate()
 	case stocks.FieldYield:
 		return m.Yield()
 	case stocks.FieldCreatedAt:
@@ -1164,6 +1769,28 @@ func (m *StocksMutation) OldField(ctx context.Context, name string) (ent.Value, 
 		return m.OldDescription(ctx)
 	case stocks.FieldWebsite:
 		return m.OldWebsite(ctx)
+	case stocks.FieldCeo:
+		return m.OldCeo(ctx)
+	case stocks.FieldSector:
+		return m.OldSector(ctx)
+	case stocks.FieldCountry:
+		return m.OldCountry(ctx)
+	case stocks.FieldFullTimeEmployees:
+		return m.OldFullTimeEmployees(ctx)
+	case stocks.FieldPhone:
+		return m.OldPhone(ctx)
+	case stocks.FieldAddress:
+		return m.OldAddress(ctx)
+	case stocks.FieldCity:
+		return m.OldCity(ctx)
+	case stocks.FieldState:
+		return m.OldState(ctx)
+	case stocks.FieldZip:
+		return m.OldZip(ctx)
+	case stocks.FieldImage:
+		return m.OldImage(ctx)
+	case stocks.FieldIpoDate:
+		return m.OldIpoDate(ctx)
 	case stocks.FieldYield:
 		return m.OldYield(ctx)
 	case stocks.FieldCreatedAt:
@@ -1243,7 +1870,7 @@ func (m *StocksMutation) SetField(name string, value ent.Value) error {
 		m.SetMarketCarp(v)
 		return nil
 	case stocks.FieldLastDiv:
-		v, ok := value.(int)
+		v, ok := value.(float64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -1262,6 +1889,83 @@ func (m *StocksMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetWebsite(v)
+		return nil
+	case stocks.FieldCeo:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCeo(v)
+		return nil
+	case stocks.FieldSector:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetSector(v)
+		return nil
+	case stocks.FieldCountry:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCountry(v)
+		return nil
+	case stocks.FieldFullTimeEmployees:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetFullTimeEmployees(v)
+		return nil
+	case stocks.FieldPhone:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetPhone(v)
+		return nil
+	case stocks.FieldAddress:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetAddress(v)
+		return nil
+	case stocks.FieldCity:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetCity(v)
+		return nil
+	case stocks.FieldState:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetState(v)
+		return nil
+	case stocks.FieldZip:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetZip(v)
+		return nil
+	case stocks.FieldImage:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetImage(v)
+		return nil
+	case stocks.FieldIpoDate:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetIpoDate(v)
 		return nil
 	case stocks.FieldYield:
 		v, ok := value.(float64)
@@ -1349,7 +2053,7 @@ func (m *StocksMutation) AddField(name string, value ent.Value) error {
 		m.AddMarketCarp(v)
 		return nil
 	case stocks.FieldLastDiv:
-		v, ok := value.(int)
+		v, ok := value.(float64)
 		if !ok {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
@@ -1413,6 +2117,39 @@ func (m *StocksMutation) ClearedFields() []string {
 	if m.FieldCleared(stocks.FieldWebsite) {
 		fields = append(fields, stocks.FieldWebsite)
 	}
+	if m.FieldCleared(stocks.FieldCeo) {
+		fields = append(fields, stocks.FieldCeo)
+	}
+	if m.FieldCleared(stocks.FieldSector) {
+		fields = append(fields, stocks.FieldSector)
+	}
+	if m.FieldCleared(stocks.FieldCountry) {
+		fields = append(fields, stocks.FieldCountry)
+	}
+	if m.FieldCleared(stocks.FieldFullTimeEmployees) {
+		fields = append(fields, stocks.FieldFullTimeEmployees)
+	}
+	if m.FieldCleared(stocks.FieldPhone) {
+		fields = append(fields, stocks.FieldPhone)
+	}
+	if m.FieldCleared(stocks.FieldAddress) {
+		fields = append(fields, stocks.FieldAddress)
+	}
+	if m.FieldCleared(stocks.FieldCity) {
+		fields = append(fields, stocks.FieldCity)
+	}
+	if m.FieldCleared(stocks.FieldState) {
+		fields = append(fields, stocks.FieldState)
+	}
+	if m.FieldCleared(stocks.FieldZip) {
+		fields = append(fields, stocks.FieldZip)
+	}
+	if m.FieldCleared(stocks.FieldImage) {
+		fields = append(fields, stocks.FieldImage)
+	}
+	if m.FieldCleared(stocks.FieldIpoDate) {
+		fields = append(fields, stocks.FieldIpoDate)
+	}
 	if m.FieldCleared(stocks.FieldYield) {
 		fields = append(fields, stocks.FieldYield)
 	}
@@ -1466,6 +2203,39 @@ func (m *StocksMutation) ClearField(name string) error {
 	case stocks.FieldWebsite:
 		m.ClearWebsite()
 		return nil
+	case stocks.FieldCeo:
+		m.ClearCeo()
+		return nil
+	case stocks.FieldSector:
+		m.ClearSector()
+		return nil
+	case stocks.FieldCountry:
+		m.ClearCountry()
+		return nil
+	case stocks.FieldFullTimeEmployees:
+		m.ClearFullTimeEmployees()
+		return nil
+	case stocks.FieldPhone:
+		m.ClearPhone()
+		return nil
+	case stocks.FieldAddress:
+		m.ClearAddress()
+		return nil
+	case stocks.FieldCity:
+		m.ClearCity()
+		return nil
+	case stocks.FieldState:
+		m.ClearState()
+		return nil
+	case stocks.FieldZip:
+		m.ClearZip()
+		return nil
+	case stocks.FieldImage:
+		m.ClearImage()
+		return nil
+	case stocks.FieldIpoDate:
+		m.ClearIpoDate()
+		return nil
 	case stocks.FieldYield:
 		m.ClearYield()
 		return nil
@@ -1512,6 +2282,39 @@ func (m *StocksMutation) ResetField(name string) error {
 		return nil
 	case stocks.FieldWebsite:
 		m.ResetWebsite()
+		return nil
+	case stocks.FieldCeo:
+		m.ResetCeo()
+		return nil
+	case stocks.FieldSector:
+		m.ResetSector()
+		return nil
+	case stocks.FieldCountry:
+		m.ResetCountry()
+		return nil
+	case stocks.FieldFullTimeEmployees:
+		m.ResetFullTimeEmployees()
+		return nil
+	case stocks.FieldPhone:
+		m.ResetPhone()
+		return nil
+	case stocks.FieldAddress:
+		m.ResetAddress()
+		return nil
+	case stocks.FieldCity:
+		m.ResetCity()
+		return nil
+	case stocks.FieldState:
+		m.ResetState()
+		return nil
+	case stocks.FieldZip:
+		m.ResetZip()
+		return nil
+	case stocks.FieldImage:
+		m.ResetImage()
+		return nil
+	case stocks.FieldIpoDate:
+		m.ResetIpoDate()
 		return nil
 	case stocks.FieldYield:
 		m.ResetYield()

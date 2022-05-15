@@ -33,6 +33,5 @@ func getConnectionSetting() *pgConn {
 		password: os.Getenv("POSTGRES_PASSWORD"),
 		port:     os.Getenv("POSTGRES_PORT"),
 	}
-	fmt.Println(c)
 	return c
 }

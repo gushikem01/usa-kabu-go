@@ -53,3 +53,8 @@ gql: ## gql
 .PHONY: air-%
 air-%: ## air -c $(@:air-%=%)/cmd/api/.air.toml
 	air -c $(@:air-%=%)/cmd/api/.air.toml
+
+# task
+.PHONY: task
+task:
+	cd task/cmd/cli && go run main.go

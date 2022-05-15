@@ -38,6 +38,10 @@ func (srv *Service) Run(ctx context.Context) error {
 	var stocks []*ent.Stocks
 	eg.Go(func() (err error) {
 		stocks, err = srv.FindAll(ctx)
+		srv.log.Info(
+			"stocksデータ取得しました。",
+			zap.Int("stocks", len(stocks)),
+		)
 		return
 	})
 
@@ -88,10 +92,8 @@ func (srv *Service) run(ctx context.Context, stocks []*ent.Stocks, apiData []*Sy
 //	戻り値2:	追加データ
 func (srv *Service) createOrUpdate(ctx context.Context, stocks []*ent.Stocks, apiData []*SymbolsList) (add []*SymbolsList, up []*SymbolsList) {
 	var i, j int
-	// 更新
 	up = make([]*SymbolsList, len(apiData))
 
-	// 新規
 	add = make([]*SymbolsList, len(apiData))
 
 	for _, a := range apiData {
@@ -115,10 +117,10 @@ func (srv *Service) createOrUpdate(ctx context.Context, stocks []*ent.Stocks, ap
 		add[j] = a
 		j++
 	}
-	if len(up) > 0 {
+	if len(up) > 0 && i > 0 {
 		up = up[:i-1]
 	}
-	if len(add) > 0 {
+	if len(add) > 0 && j > 0 {
 		add = add[:j-1]
 	}
 	return add, up
@@ -143,6 +145,7 @@ func (srv *Service) APIGet(ctx context.Context) ([]*SymbolsList, error) {
 	if err != nil {
 		srv.log.Error(
 			"APIの取得に失敗しました。",
+			zap.String("API", apiEndpoint),
 			zap.Error(err),
 		)
 		return nil, err
@@ -153,6 +156,11 @@ func (srv *Service) APIGet(ctx context.Context) ([]*SymbolsList, error) {
 	if err := json.Unmarshal(jsonBytes, &data); err != nil {
 		return nil, err
 	}
+	srv.log.Info(
+		"APIの取得に成功しました。",
+		zap.String("API", apiEndpoint),
+		zap.Int("件数", len(data)),
+	)
 	return data, nil
 }
 
@@ -169,6 +177,10 @@ func (srv *Service) Create(ctx context.Context, stocks []*SymbolsList) error {
 		)
 		return err
 	}
+	srv.log.Info(
+		"データ作成に成功しました。",
+		zap.Int("件数", len(stocks)),
+	)
 	return nil
 }
 
@@ -187,5 +199,9 @@ func (srv *Service) UpdateAll(ctx context.Context, stocks []*SymbolsList) ([]*en
 		)
 		return nil, err
 	}
+	srv.log.Info(
+		"データ更新に成功しました。",
+		zap.Int("件数", len(stocks)),
+	)
 	return up, nil
 }

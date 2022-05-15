@@ -50,7 +50,7 @@ func init() {
 	// stocksDescLastDiv is the schema descriptor for last_div field.
 	stocksDescLastDiv := stocksFields[9].Descriptor()
 	// stocks.DefaultLastDiv holds the default value on creation for the last_div field.
-	stocks.DefaultLastDiv = stocksDescLastDiv.Default.(int)
+	stocks.DefaultLastDiv = stocksDescLastDiv.Default.(float64)
 	// stocksDescDescription is the schema descriptor for description field.
 	stocksDescDescription := stocksFields[10].Descriptor()
 	// stocks.DefaultDescription holds the default value on creation for the description field.
@@ -59,16 +59,60 @@ func init() {
 	stocksDescWebsite := stocksFields[11].Descriptor()
 	// stocks.DefaultWebsite holds the default value on creation for the website field.
 	stocks.DefaultWebsite = stocksDescWebsite.Default.(string)
+	// stocksDescCeo is the schema descriptor for ceo field.
+	stocksDescCeo := stocksFields[12].Descriptor()
+	// stocks.DefaultCeo holds the default value on creation for the ceo field.
+	stocks.DefaultCeo = stocksDescCeo.Default.(string)
+	// stocksDescSector is the schema descriptor for sector field.
+	stocksDescSector := stocksFields[13].Descriptor()
+	// stocks.DefaultSector holds the default value on creation for the sector field.
+	stocks.DefaultSector = stocksDescSector.Default.(string)
+	// stocksDescCountry is the schema descriptor for country field.
+	stocksDescCountry := stocksFields[14].Descriptor()
+	// stocks.DefaultCountry holds the default value on creation for the country field.
+	stocks.DefaultCountry = stocksDescCountry.Default.(string)
+	// stocksDescFullTimeEmployees is the schema descriptor for full_time_employees field.
+	stocksDescFullTimeEmployees := stocksFields[15].Descriptor()
+	// stocks.DefaultFullTimeEmployees holds the default value on creation for the full_time_employees field.
+	stocks.DefaultFullTimeEmployees = stocksDescFullTimeEmployees.Default.(string)
+	// stocksDescPhone is the schema descriptor for phone field.
+	stocksDescPhone := stocksFields[16].Descriptor()
+	// stocks.DefaultPhone holds the default value on creation for the phone field.
+	stocks.DefaultPhone = stocksDescPhone.Default.(string)
+	// stocksDescAddress is the schema descriptor for address field.
+	stocksDescAddress := stocksFields[17].Descriptor()
+	// stocks.DefaultAddress holds the default value on creation for the address field.
+	stocks.DefaultAddress = stocksDescAddress.Default.(string)
+	// stocksDescCity is the schema descriptor for city field.
+	stocksDescCity := stocksFields[18].Descriptor()
+	// stocks.DefaultCity holds the default value on creation for the city field.
+	stocks.DefaultCity = stocksDescCity.Default.(string)
+	// stocksDescState is the schema descriptor for state field.
+	stocksDescState := stocksFields[19].Descriptor()
+	// stocks.DefaultState holds the default value on creation for the state field.
+	stocks.DefaultState = stocksDescState.Default.(string)
+	// stocksDescZip is the schema descriptor for zip field.
+	stocksDescZip := stocksFields[20].Descriptor()
+	// stocks.DefaultZip holds the default value on creation for the zip field.
+	stocks.DefaultZip = stocksDescZip.Default.(string)
+	// stocksDescImage is the schema descriptor for image field.
+	stocksDescImage := stocksFields[21].Descriptor()
+	// stocks.DefaultImage holds the default value on creation for the image field.
+	stocks.DefaultImage = stocksDescImage.Default.(string)
+	// stocksDescIpoDate is the schema descriptor for ipo_date field.
+	stocksDescIpoDate := stocksFields[22].Descriptor()
+	// stocks.DefaultIpoDate holds the default value on creation for the ipo_date field.
+	stocks.DefaultIpoDate = stocksDescIpoDate.Default.(string)
 	// stocksDescYield is the schema descriptor for yield field.
-	stocksDescYield := stocksFields[12].Descriptor()
+	stocksDescYield := stocksFields[23].Descriptor()
 	// stocks.DefaultYield holds the default value on creation for the yield field.
 	stocks.DefaultYield = stocksDescYield.Default.(float64)
 	// stocksDescCreatedAt is the schema descriptor for created_at field.
-	stocksDescCreatedAt := stocksFields[13].Descriptor()
+	stocksDescCreatedAt := stocksFields[24].Descriptor()
 	// stocks.DefaultCreatedAt holds the default value on creation for the created_at field.
 	stocks.DefaultCreatedAt = stocksDescCreatedAt.Default.(func() time.Time)
 	// stocksDescUpdatedAt is the schema descriptor for updated_at field.
-	stocksDescUpdatedAt := stocksFields[14].Descriptor()
+	stocksDescUpdatedAt := stocksFields[25].Descriptor()
 	// stocks.DefaultUpdatedAt holds the default value on creation for the updated_at field.
 	stocks.DefaultUpdatedAt = stocksDescUpdatedAt.Default.(func() time.Time)
 }
